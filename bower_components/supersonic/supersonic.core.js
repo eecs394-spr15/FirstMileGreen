@@ -1,7 +1,7 @@
 /**
  * supersonic
- * Version: 1.2.0
- * Published: 2015-03-26
+ * Version: 1.2.1
+ * Published: 2015-03-31
  * Homepage: https://github.com/AppGyver/supersonic
  * License: MIT
  */
@@ -31,14 +31,15 @@
 
 }).call(this);
 
-},{"bluebird":134}],2:[function(require,module,exports){
+},{"bluebird":137}],2:[function(require,module,exports){
 (function() {
   var Promise;
 
   Promise = require('bluebird');
 
   module.exports = function(namespace, storage, time) {
-    var computeIfAbsent, computeUnlessValid, invalidateIfSuccessful, isValidMeta, keyWithNamespace, metadataKeyForIndex, prop, set;
+    var computeIfAbsent, computeUnlessValid, debug, invalidateIfSuccessful, isValidMeta, keyWithNamespace, metadataKeyForIndex, prop, set;
+    debug = require('debug')("ag-data:cached-property:" + namespace);
     if (time == null) {
       time = function() {
         return (new Date()).getTime();
@@ -67,6 +68,7 @@
           if (value != null) {
             return value;
           } else {
+            debug("" + index + " is absent, computing...");
             return Promise.resolve(compute()).then(set(index));
           }
         });
@@ -80,6 +82,7 @@
           })) {
             return storage.getItem(index);
           } else {
+            debug("" + index + " is invalid, computing...");
             return Promise.resolve(compute()).then(set(index));
           }
         });
@@ -100,6 +103,7 @@
       return function(operation) {
         return Promise.resolve(operation()).then(function(result) {
           return storage.removeItem(metadataKeyForIndex(index)).then(function() {
+            debug("" + index + " invalidated");
             return result;
           });
         });
@@ -127,7 +131,7 @@
 
 }).call(this);
 
-},{"bluebird":134}],3:[function(require,module,exports){
+},{"bluebird":137,"debug":133}],3:[function(require,module,exports){
 (function() {
   var Bacon, Promise, asyncKeyValueStorage, cachedResourceFromResource, createCache,
     __slice = [].slice;
@@ -141,10 +145,11 @@
   createCache = require('./cache');
 
   module.exports = cachedResourceFromResource = function(resource, options) {
-    var cachedResource, collectionCache, instanceCache, storage, timeToLive;
+    var cachedResource, collectionCache, debug, instanceCache, storage, timeToLive;
     if (options == null) {
       options = {};
     }
+    debug = require('debug')("ag-data:cached-resource:" + resource.name);
     timeToLive = (function() {
       switch (false) {
         case options.timeToLive == null:
@@ -163,6 +168,11 @@
     })();
     collectionCache = createCache("collections-" + resource.name, storage);
     instanceCache = createCache("records-" + resource.name, storage);
+    debug("Resource '" + resource.name + "' cache configured:", {
+      timeToLive: timeToLive,
+      collectionCacheNamespace: collectionCache.namespace,
+      instanceCacheNamespace: instanceCache.namespace
+    });
     cachedResource = Object.create(resource);
     cachedResource.find = function(id) {
       return instanceCache.prop(id, {
@@ -226,7 +236,7 @@
 
 }).call(this);
 
-},{"./async-key-value-storage":1,"./cache":2,"baconjs":133,"bluebird":134}],4:[function(require,module,exports){
+},{"./async-key-value-storage":1,"./cache":2,"baconjs":136,"bluebird":137,"debug":133}],4:[function(require,module,exports){
 (function() {
   var Bacon, Promise, deepEqual,
     __slice = [].slice;
@@ -274,7 +284,7 @@
 
 }).call(this);
 
-},{"baconjs":133,"bluebird":134,"deep-equal":135}],5:[function(require,module,exports){
+},{"baconjs":136,"bluebird":137,"deep-equal":138}],5:[function(require,module,exports){
 (function() {
   var createModelFromResource, data, defaultLoader, restful;
 
@@ -285,6 +295,9 @@
   createModelFromResource = require('./model');
 
   module.exports = data = {
+    storages: {
+      memory: require('./async-key-value-storage')
+    },
     loadResourceBundle: function(object) {
       var bundle;
       bundle = defaultLoader.loadResourceBundle(object);
@@ -301,7 +314,7 @@
 
 }).call(this);
 
-},{"./model":7,"ag-resource-loader-json":8,"ag-restful":67,"bluebird":134}],6:[function(require,module,exports){
+},{"./async-key-value-storage":1,"./model":7,"ag-resource-loader-json":8,"ag-restful":67,"bluebird":137}],6:[function(require,module,exports){
 (function() {
   var deepEqual, jsonableEquality;
 
@@ -319,7 +332,7 @@
 
 }).call(this);
 
-},{"deep-equal":135}],7:[function(require,module,exports){
+},{"deep-equal":138}],7:[function(require,module,exports){
 (function() {
   var Bacon, Promise, cachedResource, defaultInterval, followable, jsonableEquality,
     __hasProp = {}.hasOwnProperty,
@@ -666,7 +679,7 @@
 
 }).call(this);
 
-},{"./cached-resource":3,"./followable":4,"./jsonable-equality":6,"baconjs":133,"bluebird":134}],8:[function(require,module,exports){
+},{"./cached-resource":3,"./followable":4,"./jsonable-equality":6,"baconjs":136,"bluebird":137}],8:[function(require,module,exports){
 (function() {
   var validateResourceBundle;
 
@@ -3483,7 +3496,7 @@ module.exports = property;
 }).call(this);
 
 }).call(this,require("buffer").Buffer)
-},{"./urlify":68,"ag-types":75,"assert-plus":86,"buffer":139,"lodash-node/modern/objects/defaults":114}],61:[function(require,module,exports){
+},{"./urlify":68,"ag-types":75,"assert-plus":86,"buffer":142,"lodash-node/modern/objects/defaults":114}],61:[function(require,module,exports){
 (function() {
   var deepDefaults, _;
 
@@ -4172,7 +4185,7 @@ Object.keys(assert).forEach(function (k) {
 });
 
 }).call(this,require("oMfpAn"),require("buffer").Buffer)
-},{"assert":138,"buffer":139,"oMfpAn":144,"stream":146,"util":154}],87:[function(require,module,exports){
+},{"assert":141,"buffer":142,"oMfpAn":147,"stream":149,"util":157}],87:[function(require,module,exports){
 module.exports=require(24)
 },{"./validation":88}],88:[function(require,module,exports){
 module.exports=require(25)
@@ -6003,6 +6016,507 @@ module.exports = function(arr, fn, initial){
   return curr;
 };
 },{}],133:[function(require,module,exports){
+
+/**
+ * This is the web browser implementation of `debug()`.
+ *
+ * Expose `debug()` as the module.
+ */
+
+exports = module.exports = require('./debug');
+exports.log = log;
+exports.formatArgs = formatArgs;
+exports.save = save;
+exports.load = load;
+exports.useColors = useColors;
+
+/**
+ * Use chrome.storage.local if we are in an app
+ */
+
+var storage;
+
+if (typeof chrome !== 'undefined' && typeof chrome.storage !== 'undefined')
+  storage = chrome.storage.local;
+else
+  storage = localstorage();
+
+/**
+ * Colors.
+ */
+
+exports.colors = [
+  'lightseagreen',
+  'forestgreen',
+  'goldenrod',
+  'dodgerblue',
+  'darkorchid',
+  'crimson'
+];
+
+/**
+ * Currently only WebKit-based Web Inspectors, Firefox >= v31,
+ * and the Firebug extension (any Firefox version) are known
+ * to support "%c" CSS customizations.
+ *
+ * TODO: add a `localStorage` variable to explicitly enable/disable colors
+ */
+
+function useColors() {
+  // is webkit? http://stackoverflow.com/a/16459606/376773
+  return ('WebkitAppearance' in document.documentElement.style) ||
+    // is firebug? http://stackoverflow.com/a/398120/376773
+    (window.console && (console.firebug || (console.exception && console.table))) ||
+    // is firefox >= v31?
+    // https://developer.mozilla.org/en-US/docs/Tools/Web_Console#Styling_messages
+    (navigator.userAgent.toLowerCase().match(/firefox\/(\d+)/) && parseInt(RegExp.$1, 10) >= 31);
+}
+
+/**
+ * Map %j to `JSON.stringify()`, since no Web Inspectors do that by default.
+ */
+
+exports.formatters.j = function(v) {
+  return JSON.stringify(v);
+};
+
+
+/**
+ * Colorize log arguments if enabled.
+ *
+ * @api public
+ */
+
+function formatArgs() {
+  var args = arguments;
+  var useColors = this.useColors;
+
+  args[0] = (useColors ? '%c' : '')
+    + this.namespace
+    + (useColors ? ' %c' : ' ')
+    + args[0]
+    + (useColors ? '%c ' : ' ')
+    + '+' + exports.humanize(this.diff);
+
+  if (!useColors) return args;
+
+  var c = 'color: ' + this.color;
+  args = [args[0], c, 'color: inherit'].concat(Array.prototype.slice.call(args, 1));
+
+  // the final "%c" is somewhat tricky, because there could be other
+  // arguments passed either before or after the %c, so we need to
+  // figure out the correct index to insert the CSS into
+  var index = 0;
+  var lastC = 0;
+  args[0].replace(/%[a-z%]/g, function(match) {
+    if ('%%' === match) return;
+    index++;
+    if ('%c' === match) {
+      // we only are interested in the *last* %c
+      // (the user may have provided their own)
+      lastC = index;
+    }
+  });
+
+  args.splice(lastC, 0, c);
+  return args;
+}
+
+/**
+ * Invokes `console.log()` when available.
+ * No-op when `console.log` is not a "function".
+ *
+ * @api public
+ */
+
+function log() {
+  // this hackery is required for IE8/9, where
+  // the `console.log` function doesn't have 'apply'
+  return 'object' === typeof console
+    && console.log
+    && Function.prototype.apply.call(console.log, console, arguments);
+}
+
+/**
+ * Save `namespaces`.
+ *
+ * @param {String} namespaces
+ * @api private
+ */
+
+function save(namespaces) {
+  try {
+    if (null == namespaces) {
+      storage.removeItem('debug');
+    } else {
+      storage.debug = namespaces;
+    }
+  } catch(e) {}
+}
+
+/**
+ * Load `namespaces`.
+ *
+ * @return {String} returns the previously persisted debug modes
+ * @api private
+ */
+
+function load() {
+  var r;
+  try {
+    r = storage.debug;
+  } catch(e) {}
+  return r;
+}
+
+/**
+ * Enable namespaces listed in `localStorage.debug` initially.
+ */
+
+exports.enable(load());
+
+/**
+ * Localstorage attempts to return the localstorage.
+ *
+ * This is necessary because safari throws
+ * when a user disables cookies/localstorage
+ * and you attempt to access it.
+ *
+ * @return {LocalStorage}
+ * @api private
+ */
+
+function localstorage(){
+  try {
+    return window.localStorage;
+  } catch (e) {}
+}
+
+},{"./debug":134}],134:[function(require,module,exports){
+
+/**
+ * This is the common logic for both the Node.js and web browser
+ * implementations of `debug()`.
+ *
+ * Expose `debug()` as the module.
+ */
+
+exports = module.exports = debug;
+exports.coerce = coerce;
+exports.disable = disable;
+exports.enable = enable;
+exports.enabled = enabled;
+exports.humanize = require('ms');
+
+/**
+ * The currently active debug mode names, and names to skip.
+ */
+
+exports.names = [];
+exports.skips = [];
+
+/**
+ * Map of special "%n" handling functions, for the debug "format" argument.
+ *
+ * Valid key names are a single, lowercased letter, i.e. "n".
+ */
+
+exports.formatters = {};
+
+/**
+ * Previously assigned color.
+ */
+
+var prevColor = 0;
+
+/**
+ * Previous log timestamp.
+ */
+
+var prevTime;
+
+/**
+ * Select a color.
+ *
+ * @return {Number}
+ * @api private
+ */
+
+function selectColor() {
+  return exports.colors[prevColor++ % exports.colors.length];
+}
+
+/**
+ * Create a debugger with the given `namespace`.
+ *
+ * @param {String} namespace
+ * @return {Function}
+ * @api public
+ */
+
+function debug(namespace) {
+
+  // define the `disabled` version
+  function disabled() {
+  }
+  disabled.enabled = false;
+
+  // define the `enabled` version
+  function enabled() {
+
+    var self = enabled;
+
+    // set `diff` timestamp
+    var curr = +new Date();
+    var ms = curr - (prevTime || curr);
+    self.diff = ms;
+    self.prev = prevTime;
+    self.curr = curr;
+    prevTime = curr;
+
+    // add the `color` if not set
+    if (null == self.useColors) self.useColors = exports.useColors();
+    if (null == self.color && self.useColors) self.color = selectColor();
+
+    var args = Array.prototype.slice.call(arguments);
+
+    args[0] = exports.coerce(args[0]);
+
+    if ('string' !== typeof args[0]) {
+      // anything else let's inspect with %o
+      args = ['%o'].concat(args);
+    }
+
+    // apply any `formatters` transformations
+    var index = 0;
+    args[0] = args[0].replace(/%([a-z%])/g, function(match, format) {
+      // if we encounter an escaped % then don't increase the array index
+      if (match === '%%') return match;
+      index++;
+      var formatter = exports.formatters[format];
+      if ('function' === typeof formatter) {
+        var val = args[index];
+        match = formatter.call(self, val);
+
+        // now we need to remove `args[index]` since it's inlined in the `format`
+        args.splice(index, 1);
+        index--;
+      }
+      return match;
+    });
+
+    if ('function' === typeof exports.formatArgs) {
+      args = exports.formatArgs.apply(self, args);
+    }
+    var logFn = enabled.log || exports.log || console.log.bind(console);
+    logFn.apply(self, args);
+  }
+  enabled.enabled = true;
+
+  var fn = exports.enabled(namespace) ? enabled : disabled;
+
+  fn.namespace = namespace;
+
+  return fn;
+}
+
+/**
+ * Enables a debug mode by namespaces. This can include modes
+ * separated by a colon and wildcards.
+ *
+ * @param {String} namespaces
+ * @api public
+ */
+
+function enable(namespaces) {
+  exports.save(namespaces);
+
+  var split = (namespaces || '').split(/[\s,]+/);
+  var len = split.length;
+
+  for (var i = 0; i < len; i++) {
+    if (!split[i]) continue; // ignore empty strings
+    namespaces = split[i].replace(/\*/g, '.*?');
+    if (namespaces[0] === '-') {
+      exports.skips.push(new RegExp('^' + namespaces.substr(1) + '$'));
+    } else {
+      exports.names.push(new RegExp('^' + namespaces + '$'));
+    }
+  }
+}
+
+/**
+ * Disable debug output.
+ *
+ * @api public
+ */
+
+function disable() {
+  exports.enable('');
+}
+
+/**
+ * Returns true if the given mode name is enabled, false otherwise.
+ *
+ * @param {String} name
+ * @return {Boolean}
+ * @api public
+ */
+
+function enabled(name) {
+  var i, len;
+  for (i = 0, len = exports.skips.length; i < len; i++) {
+    if (exports.skips[i].test(name)) {
+      return false;
+    }
+  }
+  for (i = 0, len = exports.names.length; i < len; i++) {
+    if (exports.names[i].test(name)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Coerce `val`.
+ *
+ * @param {Mixed} val
+ * @return {Mixed}
+ * @api private
+ */
+
+function coerce(val) {
+  if (val instanceof Error) return val.stack || val.message;
+  return val;
+}
+
+},{"ms":135}],135:[function(require,module,exports){
+/**
+ * Helpers.
+ */
+
+var s = 1000;
+var m = s * 60;
+var h = m * 60;
+var d = h * 24;
+var y = d * 365.25;
+
+/**
+ * Parse or format the given `val`.
+ *
+ * Options:
+ *
+ *  - `long` verbose formatting [false]
+ *
+ * @param {String|Number} val
+ * @param {Object} options
+ * @return {String|Number}
+ * @api public
+ */
+
+module.exports = function(val, options){
+  options = options || {};
+  if ('string' == typeof val) return parse(val);
+  return options.long
+    ? long(val)
+    : short(val);
+};
+
+/**
+ * Parse the given `str` and return milliseconds.
+ *
+ * @param {String} str
+ * @return {Number}
+ * @api private
+ */
+
+function parse(str) {
+  var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(str);
+  if (!match) return;
+  var n = parseFloat(match[1]);
+  var type = (match[2] || 'ms').toLowerCase();
+  switch (type) {
+    case 'years':
+    case 'year':
+    case 'yrs':
+    case 'yr':
+    case 'y':
+      return n * y;
+    case 'days':
+    case 'day':
+    case 'd':
+      return n * d;
+    case 'hours':
+    case 'hour':
+    case 'hrs':
+    case 'hr':
+    case 'h':
+      return n * h;
+    case 'minutes':
+    case 'minute':
+    case 'mins':
+    case 'min':
+    case 'm':
+      return n * m;
+    case 'seconds':
+    case 'second':
+    case 'secs':
+    case 'sec':
+    case 's':
+      return n * s;
+    case 'milliseconds':
+    case 'millisecond':
+    case 'msecs':
+    case 'msec':
+    case 'ms':
+      return n;
+  }
+}
+
+/**
+ * Short format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function short(ms) {
+  if (ms >= d) return Math.round(ms / d) + 'd';
+  if (ms >= h) return Math.round(ms / h) + 'h';
+  if (ms >= m) return Math.round(ms / m) + 'm';
+  if (ms >= s) return Math.round(ms / s) + 's';
+  return ms + 'ms';
+}
+
+/**
+ * Long format for `ms`.
+ *
+ * @param {Number} ms
+ * @return {String}
+ * @api private
+ */
+
+function long(ms) {
+  return plural(ms, d, 'day')
+    || plural(ms, h, 'hour')
+    || plural(ms, m, 'minute')
+    || plural(ms, s, 'second')
+    || ms + ' ms';
+}
+
+/**
+ * Pluralization helper.
+ */
+
+function plural(ms, n, name) {
+  if (ms < n) return;
+  if (ms < n * 1.5) return Math.floor(ms / n) + ' ' + name;
+  return Math.ceil(ms / n) + ' ' + name + 's';
+}
+
+},{}],136:[function(require,module,exports){
 (function (global){
 (function() {
   var Bacon, BufferingSource, Bus, CompositeUnsubscribe, ConsumingSource, Desc, Dispatcher, End, Error, Event, EventStream, Exception, Initial, Next, None, Observable, Property, PropertyDispatcher, Some, Source, UpdateBarrier, addPropertyInitValueToStream, assert, assertArray, assertEventStream, assertFunction, assertNoArguments, assertString, cloneArray, compositeUnsubscribe, containsDuplicateDeps, convertArgsToFunction, describe, end, eventIdCounter, findDeps, flatMap_, former, idCounter, initial, isArray, isFieldKey, isFunction, isObservable, latter, liftCallback, makeFunction, makeFunctionArgs, makeFunction_, makeObservable, makeSpawner, next, nop, partiallyApplied, recursionDepth, registerObs, spys, toCombinator, toEvent, toFieldExtractor, toFieldKey, toOption, toSimpleExtractor, withDescription, withMethodCallSupport, _, _ref,
@@ -9139,7 +9653,7 @@ module.exports = function(arr, fn, initial){
 }).call(this);
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],134:[function(require,module,exports){
+},{}],137:[function(require,module,exports){
 (function (process,global){
 /* @preserve
  * The MIT License (MIT)
@@ -13807,7 +14321,7 @@ module.exports = ret;
 },{"./es5.js":14}]},{},[4])(4)
 });                    ;if (typeof window !== 'undefined' && window !== null) {                               window.P = window.Promise;                                                     } else if (typeof self !== 'undefined' && self !== null) {                             self.P = self.Promise;                                                         }
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"oMfpAn":144}],135:[function(require,module,exports){
+},{"oMfpAn":147}],138:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = require('./lib/keys.js');
 var isArguments = require('./lib/is_arguments.js');
@@ -13903,7 +14417,7 @@ function objEquiv(a, b, opts) {
   return typeof a === typeof b;
 }
 
-},{"./lib/is_arguments.js":136,"./lib/keys.js":137}],136:[function(require,module,exports){
+},{"./lib/is_arguments.js":139,"./lib/keys.js":140}],139:[function(require,module,exports){
 var supportsArgumentsClass = (function(){
   return Object.prototype.toString.call(arguments)
 })() == '[object Arguments]';
@@ -13925,7 +14439,7 @@ function unsupported(object){
     false;
 };
 
-},{}],137:[function(require,module,exports){
+},{}],140:[function(require,module,exports){
 exports = module.exports = typeof Object.keys === 'function'
   ? Object.keys : shim;
 
@@ -13936,7 +14450,7 @@ function shim (obj) {
   return keys;
 }
 
-},{}],138:[function(require,module,exports){
+},{}],141:[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -14298,7 +14812,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":154}],139:[function(require,module,exports){
+},{"util/":157}],142:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -15409,7 +15923,7 @@ function assert (test, message) {
   if (!test) throw new Error(message || 'Failed assertion')
 }
 
-},{"base64-js":140,"ieee754":141}],140:[function(require,module,exports){
+},{"base64-js":143,"ieee754":144}],143:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -15531,7 +16045,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],141:[function(require,module,exports){
+},{}],144:[function(require,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -15617,7 +16131,7 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],142:[function(require,module,exports){
+},{}],145:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -15920,7 +16434,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],143:[function(require,module,exports){
+},{}],146:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -15945,7 +16459,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],144:[function(require,module,exports){
+},{}],147:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -16010,7 +16524,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],145:[function(require,module,exports){
+},{}],148:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -16084,7 +16598,7 @@ function onend() {
   });
 }
 
-},{"./readable.js":149,"./writable.js":151,"inherits":143,"process/browser.js":147}],146:[function(require,module,exports){
+},{"./readable.js":152,"./writable.js":154,"inherits":146,"process/browser.js":150}],149:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -16213,7 +16727,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"./duplex.js":145,"./passthrough.js":148,"./readable.js":149,"./transform.js":150,"./writable.js":151,"events":142,"inherits":143}],147:[function(require,module,exports){
+},{"./duplex.js":148,"./passthrough.js":151,"./readable.js":152,"./transform.js":153,"./writable.js":154,"events":145,"inherits":146}],150:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -16268,7 +16782,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],148:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -16311,7 +16825,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-},{"./transform.js":150,"inherits":143}],149:[function(require,module,exports){
+},{"./transform.js":153,"inherits":146}],152:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -17248,7 +17762,7 @@ function indexOf (xs, x) {
 }
 
 }).call(this,require("oMfpAn"))
-},{"./index.js":146,"buffer":139,"events":142,"inherits":143,"oMfpAn":144,"process/browser.js":147,"string_decoder":152}],150:[function(require,module,exports){
+},{"./index.js":149,"buffer":142,"events":145,"inherits":146,"oMfpAn":147,"process/browser.js":150,"string_decoder":155}],153:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -17454,7 +17968,7 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-},{"./duplex.js":145,"inherits":143}],151:[function(require,module,exports){
+},{"./duplex.js":148,"inherits":146}],154:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -17842,7 +18356,7 @@ function endWritable(stream, state, cb) {
   state.ended = true;
 }
 
-},{"./index.js":146,"buffer":139,"inherits":143,"process/browser.js":147}],152:[function(require,module,exports){
+},{"./index.js":149,"buffer":142,"inherits":146,"process/browser.js":150}],155:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -18035,14 +18549,14 @@ function base64DetectIncompleteChar(buffer) {
   return incomplete;
 }
 
-},{"buffer":139}],153:[function(require,module,exports){
+},{"buffer":142}],156:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],154:[function(require,module,exports){
+},{}],157:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -18632,7 +19146,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":153,"inherits":143,"oMfpAn":144}],155:[function(require,module,exports){
+},{"./support/isBuffer":156,"inherits":146,"oMfpAn":147}],158:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap')
@@ -18739,7 +19253,7 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":157}],156:[function(require,module,exports){
+},{"asap":160}],159:[function(require,module,exports){
 'use strict';
 
 //This file contains then/promise specific extensions to the core promise API
@@ -18921,7 +19435,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":155,"asap":157}],157:[function(require,module,exports){
+},{"./core.js":158,"asap":160}],160:[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -19038,7 +19552,7 @@ module.exports = asap;
 
 
 }).call(this,require("oMfpAn"))
-},{"oMfpAn":144}],158:[function(require,module,exports){
+},{"oMfpAn":147}],161:[function(require,module,exports){
 // Some code originally from async_storage.js in
 // [Gaia](https://github.com/mozilla-b2g/gaia).
 (function() {
@@ -19452,7 +19966,7 @@ module.exports = asap;
     }
 }).call(window);
 
-},{"promise":156}],159:[function(require,module,exports){
+},{"promise":159}],162:[function(require,module,exports){
 // If IndexedDB isn't available, we'll fall back to localStorage.
 // Note that this will have considerable performance and storage
 // side-effects (all data will be serialized on save and only data that
@@ -19947,7 +20461,7 @@ module.exports = asap;
     }
 }).call(window);
 
-},{"promise":156}],160:[function(require,module,exports){
+},{"promise":159}],163:[function(require,module,exports){
 /*
  * Includes code from:
  *
@@ -20535,7 +21049,7 @@ module.exports = asap;
     }
 }).call(window);
 
-},{"promise":156}],161:[function(require,module,exports){
+},{"promise":159}],164:[function(require,module,exports){
 (function() {
     'use strict';
 
@@ -20957,7 +21471,7 @@ module.exports = asap;
     }
 }).call(window);
 
-},{"./drivers/indexeddb":158,"./drivers/localstorage":159,"./drivers/websql":160,"promise":156}],162:[function(require,module,exports){
+},{"./drivers/indexeddb":161,"./drivers/localstorage":162,"./drivers/websql":163,"promise":159}],165:[function(require,module,exports){
 var global, logger, steroids;
 
 global = typeof window !== "undefined" && window !== null ? window : require('./mock/window');
@@ -20987,7 +21501,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./core/app":164,"./core/data":170,"./core/debug":173,"./core/device":180,"./core/logger":187,"./core/media":189,"./core/ui":199,"./mock/steroids":209,"./mock/window":210,"baconjs":133,"bluebird":134}],163:[function(require,module,exports){
+},{"./core/app":167,"./core/data":173,"./core/debug":177,"./core/device":184,"./core/logger":191,"./core/media":193,"./core/ui":203,"./mock/steroids":213,"./mock/window":214,"baconjs":136,"bluebird":137}],166:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -21059,7 +21573,7 @@ module.exports = function(steroids) {
 
 
 
-},{"bluebird":134}],164:[function(require,module,exports){
+},{"bluebird":137}],167:[function(require,module,exports){
 var Promise, events;
 
 Promise = require('bluebird');
@@ -21088,7 +21602,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":186,"./getLaunchURL":163,"./openURL":165,"./sleep":166,"./splashscreen":167,"./statusBar":168,"bluebird":134}],165:[function(require,module,exports){
+},{"../events":190,"./getLaunchURL":166,"./openURL":168,"./sleep":169,"./splashscreen":170,"./statusBar":171,"bluebird":137}],168:[function(require,module,exports){
 var Promise, superify;
 
 Promise = require('bluebird');
@@ -21156,7 +21670,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../superify":190,"bluebird":134}],166:[function(require,module,exports){
+},{"../superify":194,"bluebird":137}],169:[function(require,module,exports){
 var Promise, superify;
 
 Promise = require('bluebird');
@@ -21236,7 +21750,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../superify":190,"bluebird":134}],167:[function(require,module,exports){
+},{"../superify":194,"bluebird":137}],170:[function(require,module,exports){
 var Promise, superify;
 
 Promise = require('bluebird');
@@ -21322,7 +21836,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../superify":190,"bluebird":134}],168:[function(require,module,exports){
+},{"../superify":194,"bluebird":137}],171:[function(require,module,exports){
 var Promise, superify;
 
 Promise = require('bluebird');
@@ -21420,7 +21934,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../superify":190,"bluebird":134}],169:[function(require,module,exports){
+},{"../superify":194,"bluebird":137}],172:[function(require,module,exports){
 var Bacon, deepEqual,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
@@ -21522,24 +22036,17 @@ module.exports = function(window) {
 
 
 
-},{"baconjs":133,"deep-equal":135}],170:[function(require,module,exports){
-var localforage;
+},{"baconjs":136,"deep-equal":138}],173:[function(require,module,exports){
+var adapters;
 
-localforage = (function() {
-  switch (false) {
-    case !(typeof window === "undefined" || window === null):
-      return {};
-    default:
-      return require('localforage');
-  }
-})();
+adapters = require('./storage/adapters');
 
 module.exports = function(logger, window) {
   var channel, model, storage;
   channel = require('./channel')(window);
-  model = require('./model')(logger, window, localforage);
+  model = require('./model')(logger, window, adapters.localforage);
   storage = {
-    adapter: localforage,
+    adapters: adapters,
     property: require('./storage/property')(logger, window, channel)
   };
   return {
@@ -21551,12 +22058,12 @@ module.exports = function(logger, window) {
 
 
 
-},{"./channel":169,"./model":171,"./storage/property":172,"localforage":161}],171:[function(require,module,exports){
+},{"./channel":172,"./model":174,"./storage/adapters":175,"./storage/property":176}],174:[function(require,module,exports){
 var data;
 
 data = require('ag-data');
 
-module.exports = function(logger, window, defaultStorage) {
+module.exports = function(logger, window, createDefaultStorage) {
 
   /*
     * @namespace supersonic.data
@@ -21619,7 +22126,7 @@ module.exports = function(logger, window, defaultStorage) {
             }
             if (options != null ? (_ref1 = options.cache) != null ? _ref1.enabled : void 0 : void 0) {
               if (options.cache.storage == null) {
-                options.cache.storage = defaultStorage;
+                options.cache.storage = createDefaultStorage();
               }
             }
             try {
@@ -21969,7 +22476,30 @@ module.exports = function(logger, window, defaultStorage) {
 
 
 
-},{"ag-data":5}],172:[function(require,module,exports){
+},{"ag-data":5}],175:[function(require,module,exports){
+var data, localforage;
+
+localforage = (function() {
+  switch (false) {
+    case !(typeof window === "undefined" || window === null):
+      return {};
+    default:
+      return require('localforage');
+  }
+})();
+
+data = require('ag-data');
+
+module.exports = {
+  localforage: function() {
+    return localforage;
+  },
+  memory: data.storages.memory
+};
+
+
+
+},{"ag-data":5,"localforage":164}],176:[function(require,module,exports){
 var Bacon,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
@@ -22027,7 +22557,7 @@ module.exports = function(logger, window, channel) {
 
 
 
-},{"baconjs":133}],173:[function(require,module,exports){
+},{"baconjs":136}],177:[function(require,module,exports){
 module.exports = function(steroids, log) {
   return {
     ping: require("./ping")(steroids, log)
@@ -22036,7 +22566,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"./ping":174}],174:[function(require,module,exports){
+},{"./ping":178}],178:[function(require,module,exports){
 var Promise, superify;
 
 Promise = require('bluebird');
@@ -22086,7 +22616,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../superify":190,"bluebird":134}],175:[function(require,module,exports){
+},{"../superify":194,"bluebird":137}],179:[function(require,module,exports){
 var Bacon, Promise, deviceready, superify;
 
 Promise = require('bluebird');
@@ -22244,7 +22774,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":186,"../superify":190,"baconjs":133,"bluebird":134}],176:[function(require,module,exports){
+},{"../events":190,"../superify":194,"baconjs":136,"bluebird":137}],180:[function(require,module,exports){
 module.exports = function(steroids, log) {
   var bug, callbacks, override, whenPressed, _addCallback, _handler, _removeCallback;
   bug = log.debuggable("supersonic.device.buttons.back");
@@ -22331,7 +22861,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{}],177:[function(require,module,exports){
+},{}],181:[function(require,module,exports){
 
 /*
   * @namespace supersonic.device
@@ -22347,7 +22877,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"./back":176}],178:[function(require,module,exports){
+},{"./back":180}],182:[function(require,module,exports){
 var Bacon, Promise, deviceready, superify;
 
 Promise = require('bluebird');
@@ -22501,7 +23031,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":186,"../superify":190,"baconjs":133,"bluebird":134}],179:[function(require,module,exports){
+},{"../events":190,"../superify":194,"baconjs":136,"bluebird":137}],183:[function(require,module,exports){
 var Bacon, Promise, deviceready, superify;
 
 Promise = require('bluebird');
@@ -22655,7 +23185,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":186,"../superify":190,"baconjs":133,"bluebird":134}],180:[function(require,module,exports){
+},{"../events":190,"../superify":194,"baconjs":136,"bluebird":137}],184:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -22676,7 +23206,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"./accelerometer":175,"./buttons":177,"./compass":178,"./geolocation":179,"./network":181,"./platform":182,"./push":183,"./ready":184,"./vibrate":185,"bluebird":134}],181:[function(require,module,exports){
+},{"./accelerometer":179,"./buttons":181,"./compass":182,"./geolocation":183,"./network":185,"./platform":186,"./push":187,"./ready":188,"./vibrate":189,"bluebird":137}],185:[function(require,module,exports){
 var Promise, network;
 
 Promise = require('bluebird');
@@ -22770,7 +23300,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":186,"bluebird":134}],182:[function(require,module,exports){
+},{"../events":190,"bluebird":137}],186:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -22832,7 +23362,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":186,"bluebird":134}],183:[function(require,module,exports){
+},{"../events":190,"bluebird":137}],187:[function(require,module,exports){
 var Bacon, Promise, deviceready, superify;
 
 Promise = require('bluebird');
@@ -22976,7 +23506,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":186,"../superify":190,"baconjs":133,"bluebird":134}],184:[function(require,module,exports){
+},{"../events":190,"../superify":194,"baconjs":136,"bluebird":137}],188:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -23010,7 +23540,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":186,"bluebird":134}],185:[function(require,module,exports){
+},{"../events":190,"bluebird":137}],189:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -23048,7 +23578,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":186,"bluebird":134}],186:[function(require,module,exports){
+},{"../events":190,"bluebird":137}],190:[function(require,module,exports){
 var Bacon, Promise;
 
 Promise = require('bluebird');
@@ -23114,7 +23644,7 @@ module.exports = {
 
 
 
-},{"baconjs":133,"bluebird":134}],187:[function(require,module,exports){
+},{"baconjs":136,"bluebird":137}],191:[function(require,module,exports){
 var Bacon, Promise, logMessageEnvelope, logMessageStream, startFlushing,
   __slice = [].slice;
 
@@ -23337,7 +23867,7 @@ module.exports = function(steroids, window) {
 
 
 
-},{"baconjs":133,"bluebird":134}],188:[function(require,module,exports){
+},{"baconjs":136,"bluebird":137}],192:[function(require,module,exports){
 var Promise, deviceready, superify;
 
 Promise = require('bluebird');
@@ -23634,7 +24164,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":186,"../superify":190,"bluebird":134}],189:[function(require,module,exports){
+},{"../events":190,"../superify":194,"bluebird":137}],193:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -23647,7 +24177,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"./camera":188,"bluebird":134}],190:[function(require,module,exports){
+},{"./camera":192,"bluebird":137}],194:[function(require,module,exports){
 var Bacon,
   __slice = [].slice;
 
@@ -23718,7 +24248,7 @@ module.exports = function(namespace, logger) {
 
 
 
-},{"baconjs":133}],191:[function(require,module,exports){
+},{"baconjs":136}],195:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -23783,7 +24313,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":134}],192:[function(require,module,exports){
+},{"bluebird":137}],196:[function(require,module,exports){
 var Promise, parseRoute,
   __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
@@ -24050,7 +24580,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"./views/parseRoute":208,"bluebird":134}],193:[function(require,module,exports){
+},{"./views/parseRoute":212,"bluebird":137}],197:[function(require,module,exports){
 var Promise,
   __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
@@ -24198,7 +24728,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":134}],194:[function(require,module,exports){
+},{"bluebird":137}],198:[function(require,module,exports){
 var Promise, deviceready, superify;
 
 Promise = require('bluebird');
@@ -24269,7 +24799,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../../events":186,"../../superify":190,"bluebird":134}],195:[function(require,module,exports){
+},{"../../events":190,"../../superify":194,"bluebird":137}],199:[function(require,module,exports){
 var Promise, deviceready, superify;
 
 Promise = require('bluebird');
@@ -24350,7 +24880,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../../events":186,"../../superify":190,"bluebird":134}],196:[function(require,module,exports){
+},{"../../events":190,"../../superify":194,"bluebird":137}],200:[function(require,module,exports){
 
 /*
   * @namespace supersonic.ui
@@ -24368,7 +24898,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"./alert":194,"./confirm":195,"./prompt":197}],197:[function(require,module,exports){
+},{"./alert":198,"./confirm":199,"./prompt":201}],201:[function(require,module,exports){
 var Promise, deviceready, superify;
 
 Promise = require('bluebird');
@@ -24452,7 +24982,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../../events":186,"../../superify":190,"bluebird":134}],198:[function(require,module,exports){
+},{"../../events":190,"../../superify":194,"bluebird":137}],202:[function(require,module,exports){
 var Promise, superify;
 
 Promise = require('bluebird');
@@ -24834,7 +25364,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../superify":190,"bluebird":134}],199:[function(require,module,exports){
+},{"../superify":194,"bluebird":137}],203:[function(require,module,exports){
 module.exports = function(steroids, log, global) {
   return {
     View: require("./View")(steroids, log),
@@ -24854,7 +25384,7 @@ module.exports = function(steroids, log, global) {
 
 
 
-},{"./NavigationBarButton":191,"./View":192,"./animate":193,"./dialog":196,"./drawers":198,"./initialView":200,"./layers":201,"./modal":202,"./navigationBar":203,"./screen":204,"./tabs":205,"./views":206}],200:[function(require,module,exports){
+},{"./NavigationBarButton":195,"./View":196,"./animate":197,"./dialog":200,"./drawers":202,"./initialView":204,"./layers":205,"./modal":206,"./navigationBar":207,"./screen":208,"./tabs":209,"./views":210}],204:[function(require,module,exports){
 var Promise, superify;
 
 Promise = require("bluebird");
@@ -24948,7 +25478,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../superify":190,"bluebird":134}],201:[function(require,module,exports){
+},{"../superify":194,"bluebird":137}],205:[function(require,module,exports){
 var Promise, superify;
 
 Promise = require('bluebird');
@@ -25150,7 +25680,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../superify":190,"bluebird":134}],202:[function(require,module,exports){
+},{"../superify":194,"bluebird":137}],206:[function(require,module,exports){
 var Promise, superify;
 
 Promise = require('bluebird');
@@ -25357,7 +25887,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../superify":190,"bluebird":134}],203:[function(require,module,exports){
+},{"../superify":194,"bluebird":137}],207:[function(require,module,exports){
 var Promise, superify;
 
 Promise = require('bluebird');
@@ -25647,7 +26177,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../superify":190,"bluebird":134}],204:[function(require,module,exports){
+},{"../superify":194,"bluebird":137}],208:[function(require,module,exports){
 var Promise, superify;
 
 Promise = require('bluebird');
@@ -25748,7 +26278,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../superify":190,"bluebird":134}],205:[function(require,module,exports){
+},{"../superify":194,"bluebird":137}],209:[function(require,module,exports){
 var Promise, parseRoute, superify;
 
 Promise = require('bluebird');
@@ -26093,7 +26623,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../superify":190,"./views/parseRoute":208,"bluebird":134}],206:[function(require,module,exports){
+},{"../superify":194,"./views/parseRoute":212,"bluebird":137}],210:[function(require,module,exports){
 var Promise, superify;
 
 Promise = require('bluebird');
@@ -26270,7 +26800,7 @@ module.exports = function(steroids, log, global) {
 
 
 
-},{"../superify":190,"./View":192,"./views/current":207,"bluebird":134}],207:[function(require,module,exports){
+},{"../superify":194,"./View":196,"./views/current":211,"bluebird":137}],211:[function(require,module,exports){
 var Bacon, Promise, channel, events;
 
 Bacon = require('baconjs');
@@ -26443,7 +26973,7 @@ module.exports = function(steroids, log, global) {
 
 
 
-},{"../../data/channel":169,"../../events":186,"baconjs":133,"bluebird":134}],208:[function(require,module,exports){
+},{"../../data/channel":172,"../../events":190,"baconjs":136,"bluebird":137}],212:[function(require,module,exports){
 module.exports = function(location, options) {
   var module, parts, path, query, routePattern, view, whole;
   if (options == null) {
@@ -26465,7 +26995,7 @@ module.exports = function(location, options) {
 
 
 
-},{}],209:[function(require,module,exports){
+},{}],213:[function(require,module,exports){
 var __slice = [].slice;
 
 module.exports = (function() {
@@ -26555,7 +27085,7 @@ module.exports = (function() {
 
 
 
-},{}],210:[function(require,module,exports){
+},{}],214:[function(require,module,exports){
 module.exports = {
   location: {
     href: ''
@@ -26567,4 +27097,4 @@ module.exports = {
 
 
 
-},{}]},{},[162])
+},{}]},{},[165])
