@@ -24,12 +24,36 @@
 <link href="styles/swipebox.css"		 rel="stylesheet" type="text/css">
 <link href="styles/font-awesome.css"	 rel="stylesheet" type="text/css">
 <link href="styles/animate.css"			 rel="stylesheet" type="text/css">
-
+<script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jqueryui.js"></script>
 <script type="text/javascript" src="scripts/framework.plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript">
+Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+var Games = Parse.Object.extend("Games");
+var laurensGame = new Games();
+laurensGame.save({sport: "swimming"}).then(function(object) {
+        alert("yay! it worked");
+    });
 
+
+/*var query = new Parse.Query("Games");
+query.find({
+           success: function(results) {
+           // results is an array of Parse.Object.
+           for (var i = 0; i < results.length; i++){
+           alert(results[i].get("sport"));
+           }
+           },
+           
+           error: function(error) {
+           // error is an instance of Parse.Error.
+           alert(error);
+           }
+           });*/
+
+</script>
 </head>
 <body> 
 
@@ -276,7 +300,7 @@
                 <p class="notification-page-item">
                     <img src="images/pictures/Basketball.png" alt="img">
                     <em>
-                        asdffasdfasdfafasdfasdfasdfsadfsd
+                        atestsdffasdfasdfafasdfasdfasdfsadfsd
                     </em>
                     <a href="#">Blom</a>
                     <a href="#">4/2/14 @ 3pm</a>
