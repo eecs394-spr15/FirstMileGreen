@@ -906,11 +906,13 @@ body{
 /*Page Header*/
 
 #content{
-    padding-top:70px;
+    /*padding-top:70px;*/
+    padding-top:50px;
 }
 
 .header-clear{
-    height:30px;
+    /*height:30px;*/
+    heigh:5px;
 }
 
 .header{
@@ -969,6 +971,10 @@ body{
     /*margin-top:15px;*/
     margin-top:15px;
     margin-right:3px;
+    
+    border-bottom-style:solid;
+    border-bottom-width: 1px;
+    /*margin-bottom:10px;*/
 }
 
 .open-menu{
