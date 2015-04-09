@@ -328,27 +328,25 @@
                                 </div>
                             </div>
                             
-                            <h3 class="center-text">Start Time </h3>
-                            <div class="container">
-                                <div class="submenu-navigation">
-                                    <a href="#" class="submenu-nav-deploy">Times</a>
-                                    <div class="submenu-nav-items">
-                                        <a href="#">Spac</a>
-                                        <a href="#">Blom</a>
-                                        <a href="#">Deering</a>
-                                    </div>
-                                </div>
-                                
-                                <h3 class="center-text">End Time</h3>
-                                <div class="container">
-                                    <div class="submenu-navigation">
-                                        <a href="#" class="submenu-nav-deploy">Times</a>
-                                        <div class="submenu-nav-items">
-                                            <a href="#">Spac</a>
-                                            <a href="#">Blom</a>
-                                            <a href="#">Deering</a>
-                                        </div>
-                                    </div>
+                            <div class="clear"></div>
+                            <h3 class="center-text">When? </h3>
+                            
+                            <div class="demo">
+                                <p align="center">Start Time<input id="stepExample1" type="text" class="time" /></p>
+                                <p align="center">End Time<input id="stepExample2" type="text" class="time" /></p>
+                                </br>
+                            </div>
+                            
+                            <script>
+                                $(function() {
+                                  $('#stepExample1').timepicker({ 'step': 30 });
+                                  $('#stepExample2').timepicker({
+                                                                'step': 30 
+                                                                });
+                                  });
+                                </script>
+                            
+
                                     
                                     
                                 </div>
