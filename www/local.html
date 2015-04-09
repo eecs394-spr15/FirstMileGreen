@@ -18,18 +18,56 @@
 
 <title>Pickup</title>
 
+<script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
 <link href="styles/style.css"     		 rel="stylesheet" type="text/css">
 <link href="styles/framework.css" 		 rel="stylesheet" type="text/css">
 <link href="styles/owl.theme.css" 		 rel="stylesheet" type="text/css">
 <link href="styles/swipebox.css"		 rel="stylesheet" type="text/css">
 <link href="styles/font-awesome.css"	 rel="stylesheet" type="text/css">
 <link href="styles/animate.css"			 rel="stylesheet" type="text/css">
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jqueryui.js"></script>
 <script type="text/javascript" src="scripts/framework.plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
+<script>
+    
+    Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+    /*var Games = Parse.Object.extend("Games");
+     var laurensGame = new Games();
+     laurensGame.save({sport: "swimming"}).then(function(object) {
+     alert("yay! it worked");
+     });
+     */
+var query = new Parse.Query("Games");
+query.find({
+           success: function(results) {
+           // results is an array of Parse.Object.
+           for (var i = 0; i < results.length; i++){
 
+           var sport = results[i].get("sport");
+           var imagePath;
+           if (sport == "Basketball")
+                imagePath = "images/pictures/Basketball.png";
+           else if (sport == "Soccer")
+                imagePath = "images/pictures/Soccer.png";"
+           var location = results[i].get("location");
+           var startTime = results[i].get("Start_Time");
+           var currentPlayerCount = results[i].get("Current_Num_Of_Players");
+           var maxPlayerCount = results[i].get("Max_Num_Of_Players");
+           $("#page").append("<p class=\"notification-page-item\"><img src=\""+imagePath+"\" alt=\"img\">");
+           $("#page").append("<h3>" + sport + "</h3></p>");
+           }
+           },
+           
+           error: function(error) {
+           // error is an instance of Parse.Error.
+           alert(error);
+           }
+           });
+                        
+                        
+    </script>
 </head>
 <body> 
 
@@ -265,94 +303,9 @@
         
         <div class="header-clear"></div>        
         <div class="content">
-            <div class="container no-bottom">
-                <h3 class="center-text">Pickup Games in Your Area</h3>
-                <p class="center-text">
-                   See the games being played close to you!
-                </p>
+            <div id="page" class="notification-page">
+            
             </div>
-            <div class="decoration"></div>
-            <div class="notification-page">
-                <p class="notification-page-item">
-                    <img src="images/pictures/Basketball.png" alt="img">
-                    <em>
-                        asdffasdfasdfafasdfasdfasdfsadfsd
-                    </em>
-                    <a href="#">Blom</a>
-                    <a href="#">4/2/14 @ 3pm</a>
-                </p>
-                <p class="notification-page-item">
-                <img src="images/pictures/Basketball.png" alt="img">
-                    <em>
-                        asdffasdfasdfafasdfasdfasdfsadfsd
-                    </em>
-                    <a href="#">Spac</a>
-                    <a href="#">3/3/14 @ 12pm</a>
-                </p>
-                <p class="notification-page-item">
-                <img src="images/pictures/Soccer.png" alt="img">
-                    <em>
-                        asdffasdfasdfafasdfasdfasdfsadfsd
-                    </em>
-                    <a href="#">Deering</a>
-                    <a href="#">3/4/15 @ 11am</a>
-                </p>
-                <div class="decoration"></div>
-                 <p class="notification-page-item">
-                <img src="images/pictures/Soccer.png" alt="img">
-                    <em>
-                        asdffasdfasdfafasdfasdfasdfsadfsd
-                    </em>
-                    <a href="#">Deering</a>
-                    <a href="#">3/4/15 @ 11am</a>
-                </p>
-                <div class="decoration"></div>
-                 <p class="notification-page-item">
-                <img src="images/pictures/Soccer.png" alt="img">
-                    <em>
-                        asdffasdfasdfafasdfasdfasdfsadfsd
-                    </em>
-                    <a href="#">Deering</a>
-                    <a href="#">3/4/15 @ 11am</a>
-                </p>
-                <div class="decoration"></div>
-                 <p class="notification-page-item">
-                <img src="images/pictures/Soccer.png" alt="img">
-                    <em>
-                        asdffasdfasdfafasdfasdfasdfsadfsd
-                    </em>
-                    <a href="#">Deering</a>
-                    <a href="#">3/4/15 @ 11am</a>
-                </p>
-                <div class="decoration"></div>
-                 <p class="notification-page-item">
-                <img src="images/pictures/Soccer.png" alt="img">
-                    <em>
-                        asdffasdfasdfafasdfasdfasdfsadfsd
-                    </em>
-                    <a href="#">Deering</a>
-                    <a href="#">3/4/15 @ 11am</a>
-                </p>
-                <div class="decoration"></div>
-                 <p class="notification-page-item">
-                <img src="images/pictures/Soccer.png" alt="img">
-                    <em>
-                        asdffasdfasdfafasdfasdfasdfsadfsd
-                    </em>
-                    <a href="#">Deering</a>
-                    <a href="#">3/4/15 @ 11am</a>
-                </p>
-                <div class="decoration"></div>
-                 <p class="notification-page-item">
-                <img src="images/pictures/Soccer.png" alt="img">
-                    <em>
-                        asdffasdfasdfafasdfasdfasdfsadfsd
-                    </em>
-                    <a href="#">Deering</a>
-                    <a href="#">3/4/15 @ 11am</a>
-                </p>
-                <div class="decoration"></div>
-            </div>       
         </div>
         
      
