@@ -30,6 +30,31 @@
 <script type="text/javascript" src="scripts/framework.plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
 
+<script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
+
+<title>Simple Tigra Calendar</title>
+<!-- link calendar resources -->
+<link rel="stylesheet" type="text/css" href="css/tcal.css" />
+<script type="text/javascript" src="js/tcal.js"></script>
+
+<script type="text/javascript">
+    Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+    
+    //new query for Location data
+    var Location = Parse.Object.extend("Location");
+    var locationQuery = new Parse.Query(Location);
+    
+    locationQuery.find({
+                       success: function(results) {
+                       alert("done");
+                       },
+                       error: function(error) {
+                       alert("Error when getting objects!");
+                       }
+                       });
+                       
+</script>
+
 </head>
 <body> 
 
@@ -263,52 +288,77 @@
     
     <!-- Page Content-->
     <div id="content" class="snap-content">
-    	
-    <h3 class="center-text">What sport?</h1>
-    
-    <table cellspacing='0' class="table">
         
-        <tr>
-            <td><a href="#" class="checkbox checkbox-one">Basketbll</a></td>
-            <td><a href="#" class="checkbox checkbox-one">Soccer</a></td>
-        </tr>
-        <tr class='even'>
-            <td><a href="#" class="checkbox checkbox-one">Baseball</a></td>
-            <td><a href="#" class="checkbox checkbox-one">Football</a></td>
-        </tr>
-        <tr>
-            <td><a href="#" class="checkbox checkbox-one">Ultimate</a></td>
-            <td><a href="#" class="checkbox checkbox-one">Running</a></td>
-        </tr>
-        <tr class='even'>
-            <td><a href="#" class="checkbox checkbox-one">Tennis</a></td>
-            <td><a href="#" class="checkbox checkbox-one">Rugby</a></td>
-
-        </tr>
-    </table>
-    
-    
-    
-    <div class="clear"></div>
-    <h3 class="center-text">When? </h3>
-    <div class="container">
+        <h3 class="center-text">Location</h1>
+            
+            <div class="one-half-responsive">
+                <div class="container">
                     <div class="submenu-navigation">
-                        <a href="#" class="submenu-nav-deploy">Choose Location</a>
+                        <a href="#" class="submenu-nav-deploy">Sports</a>
                         <div class="submenu-nav-items">
-                            <a href="#">Spac</a>
-                            <a href="#">Blom</a>
-                            <a href="#">Deering</a>
+                            <a href="#">Basketball</a>
+                            <a href="#">Football</a>
+                            <a href="#">Ultimate</a>
                         </div>
                     </div>
-    </div>
-    <h3 class="center-text">Comments?</h3>
-    <input class="blog-search" type="text" value="e.g bring cleats, meet at bleachers, etc.">
-    <div class="clear"></div>
-    </br>
-    <p class="center-text"><a href="your.html" class="button-3d button-green green-3d">Post!</a></p>
+                    
+                    
+                    
+                    <div class="clear"></div>
+                    <h3 class="center-text">Date </h3>
+                    <div class="container">
+                        <div class="submenu-navigation">
+                            <a href="#" class="submenu-nav-deploy">Dates</a>
+                            <div class="submenu-nav-items">
+                                <form action="#">
+                                    <!-- add class="tcal" to your input field -->
+                                    <div><input type="text" name="date" class="tcal" value="" /></div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <h3 class="center-text">Sports </h3>
+                        <div class="container">
+                            <div class="submenu-navigation">
+                                <a href="#" class="submenu-nav-deploy">SPorts</a>
+                                <div class="submenu-nav-items">
+                                    <a href="#">Basketball</a>
+                                    <a href="#">Football</a>
+                                    <a href="#">Ultimate</a>
+                                </div>
+                            </div>
+                            
+                            <div class="clear"></div>
+                            <h3 class="center-text">When? </h3>
+                            
+                            <div class="demo">
+                                <p align="center">Start Time<input id="stepExample1" type="text" class="time" /></p>
+                                <p align="center">End Time<input id="stepExample2" type="text" class="time" /></p>
+                                </br>
+                            </div>
+                            
+                            <script>
+                                $(function() {
+                                  $('#stepExample1').timepicker({ 'step': 30 });
+                                  $('#stepExample2').timepicker({
+                                                                'step': 30 
+                                                                });
+                                  });
+                                </script>
+                            
 
-    </div>
-    </div>
+                                    
+                                    
+                                </div>
+                                <h3 class="center-text">Comments?</h3>
+                                <input class="blog-search" type="text" value="e.g bring cleats, meet at bleachers, etc.">
+                                    <div class="clear"></div>
+                                    </br>
+                                    <p class="center-text"><a href="your.html" class="button-3d button-green green-3d">Post!</a></p>
+                                    
+                                    </div>
+                        </div>
+                        
     
    
     
