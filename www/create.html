@@ -16,7 +16,7 @@
 <link rel="apple-touch-startup-image" sizes="1536x2008" href="images/splash/splash-screen-ipad-portrait-retina.png"   media="(device-width: 768px)	and (orientation: portrait)	and (-webkit-device-pixel-ratio: 2)"/>
 <link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png"   media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)"/>
 
-<title>Pickup</title>
+<title>PickUp</title>
 
 <link href="styles/style.css"     		 rel="stylesheet" type="text/css">
 <link href="styles/framework.css" 		 rel="stylesheet" type="text/css">
@@ -29,6 +29,16 @@
 <script type="text/javascript" src="scripts/jqueryui.js"></script>
 <script type="text/javascript" src="scripts/framework.plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+  <script type="text/javascript" src="jquery.timepicker.js"></script>
+  <link rel="stylesheet" type="text/css" href="jquery.timepicker.css" />
+
+  <script type="text/javascript" src="lib/bootstrap-datepicker.js"></script>
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-datepicker.css" />
+
+  <script type="text/javascript" src="lib/site.js"></script>
+  <link rel="stylesheet" type="text/css" href="lib/site.css" />
 
 </head>
 <body> 
@@ -291,6 +301,27 @@
     
     <div class="clear"></div>
     <h3 class="center-text">When? </h3>
+    		
+            <div class="demo">
+                <p align="center">Start Time<input id="stepExample1" type="text" class="time" /></p>
+                <p align="center">End Time<input id="stepExample2" type="text" class="time" /></p>
+                </br>
+            </div>
+
+            <script>
+                $(function() {
+                    $('#stepExample1').timepicker({ 'step': 30 });
+                    $('#stepExample2').timepicker({
+                        'step': 30 
+                    });
+                });
+            </script>
+           
+
+            
+
+  
+    
     <div class="container">
                     <div class="submenu-navigation">
                         <a href="#" class="submenu-nav-deploy">Choose Location</a>
@@ -301,11 +332,10 @@
                         </div>
                     </div>
     </div>
-    <h3 class="center-text">Comments?</h3>
-    <input class="blog-search" type="text" value="e.g bring cleats, meet at bleachers, etc.">
-    <div class="clear"></div>
+  
+
     </br>
-    <p class="center-text"><a href="your.html" class="button-3d button-green green-3d">Post!</a></p>
+    <p class="center-text"><a href="your.html" class="button-3d button-green green-3d"><b>Post!</b></a></p>
 
     </div>
     </div>
