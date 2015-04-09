@@ -45,7 +45,6 @@
 </script>
 
 <script>
-    
     Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
     /*var Games = Parse.Object.extend("Games");
      var laurensGame = new Games();
@@ -53,13 +52,15 @@
      alert("yay! it worked");
      });
      */
-var query = new Parse.Query("Games");
+var query = new Parse.Query("Current_Games");
 query.find({
+           alert("in script");
+
            success: function(results) {
            // results is an array of Parse.Object.
            for (var i = 0; i < results.length; i++){
 
-           var sport = results[i].get("sport");
+           var sport = results[i].get("Sport");
            var imagePath;
            
            if (sport == "Basketball")
@@ -67,14 +68,14 @@ query.find({
            else if (sport == "Soccer")
                 imagePath = "images/Custom/Soccer/Soccer_Ball.png";
            else
-                imagePath = "images/Custom/Football/football.png";
+                imagePath = "images/Custom/Football/Football.png";
            
            
-           var location = results[i].get("location");
+           var location = results[i].get("Location_Name");
            var startTime = results[i].get("Start_Time");
            startTime = new Date(startTime);
            startTime = formatAMPM(startTime);
-           var currentPlayerCount = results[i].get("Current_Num_Of_Players");
+           var currentPlayerCount = results[i].get("Num_Of_Players");
            var maxPlayerCount = results[i].get("Max_Num_Of_Players");
 
            
