@@ -77,12 +77,14 @@ query.find({
            var currentPlayerCount = results[i].get("Current_Num_Of_Players");
            var maxPlayerCount = results[i].get("Max_Num_Of_Players");
 
+           
+           
+           
+           
+           
+           $("#page").append("<a href=\"#\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + "</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+           
 
-           $("#page").append("<p class=\"notification-page-item\"><em><img src=\""+imagePath+"\" alt=\"img\">");
-           $("#page").append("<div class=\"one-half\"><h4>Sport: </h4><h6>" + sport + "</h6></p>");
-           $("#page").append("<h4>Location: </h4><h6>" + location + "</h6></p></div>");
-           $("#page").append("<div class=\"one-half last-column\"><h4>Start Time: </h4><h6>" + startTime + "</h6></p>");
-           $("#page").append("<h4>Number of Players: </h4><h6>" + currentPlayerCount + "/" + maxPlayerCount + "</h6></p></em></div><div class=\"decoration hide-if-responsive\"></div>");
 
            }
            },
@@ -330,9 +332,11 @@ query.find({
         
         <div class="header-clear"></div>        
         <div class="content">
-            <div id="page" class="notification-page">
-            
-            </div>
+                <div class="decoration"></div>
+                <div id="page" class="one-third-responsive">
+                    
+                </div>
+                
             
             
         </div>
