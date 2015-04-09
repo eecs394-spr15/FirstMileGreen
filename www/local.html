@@ -18,18 +18,83 @@
 
 <title>Pickup</title>
 
+<script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
 <link href="styles/style.css"     		 rel="stylesheet" type="text/css">
 <link href="styles/framework.css" 		 rel="stylesheet" type="text/css">
 <link href="styles/owl.theme.css" 		 rel="stylesheet" type="text/css">
 <link href="styles/swipebox.css"		 rel="stylesheet" type="text/css">
 <link href="styles/font-awesome.css"	 rel="stylesheet" type="text/css">
 <link href="styles/animate.css"			 rel="stylesheet" type="text/css">
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jqueryui.js"></script>
 <script type="text/javascript" src="scripts/framework.plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript">
+    function formatAMPM(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+    
+</script>
 
+<script>
+    
+    Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+    /*var Games = Parse.Object.extend("Games");
+     var laurensGame = new Games();
+     laurensGame.save({sport: "swimming"}).then(function(object) {
+     alert("yay! it worked");
+     });
+     */
+var query = new Parse.Query("Games");
+query.find({
+           success: function(results) {
+           // results is an array of Parse.Object.
+           for (var i = 0; i < results.length; i++){
+
+           var sport = results[i].get("sport");
+           var imagePath;
+           
+           if (sport == "Basketball")
+                imagePath = "images/Custom/Basketball/basketball.png";
+           else if (sport == "Soccer")
+                imagePath = "images/Custom/Soccer/Soccer_Ball.png";
+           else
+                imagePath = "images/Custom/Football/football.png";
+           
+           
+           var location = results[i].get("location");
+           var startTime = results[i].get("Start_Time");
+           startTime = new Date(startTime);
+           startTime = formatAMPM(startTime);
+           var currentPlayerCount = results[i].get("Current_Num_Of_Players");
+           var maxPlayerCount = results[i].get("Max_Num_Of_Players");
+
+
+           $("#page").append("<p class=\"notification-page-item\"><em><img src=\""+imagePath+"\" alt=\"img\">");
+           $("#page").append("<div class=\"one-half\"><h4>Sport: </h4><h6>" + sport + "</h6></p>");
+           $("#page").append("<h4>Location: </h4><h6>" + location + "</h6></p></div>");
+           $("#page").append("<div class=\"one-half last-column\"><h4>Start Time: </h4><h6>" + startTime + "</h6></p>");
+           $("#page").append("<h4>Number of Players: </h4><h6>" + currentPlayerCount + "/" + maxPlayerCount + "</h6></p></em></div><div class=\"decoration hide-if-responsive\"></div>");
+
+           }
+           },
+           
+           error: function(error) {
+           // error is an instance of Parse.Error.
+           alert(error);
+           }
+           });
+                        
+                        
+    </script>
 </head>
 <body> 
 
