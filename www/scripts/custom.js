@@ -89,7 +89,20 @@ $(document).ready(function() {
 			snapper.open('left');
 		}
 		return false;
-	});	
+	});
+                  
+    $('.plus-button').click(function() {
+        $('.header, .menu-wrapper').removeClass('hide-header-right');
+        $('.header, .menu-wrapper').addClass('hide-header-left');
+        $('.menu-wrapper').addClass('hide-menu-wrapper');
+        $('.open-slide').removeClass('active-slide');
+        if( snapper.state().state=="left" ){
+            snapper.close();
+        } else {
+            snapper.open('left');
+        }
+        return false;
+    });
     
     $('.open-more').click(function() {
         $('.header, .menu-wrapper').removeClass('hide-header-left');

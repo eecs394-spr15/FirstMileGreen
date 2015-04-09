@@ -951,6 +951,7 @@ body{
     transition:all 250ms ease;    
 }
 
+/*
 .main-logo{
     background-image:url(../images/logo-dark.png);
     width:80px;
@@ -962,13 +963,38 @@ body{
     float:left;
     margin-left:30px;
 }
+ */
 
 .header-controls{
+    /*margin-top:15px;*/
     margin-top:15px;
     margin-right:3px;
 }
 
 .open-menu{
+    float:left;
+    width:60px;
+    height:40px;
+    line-height:40px;
+    font-size:14px;
+    text-align:center;
+    color:#1f1f1f;
+    /*border-right:dashed 1px #cacaca;*/
+}
+
+.local-games-title{
+    float:center;
+    width:250px;
+    height:40px;
+    font-size:15px;
+    line-height:40px;
+    color:#1f1f1f;
+    text-align:center;
+    padding-left:55px;
+    font-weight: bold;
+}
+
+.plus-button{
     float:right;
     width:60px;
     height:40px;
@@ -976,8 +1002,24 @@ body{
     font-size:14px;
     text-align:center;
     color:#1f1f1f;
-    border-right:dashed 1px #cacaca;
+    padding-bottom: 50px;
+    /*
+    padding-top: 10px;
+    padding-left: 10px;
+    (/
+    /*
+    float:right;
+    width:60px;
+    height:40px;
+    line-height:40px;
+    font-size:14px;
+    text-align:center;
+    color:#1f1f1f;
+     */
+    /*padding-right: 10px;*/
 }
+
+
 
 .open-slide{
     float:right;
