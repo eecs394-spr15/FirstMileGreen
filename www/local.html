@@ -46,17 +46,25 @@ query.find({
            for (var i = 0; i < results.length; i++){
 
            var sport = results[i].get("sport");
-           var imagePath;
-           if (sport == "Basketball")
-                imagePath = "images/pictures/Basketball.png";
-           else if (sport == "Soccer")
-                imagePath = "images/pictures/Soccer.png";"
+           var imagePath =  "images/pictures/Basketball.png";
+           
+           
+           
+           
+           
+           
            var location = results[i].get("location");
            var startTime = results[i].get("Start_Time");
            var currentPlayerCount = results[i].get("Current_Num_Of_Players");
            var maxPlayerCount = results[i].get("Max_Num_Of_Players");
+           
+           
            $("#page").append("<p class=\"notification-page-item\"><img src=\""+imagePath+"\" alt=\"img\">");
            $("#page").append("<h3>" + sport + "</h3></p>");
+           $("#page").append("<h3>" + location + "</h3></p>");
+           $("#page").append("<h3>" + startTime + "</h3></p>");
+           $("#page").append("<h3>" + currentPlayerCount + "/" + maxPlayerCount + "</h3></p>");
+
            }
            },
            
