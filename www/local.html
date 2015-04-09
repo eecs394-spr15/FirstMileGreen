@@ -45,7 +45,7 @@
                                                     </script>
                                                 
                                                 <script>
-                                                    alert("in script");
+                                                    
                                                     Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
                                                     /*var Games = Parse.Object.extend("Games");
                                                      var laurensGame = new Games();
@@ -55,7 +55,6 @@
                                                      */
                                                 var query = new Parse.Query("Games");
                                                 query.find({
-                                                           alert("in find");
                                                            success: function(results) {
                                                            // results is an array of Parse.Object.
                                                            for (var i = 0; i < results.length; i++){
@@ -68,10 +67,10 @@
                                                            else if (sport == "Soccer")
                                                            imagePath = "images/Custom/Soccer/Soccer_Ball.png";
                                                            else
-                                                           imagePath = "images/Custom/Football/football.png";
+                                                           imagePath = "images/Custom/Fo otball/Football.png";
                                                            
                                                            
-                                                           var location = results[i].get("Location_Name");
+                                                           var location = results[i].get("location");
                                                            var startTime = results[i].get("Start_Time");
                                                            startTime = new Date(startTime);
                                                            startTime = formatAMPM(startTime);
