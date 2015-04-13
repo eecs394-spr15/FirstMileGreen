@@ -5,24 +5,20 @@ module.exports =
   # See styling options for tabs and other native components in app/common/native-styles/ios.css or app/common/native-styles/android.css
   tabs: [
     {
-      title: "Index"
-      id: "index"
-      location: "common#getting-started" # Supersonic module#view type navigation
+      title: "Create Pickup Game"
+      id: "create"
+      location: "common#create-pickup" # Supersonic module#view type navigation
     }
     {
-      title: "Settings"
-      id: "settings"
-      location: "common#settings"
+      title: "View Pickup Games"
+      id: "view"
+      location: "common#view-games"
     }
-    {
-      title: "Internet"
-      id: "internet"
-      location: "http://google.com" # URLs are supported!
-    }
+  
   ]
 
   # rootView:
-  #   location: "example#getting-started"
+  #   location: "example#view-games"
 
   preloads: [
     {
