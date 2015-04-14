@@ -25,7 +25,7 @@ Parse.Cloud.define("get_games", function(request, response)
 	var query = new Parse.Query("Current_Games");
 	query.select("GameID", "Location_Name", "Sport", "Num_Of_Players", "Max_Num_Of_Players", "Start_Time", "End_Time");
 	query.ascending("Start_Time");
-	query.limit(2);
+	query.limit(2);//increase to usable size
 	query.find({
 		success: function(results) {
 			response.success(results);
@@ -35,3 +35,4 @@ Parse.Cloud.define("get_games", function(request, response)
 		}
 	});
 });
+
