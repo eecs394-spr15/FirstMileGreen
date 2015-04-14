@@ -36,3 +36,15 @@ Parse.Cloud.define("get_games", function(request, response)
 	});
 });
 
+Parse.Cloud.define("join_game", function(request, response)
+{
+	//var query = new Parse.Query("Current_Games");
+	query.find({
+		success: function(results) {
+			response.success(results);
+		},
+		error: function() {
+			response.error("Player lookup failed");
+		}
+	});
+});
