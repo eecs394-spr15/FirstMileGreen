@@ -1,14 +1,16 @@
-4/14 
+Last Updated 4/15
+
 Working Queries:
 get_players
 get_games
 hello (only for testing)
-
-In the Queue (look at Trello backlog to confirm):
 join_game
 leave_game
 create_game
 
+Left to do (check Trello):
+make "more info" query (replace get_players?)
+make checks for join game, leave_game, and create_game
 
 
 How to use:
