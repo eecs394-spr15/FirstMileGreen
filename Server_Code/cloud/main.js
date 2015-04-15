@@ -50,13 +50,14 @@ Parse.Cloud.define("join_game", function(request, response)
 	{
 		success: function(add_to_list)
 		{
-//			response.success("Player added");
+			response.success("Player added");
 		},
 		error: function(add_to_list, error)
 		{
-//			response.error("Player add failed");
+			response.error("Player add failed");
 		}
 	});
+	
 
 	//increment number in current_games table
 	var Current_Games = Parse.Object.extend("Current_Games");
@@ -66,14 +67,15 @@ Parse.Cloud.define("join_game", function(request, response)
 	add_to_num.find({
 		success: function(results) {
 			var game = results[0];
-			//var current_player_number = game.get('Num_Of_Players');
-			//game.set("Num_Of_Players", current_player_number + 1);
-			game.set("Num_Of_Players", 4);
+			var current_player_number = game.get('Num_Of_Players');
+			game.set("Num_Of_Players", current_player_number + 1);
+			//game.set("Num_Of_Players", 4);
 			game.save(null,
 			{
 				success: function(game)
 				{
-					response.success("Current_Games table updated");
+					//response.success("Current_Games table updated");
+					response.success("Current_Games updated");
 				},
 				error:function(game, error)
 				{
