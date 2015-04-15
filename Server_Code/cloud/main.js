@@ -69,12 +69,10 @@ Parse.Cloud.define("join_game", function(request, response)
 			var game = results[0];
 			var current_player_number = game.get('Num_Of_Players');
 			game.set("Num_Of_Players", current_player_number + 1);
-			//game.set("Num_Of_Players", 4);
 			game.save(null,
 			{
 				success: function(game)
 				{
-					//response.success("Current_Games table updated");
 					response.success("Current_Games updated");
 				},
 				error:function(game, error)
@@ -90,3 +88,71 @@ Parse.Cloud.define("join_game", function(request, response)
 	});
 
 });
+
+Parse.Cloud.define("leave_game", function(request, response)
+{
+	//add name to list of players
+
+	var Players = Parse.Object.extend("Players");
+	var add_to_list = new Parse.Query(Players);
+	//gets data from phone request
+	add_to_list.equalTo("PlayerID", request.params.PlayerID);
+	add_to_list.equalTo("GameID", request.params.GameID);
+	//Save data to Players table
+	add_to_list.find(
+	{
+		success: function(results)
+		{
+			var person = results[0];
+			person.destroy(
+			{
+				success: function(person)
+				{
+					response.success("Player dropped");
+				}
+				/*
+				Including this error check was giving an error for some reason. Look into later. - SW
+				error: function(person, error)
+				{
+					response.error("Player drop failed");
+				}
+				*/
+			})
+		},
+		error: function()
+		{
+			response.error("Player drop failed");
+		}
+	});
+	
+
+	//decrement number in current_games table
+	var Current_Games = Parse.Object.extend("Current_Games");
+	var add_to_num = new Parse.Query(Current_Games);
+	add_to_num.equalTo("GameID", request.params.GameID);
+
+	add_to_num.find({
+		success: function(results) {
+			var game = results[0];
+			var current_player_number = game.get('Num_Of_Players');
+			game.set("Num_Of_Players", current_player_number - 1);
+			game.save(null,
+			{
+				success: function(game)
+				{
+					response.success("Current_Games updated");
+				},
+				error:function(game, error)
+				{
+					response.error("Current_Games update failed");
+				}
+			});
+		},
+		error: function() 
+		{
+			response.error("Game not found");
+		}
+	});
+
+});
+
