@@ -39,34 +39,52 @@ Parse.Cloud.define("get_games", function(request, response)
 Parse.Cloud.define("join_game", function(request, response)
 {
 	//add name to list of players
+
 	var Players = Parse.Object.extend("Players");
 	var add_to_list = new Players();
 	//gets data from phone request
 	add_to_list.set("PlayerID", request.params.PlayerID);
 	add_to_list.set("GameID", request.params.GameID);
+	//Save data to Players table
 	add_to_list.save(null,
 	{
 		success: function(add_to_list)
 		{
-			response.success("Player added");
+//			response.success("Player added");
 		},
 		error: function(add_to_list, error)
 		{
-			response.error("Player add failed");
+//			response.error("Player add failed");
 		}
 	});
-	/*
+
 	//increment number in current_games table
-	var add_to_num = new Parse.Query("Current_Games");
+	var Current_Games = Parse.Object.extend("Current_Games");
+	var add_to_num = new Parse.Query(Current_Games);
 	add_to_num.equalTo("GameID", request.params.GameID);
 
-	query.find({
+	add_to_num.find({
 		success: function(results) {
-			response.success(results);
+			var game = results[0];
+			//var current_player_number = game.get('Num_Of_Players');
+			//game.set("Num_Of_Players", current_player_number + 1);
+			game.set("Num_Of_Players", 4);
+			game.save(null,
+			{
+				success: function(game)
+				{
+					response.success("Current_Games table updated");
+				},
+				error:function(game, error)
+				{
+					response.error("Current_Games update failed");
+				}
+			});
 		},
-		error: function() {
-			response.error("Player lookup failed");
+		error: function() 
+		{
+			response.error("Game not found");
 		}
 	});
-*/
+
 });
