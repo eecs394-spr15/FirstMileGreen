@@ -156,3 +156,34 @@ Parse.Cloud.define("leave_game", function(request, response)
 
 });
 
+
+
+Parse.Cloud.define("create_game", function(request, response)
+{
+	//add name to list of players
+
+	var Current_Games = Parse.Object.extend("Current_Games");
+	var add_to_list = new Current_Games();
+	//gets data from phone request
+	add_to_list.set("GameID", request.params.GameID);
+	add_to_list.set("Location_Name", request.params.Location_Name);
+	add_to_list.set("Sport", request.params.Sport);
+	add_to_list.set("Max_Num_Of_Players", request.params.Max_Num_Of_Players);
+	add_to_list.set("Start_Time", request.params.Start_Time);
+	add_to_list.set("End_Time", request.params.End_Time);
+	add_to_list.set("Notes", request.params.Notes);
+	add_to_list.set("Creator", request.params.PlayerID);
+	add_to_list.set("Num_Of_Players", 1);
+	//Save data to Players table
+	add_to_list.save(null,
+	{
+		success: function(add_to_list)
+		{
+			response.success("Player added");
+		},
+		error: function(add_to_list, error)
+		{
+			response.error("Player add failed");
+		}
+	});
+});
