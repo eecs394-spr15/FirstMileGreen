@@ -187,3 +187,33 @@ Parse.Cloud.define("create_game", function(request, response)
 		}
 	});
 });
+
+
+Parse.Cloud.define("get_location", function(request, response)
+{
+	var query = new Parse.Query("Location");
+	query.select("Location_Name");
+	query.find({
+		success: function(results) {
+			response.success(results);
+		},
+		error: function() {
+			response.error("Location lookup failed");
+		}
+	});
+});
+
+Parse.Cloud.define("get_sports", function(request, response)
+{
+	var query = new Parse.Query("Sports");
+	query.equalTo("Location_Name", request.params.Location_Name);
+	//query.select("PlayerID");
+	query.find({
+		success: function(results) {
+			response.success(results);
+		},
+		error: function() {
+			response.error("Sports lookup failed");
+		}
+	});
+});
