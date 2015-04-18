@@ -12,17 +12,26 @@ Parse.Cloud.define("get_more", function(request, response)
 	query.equalTo("GameID", request.params.GameID);
 	query.select("PlayerID");
 
+	var players;
+
+	query.find({
+		success: function(results)
+		{
+			players = results;
+		}
+
+	});
+
 	//gets game info
 	var game = new Parse.Query("Current_Games");
 	game.equalTo("GameID", request.params.GameID);
 	game.select("Notes");
 
-	var total = Parse.Query.or(query, game);
-	query.find({
+	game.find({
 		success: function(results)
 		{
-			response.success(results);
-		}
+			response.success([results, players]);
+		},
 		error: function()
 		{
 			response.error("lookup failed");
