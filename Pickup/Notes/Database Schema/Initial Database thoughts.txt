@@ -1,0 +1,54 @@
+Just some initial things I thought of about database schema.
+
+-SW
+
+Tables:
+	Locations
+	Sports
+	Players
+	Current Games
+	Past Games
+	Accounts
+
+Locations
+	Location Name
+	Latitude
+	Longitude
+
+Sports
+	Location Name
+	Sport
+	Max # of concurrent games
+
+Players
+	GameID
+	PlayerID
+	//GameID + PlayerID combo must be unique
+//Create a current Players and Past Players tables?
+
+Current Games
+	GameID
+	Location Name
+	Sport
+	# of players
+	Date
+	Start Time
+	End Time
+	Notes
+
+Past Games
+	GameID
+	Location Name
+	Sport
+	# of players
+	Date
+	Start Time
+	End Time
+	Notes
+
+//Is it uesful to split Games into 2 tables?
+
+Accounts
+	PlayerID
+	Favorite Sport
+	Favorite Person
