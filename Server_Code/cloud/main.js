@@ -91,8 +91,6 @@ Parse.Cloud.define("join_game", function(request, response)
 
 Parse.Cloud.define("leave_game", function(request, response)
 {
-	//add name to list of players
-
 	var Players = Parse.Object.extend("Players");
 	var add_to_list = new Parse.Query(Players);
 	//gets data from phone request
@@ -160,8 +158,6 @@ Parse.Cloud.define("leave_game", function(request, response)
 
 Parse.Cloud.define("create_game", function(request, response)
 {
-	//add name to list of players
-
 	var Current_Games = Parse.Object.extend("Current_Games");
 	var add_to_list = new Current_Games();
 	//gets data from phone request
@@ -186,6 +182,8 @@ Parse.Cloud.define("create_game", function(request, response)
 			response.error("Player add failed");
 		}
 	});
+
+	//Double check that this currently adds the creator to the players list for this game
 });
 
 
@@ -207,13 +205,63 @@ Parse.Cloud.define("get_sports", function(request, response)
 {
 	var query = new Parse.Query("Sports");
 	query.equalTo("Location_Name", request.params.Location_Name);
-	//query.select("PlayerID");
 	query.find({
 		success: function(results) {
 			response.success(results);
 		},
 		error: function() {
 			response.error("Sports lookup failed");
+		}
+	});
+});
+
+Parse.Cloud.define("cancel_game", function(request, response)
+{
+	//drops game from create_game talbe
+	var query = new Parse.Query("Current_Games");
+	query.equalTo("GameID", request.params.GameID);
+	query.equalTo("Creator", request.params.PlayerID);
+	query.find({
+		success: function(results) {
+			var game = results[0];
+			game.destroy(
+			{
+				success: function(game)
+				{
+					response.success("Game dropped");
+				}
+				/*
+				Including this error check was giving an error for some reason. Look into later. - SW
+				error: function(person, error)
+				{
+					response.error("Game drop failed");
+				}
+				*/
+			})
+
+		},
+		error: function() {
+			response.error("Game cancel failed");
+		}
+	});
+	//drop players from Players table
+	var players = new Parse.Query("Players");
+	players.equalTo("GameID", request.params.GameID);
+	players.find({
+		success: function(results){
+			var player;
+			for(i = 0; i < results.length; i++)
+			{
+				player = results[i];
+				player.destroy(
+				{
+
+				})
+			}
+		},
+		error: function()
+		{
+			response.error("Player drop failed");
 		}
 	});
 });
