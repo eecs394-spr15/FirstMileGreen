@@ -1,0 +1,61 @@
+<div ng-controller="IndexController">
+  <super-navbar>
+    <super-navbar-title>
+      Pickup Games
+    </super-navbar-title>
+    <super-navbar-button side="right" view-id="new"> 
+      Create  
+    </super-navbar-button>
+  </super-navbar>
+
+   <div class="searchbar item item-input-inset">
+    <label class="item-input-wrapper">
+      <input ng-model="query.sport" type="text" placeholder="eg. Sports">
+    </label>
+    <button class="clearButton" ng-click="query.sport = ''">
+      <div>Clear</div>
+    </button>
+ 
+  </div>
+
+
+
+
+  <div ng-show="showSpinner" ng-include="'_spinner.html'">
+    
+  </div>
+   <!-- <super-modal-show location="game#new">
+      <button class="button button-full button-positive">
+        Create a new game
+      </button>
+    </super-modal-show>-->
+
+  <div ng-hide="showSpinner">
+
+ 
+
+
+    <ul class="list" ng-hide="games.length == 0">
+
+      <!-- <super-navigate location="game#show" data-params-id="{{ game.id }}" ng-repeat="game in games"> -->
+      <super-navigate ng-repeat="game in (filtered=(games|filter:query))" class="iter item-thumbnail-left" view-id="game#show?id={{game.id}}">
+
+        <a class="item item-thumbnail-left" href="#">
+          <img src="cover.jpg">
+          <h2 ng-bind="game['sport']"></h2>
+          <p ng-bind="game['Current_Num_Of_Players']"> </p>
+        </a>
+      </super-navigate>
+
+    </ul>
+    <div class="notfound" ng-show="filtered.length ===0">
+<!--     <h4 ng-show="games.length == 0" class="assertive padding">
+      No games found. Create one?
+    </h4> -->
+    <h4>No game found! Sucker!</h4>
+
+  </div>
+
+  
+  </div>
+</div>

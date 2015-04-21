@@ -1,0 +1,13 @@
+<div ng-controller="DrawerController">
+<script>
+  document.addEventListener("touchmove", function(e){
+    e.preventDefault();
+  });
+</script>
+ 
+<ul class="list">
+  <li class="item" ng-click="createClicked()">Create</li>
+  <li class="item" ng-click="localClicked()">View Games</li>
+
+</ul>
+</div>
