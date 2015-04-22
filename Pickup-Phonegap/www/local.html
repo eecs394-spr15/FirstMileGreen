@@ -61,7 +61,7 @@
                                                            
                                                            var sport = results[i].get("sport");
                                                            var imagePath;
-                                                           
+                                                           var id = results[i].id;
                                                            if (sport == "Basketball")
                                                            imagePath = "images/Custom/Basketball/basketball.png";
                                                            else if (sport == "Soccer")
@@ -82,7 +82,7 @@
                                                            
                                                            
                                                            
-                                                           $("#page").append("<a href=\"#\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+                                                           $("#page").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
                                                            
                                                            
                                                            

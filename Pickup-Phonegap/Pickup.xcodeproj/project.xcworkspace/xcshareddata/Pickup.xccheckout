@@ -14,7 +14,7 @@
 		<string>https://github.com/eecs394-spr15/Pickup.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Pickup.xcodeproj</string>
+	<string>Pickup-Phonegap/Pickup.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DB80595A7B6CCDBD1405D182501E0D03AD471433</key>
@@ -28,14 +28,6 @@
 	<string>DB80595A7B6CCDBD1405D182501E0D03AD471433</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>DB80595A7B6CCDBD1405D182501E0D03AD471433</string>
-			<key>IDESourceControlWCCName</key>
-			<string></string>
-		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
