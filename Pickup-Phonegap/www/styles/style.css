@@ -1204,12 +1204,16 @@ body{
     line-height:26px;
 }
 
-
-
-
-
-
-
+.backButton {
+    color: #000000;
+    float:left;
+    width:60px;
+    height:40px;
+    line-height:40px;
+    font-size:14px;
+    text-align:center;
+    /*padding-bottom: 50px;*/
+}
 
 
 
