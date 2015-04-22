@@ -34,7 +34,11 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>DB80595A7B6CCDBD1405D182501E0D03AD471433</string>
 			<key>IDESourceControlWCCName</key>
+<<<<<<< HEAD
 			<string>PickUp</string>
+=======
+			<string>Pickup</string>
+>>>>>>> LaurenRahul
 		</dict>
 	</array>
 </dict>
