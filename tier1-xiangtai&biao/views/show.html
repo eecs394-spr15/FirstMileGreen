@@ -1,0 +1,40 @@
+<div ng-controller="ShowController">
+  <super-navbar>
+    <super-navbar-title>
+    See Game
+    </super-navbar-title>
+  </super-navbar>
+
+  <div class="padding">
+    <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
+    <div ng-hide="showSpinner">
+       <p>Sport: <span ng-bind="game['sport']"></span></p> 
+       <p>Location: <span ng-bind="game['location']"></span></p> 
+
+       <p>Start Time: <span ng-bind="game['Start_Time']"></span></p> 
+      
+       <p>EndTime: <span ng-bind="game['End_Time']"></span></p> 
+      
+       <p>Max_Num_Of_Players: <span ng-bind="game['Current_Num_Of_Players']"></span>/<span ng-bind="game['Max_Num_Of_Players']"></span></p> 
+      
+       <p>Notes: <span ng-bind="game['Notes']"></span></p> 
+      
+      
+       <p>Created at: <span ng-bind="game['createdAt']"></span></p> 
+      
+      
+      
+
+
+      <super-modal-show location="game#edit?id={{ game.id }}">
+        <button class="button button-block button-positive">
+          Edit
+        </button>
+      </super-modal-show>
+
+      <button ng-click="remove(game.id)" class="button button-block button-negative">
+        Remove
+      </button>
+    </div>
+  </div>
+</div>
