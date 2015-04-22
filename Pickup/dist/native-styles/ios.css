@@ -1,0 +1,110 @@
+/***********************************************************
+ * These styles apply for native components on iOS.
+ * Read more about native styles at http://docs.appgyver.com
+ ***********************************************************/
+
+navigation-bar {
+  background-color: #00B5FF;
+  color: #ffffff;
+}
+
+navigation-bar title {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+navigation-bar button, navigation-bar back-bar-button {
+  /*color: #b0b1b4;*/
+  color: #ffffff;
+  font-weight: 300;
+}
+
+#Settings{
+  font-size: 100px;
+  color: #ff00ff;
+}
+
+navigation-bar button#settings {
+  color: #ff00ff;
+}
+
+navigation-bar #settings {
+  color: #ff00ff;
+}
+
+tab-bar {
+  background-color: #ffffff;
+  border-top: 1px #d8d8d8 solid;
+}
+
+tab-bar tab-bar-item {
+  color: #b0b1b4;
+  font-family: "Avenir";
+  font-size: 10px;
+}
+
+tab-bar tab-bar-item:selected {
+  color: #1596f7;
+}
+
+tab-bar-item#settings {
+  background-image: url(icons/cog.svg);
+}
+
+tab-bar-item#index {
+  background-image: url(icons/home.svg);
+}
+
+tab-bar-item#internet {
+  background-image: url(icons/search.svg);
+}
+
+navigation-bar #plusButton{
+  font-size: 100px;
+  color: #ff00ff;
+}
+
+Settings{
+  font-size: 100px;
+  color: #ff00ff;
+}
+
+.header{
+    pointer-events:all;
+    position:fixed;
+    height:70px;
+    z-index:999999;
+    background-color:#FFFFFF;
+    width:100%;
+    max-height:100%;
+    transform:translateY(0px);
+    -webkit-transform:translateY(0px);
+    transition:all 350ms ease-in-out;
+}
+
+.header-controls{
+    /*margin-top:15px;*/
+    margin-top:15px;
+    margin-right:3px;
+    
+    /*border-bottom-style:solid;
+    border-bottom-width: 1px;
+     */
+    /*margin-bottom:10px;*/
+}
+
+.open-menu{
+    float:left;
+    width:60px;
+    height:40px;
+    line-height:40px;
+    font-size:14px;
+    text-align:center;
+    color:#1f1f1f;
+    /*border-right:dashed 1px #cacaca;*/
+}
+
+plusButton {
+    color: #ff00ff;
+}
