@@ -47,12 +47,6 @@ function formatAMPM(date) {
 <script>
 
 Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
-/*var Games = Parse.Object.extend("Games");
-var laurensGame = new Games();
-laurensGame.save({sport: "swimming"}).then(function(object) {
-alert("yay! it worked");
-});
-*/
 var query = new Parse.Query("Games");
 query.find({
     success: function(results) {
