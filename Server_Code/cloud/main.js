@@ -5,19 +5,39 @@ Parse.Cloud.define("hello", function(request, response) {
 	response.success("Hello world!");
 });
 
-Parse.Cloud.define("get_players", function(request, response)
+Parse.Cloud.define("get_more", function(request, response)
 {
+	//gets list of players
 	var query = new Parse.Query("Players");
 	query.equalTo("GameID", request.params.GameID);
 	query.select("PlayerID");
+
+	var players;
+
 	query.find({
-		success: function(results) {
-			response.success(results);
-		},
-		error: function() {
-			response.error("Player lookup failed");
+		success: function(results)
+		{
+			players = results;
 		}
+
 	});
+
+	//gets game info
+	var game = new Parse.Query("Current_Games");
+	game.equalTo("GameID", request.params.GameID);
+	game.select("Notes");
+
+	game.find({
+		success: function(results)
+		{
+			response.success([results, players]);
+		},
+		error: function()
+		{
+			response.error("lookup failed");
+		}
+	})
+	
 });
 
 Parse.Cloud.define("get_games", function(request, response)
