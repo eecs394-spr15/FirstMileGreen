@@ -54,10 +54,12 @@ Parse.Cloud.define("get_more", function(request, response)
  
 Parse.Cloud.define("get_games", function(request, response)
 {
+	var today = new Date();
+	console.log(today);
     var query = new Parse.Query("Current_Games");
     query.select("GameID", "Location_Name", "Sport", "Num_Of_Players", "Max_Num_Of_Players", "Start_Time", "End_Time");
     query.ascending("Start_Time");
-    query.limit(2);//increase to usable size
+    query.limit(15);//increase to usable size
     query.find({
         success: function(results) {
             response.success(results);
@@ -184,8 +186,6 @@ Parse.Cloud.define("leave_game", function(request, response)
     });
 });
  
- 
- 
 Parse.Cloud.define("create_game", function(request, response)
 {
     var Current_Games = Parse.Object.extend("Current_Games");
@@ -220,7 +220,7 @@ Parse.Cloud.define("create_game", function(request, response)
     add_to_list.set("End_Time", request.params.End_Time);
     add_to_list.set("Notes", request.params.Notes);
     add_to_list.set("Creator", request.params.PlayerID);
-    add_to_list.set("Num_Of_Players", 1);
+    add_to_list.set("Num_Of_Players", 0);
     //Save data to Create Games table
     add_to_list.save(null,
     {
