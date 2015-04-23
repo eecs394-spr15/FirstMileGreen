@@ -1,6 +1,8 @@
-<<<<<<< HEAD
+
 <!DOCTYPE HTML>
+
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -46,127 +48,81 @@ function formatAMPM(date) {
 }
 
 </script>
-
+<!-- 
 <script>
 
+// Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+// var query = new Parse.Query("Games");
+// query.find({
+//     success: function(results) {
+//         // results is an array of Parse.Object.
+//         for (var i = 0; i < results.length; i++){
+
+            // function formatAMPM(date) {
+            //     var hours = date.getHours();
+            //     var minutes = date.getMinutes();
+            //     var ampm = hours >= 12 ? 'pm' : 'am';
+            //     hours = hours % 12;
+            //     hours = hours ? hours : 12; // the hour '0' should be '12'
+            //     minutes = minutes < 10 ? '0'+minutes : minutes;
+            //     var strTime = hours + ':' + minutes + ' ' + ampm;
+            //     return strTime;
+            // }
+        
+</script>
+  -->                                               
+<script>
+                
 Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+/*var Games = Parse.Object.extend("Games");
+ var laurensGame = new Games();
+ laurensGame.save({sport: "swimming"}).then(function(object) {
+ alert("yay! it worked");
+ });
+ */
 var query = new Parse.Query("Games");
 query.find({
-    success: function(results) {
-        // results is an array of Parse.Object.
-        for (var i = 0; i < results.length; i++){
-=======
-<!DOCTYPE HTML><head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/splash/splash-icon.png">
-            <link rel="apple-touch-icon-precomposed" sizes="180x180" href="images/splash/splash-icon-big.png">
-                <link rel="apple-touch-startup-image" href="images/splash/splash-screen.png" 	media="screen and (max-device-width: 320px)" />
-                <link rel="apple-touch-startup-image" href="images/splash/splash-screen@2x.png" media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" />
-                <link rel="apple-touch-startup-image" href="images/splash/splash-screen-six.png" media="(device-width: 375px)">
-                    <link rel="apple-touch-startup-image" href="images/splash/splash-screen-six-plus.png" media="(device-width: 414px)">
-                        <link rel="apple-touch-startup-image" sizes="640x1096" href="images/splash/splash-screen@3x.png" />
-                        <link rel="apple-touch-startup-image" sizes="1024x748" href="images/splash/splash-screen-ipad-landscape" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : landscape)" />
-                        <link rel="apple-touch-startup-image" sizes="768x1004" href="images/splash/splash-screen-ipad-portrait.png" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : portrait)" />
-                        <link rel="apple-touch-startup-image" sizes="1536x2008" href="images/splash/splash-screen-ipad-portrait-retina.png"   media="(device-width: 768px)	and (orientation: portrait)	and (-webkit-device-pixel-ratio: 2)"/>
-                        <link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png"   media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)"/>
-                        
-                        <title>Pickup</title>
-                        
-                        <script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
-                        <link href="styles/style.css"     		 rel="stylesheet" type="text/css">
-                            <link href="styles/framework.css" 		 rel="stylesheet" type="text/css">
-                                <link href="styles/owl.theme.css" 		 rel="stylesheet" type="text/css">
-                                    <link href="styles/swipebox.css"		 rel="stylesheet" type="text/css">
-                                        <link href="styles/font-awesome.css"	 rel="stylesheet" type="text/css">
-                                            <link href="styles/animate.css"			 rel="stylesheet" type="text/css">
-                                                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-                                                <script type="text/javascript" src="scripts/jquery.js"></script>
-                                                <script type="text/javascript" src="scripts/jqueryui.js"></script>
-                                                <script type="text/javascript" src="scripts/framework.plugins.js"></script>
-                                                <script type="text/javascript" src="scripts/custom.js"></script>
-                                                <script type="text/javascript">
-                                                    function formatAMPM(date) {
-                                                        var hours = date.getHours();
-                                                        var minutes = date.getMinutes();
-                                                        var ampm = hours >= 12 ? 'pm' : 'am';
-                                                        hours = hours % 12;
-                                                        hours = hours ? hours : 12; // the hour '0' should be '12'
-                                                        minutes = minutes < 10 ? '0'+minutes : minutes;
-                                                        var strTime = hours + ':' + minutes + ' ' + ampm;
-                                                        return strTime;
-                                                    }
-                                                
-                                                    </script>
-                                                
-                                                <script>
-                                                    
-                                                    Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
-                                                    /*var Games = Parse.Object.extend("Games");
-                                                     var laurensGame = new Games();
-                                                     laurensGame.save({sport: "swimming"}).then(function(object) {
-                                                     alert("yay! it worked");
-                                                     });
-                                                     */
-                                                var query = new Parse.Query("Games");
-                                                query.find({
-                                                           success: function(results) {
-                                                           // results is an array of Parse.Object.
-                                                           for (var i = 0; i < results.length; i++){
-                                                           
-                                                           var sport = results[i].get("sport");
-                                                           var imagePath;
-                                                           var id = results[i].id;
-                                                           if (sport == "Basketball")
-                                                           imagePath = "images/Custom/Basketball/basketball.png";
-                                                           else if (sport == "Soccer")
-                                                           imagePath = "images/Custom/Soccer/Soccer_Ball.png";
-                                                           else
-                                                           imagePath = "images/Custom/Football/Football.png";
-                                                           
-                                                           
-                                                           var location = results[i].get("location");
-                                                           var startTime = results[i].get("Start_Time");
-                                                           startTime = new Date(startTime);
-                                                           startTime = formatAMPM(startTime);
-                                                           var currentPlayerCount = results[i].get("Current_Num_Of_Players");
-                                                           var maxPlayerCount = results[i].get("Max_Num_Of_Players");
-                                                           
-                                                           
-                                                           
-                                                           
-                                                           
-                                                           
-                                                           $("#page").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
-                                                           
-                                                           
-                                                           
-                                                           }
-                                                           },
-                                                           
-                                                           error: function(error) {
-                                                           // error is an instance of Parse.Error.
-                                                           alert(error);
-                                                           }
-                                                           });
-                                                           
-                                                           
-                                                    </script>
+       success: function(results) {
+       // results is an array of Parse.Object.
+       for (var i = 0; i < results.length; i++){
+       
+       var sport = results[i].get("sport");
+       var imagePath;
+       var id = results[i].id;
+       if (sport == "Basketball")
+       imagePath = "images/Custom/Basketball/basketball.png";
+       else if (sport == "Soccer")
+       imagePath = "images/Custom/Soccer/Soccer_Ball.png";
+       else
+       imagePath = "images/Custom/Football/Football.png";
+       
+       
+       var location = results[i].get("location");
+       var startTime = results[i].get("Start_Time");
+       startTime = new Date(startTime);
+       startTime = formatAMPM(startTime);
+       var currentPlayerCount = results[i].get("Current_Num_Of_Players");
+       var maxPlayerCount = results[i].get("Max_Num_Of_Players");
+             
+       
+       $("#page").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+       
+       
+       
+       }
+       },
+       
+       error: function(error) {
+       // error is an instance of Parse.Error.
+       alert(error);
+       }
+       });
+              
+</script>
 </head>
-<body>
-    
-    <div id="preloader">
-        <div id="status">
-            <p class="center-text">
-            Loading the content...
-            <em>Loading depends on your connection speed!</em>
-            </p>
-        </div>
-    </div>
-    
+
+
+
     <!--<div class="menu-wrapper">
      <em><i class="fa fa-question-circle"></i>Swipe the icons, tap to select!</em>
      <div class="menu">
@@ -204,49 +160,42 @@ query.find({
      </a>
      </div>
      </div>-->
-    
-    <div class="header">
-        <!--
-         <a href="#" class="main-logo"></a>
-         -->
-        <div class="header-controls">
-            <!--<a href="#" class="open-more"><i class="fa fa-envelope"></i></a>
-             <a href="#" class="open-slide"><i class="fa fa-star"></i></a>-->
->>>>>>> LaurenRahul
+<!--     
+  <script>          
+//             var sport = results[i].get("sport");
+//             var imagePath;
             
-            var sport = results[i].get("sport");
-            var imagePath;
-            
-            if (sport == "Basketball")
-                imagePath = "images/Custom/Basketball/basketball.png";
-            else if (sport == "Soccer")
-                imagePath = "images/Custom/Soccer/Soccer_Ball.png";
-            else
-                imagePath = "images/Custom/Football/Football.png";
+//             if (sport == "Basketball")
+//                 imagePath = "images/Custom/Basketball/basketball.png";
+//             else if (sport == "Soccer")
+//                 imagePath = "images/Custom/Soccer/Soccer_Ball.png";
+//             else
+//                 imagePath = "images/Custom/Football/Football.png";
             
             
-            var location = results[i].get("location");
-            var startTime = results[i].get("Start_Time");
-            startTime = new Date(startTime);
-            startTime = formatAMPM(startTime);
-            var currentPlayerCount = results[i].get("Current_Num_Of_Players");
-            var maxPlayerCount = results[i].get("Max_Num_Of_Players");
+//             var location = results[i].get("location");
+//             var startTime = results[i].get("Start_Time");
+//             startTime = new Date(startTime);
+//             startTime = formatAMPM(startTime);
+//             var currentPlayerCount = results[i].get("Current_Num_Of_Players");
+//             var maxPlayerCount = results[i].get("Max_Num_Of_Players");
 
-            $("#page").append("<a href=\"#\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+//             $("#page").append("<a href=\"#\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
             
             
             
-        }
-    },
+//         }
+//     },
     
-    error: function(error) {
-        // error is an instance of Parse.Error.
-        alert(error);
-    }
-});
+//     error: function(error) {
+//         // error is an instance of Parse.Error.
+//         alert(error);
+//     }
+// });
 </script>
+ -->
+<!-- </head> -->
 
-</head>
 <body>
 
 <div id="preloader">
