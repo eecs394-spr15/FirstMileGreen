@@ -29,6 +29,8 @@
 <link href="styles/swipebox.css"         rel="stylesheet" type="text/css">
 <link href="styles/font-awesome.css"     rel="stylesheet" type="text/css">
 <link href="styles/animate.css"          rel="stylesheet" type="text/css">
+<link href="styles/local.css"            rel="stylesheet" type="text/css">
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jqueryui.js"></script>
@@ -48,38 +50,11 @@ function formatAMPM(date) {
 }
 
 </script>
-<!-- 
-<script>
-
-// Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
-// var query = new Parse.Query("Games");
-// query.find({
-//     success: function(results) {
-//         // results is an array of Parse.Object.
-//         for (var i = 0; i < results.length; i++){
-
-            // function formatAMPM(date) {
-            //     var hours = date.getHours();
-            //     var minutes = date.getMinutes();
-            //     var ampm = hours >= 12 ? 'pm' : 'am';
-            //     hours = hours % 12;
-            //     hours = hours ? hours : 12; // the hour '0' should be '12'
-            //     minutes = minutes < 10 ? '0'+minutes : minutes;
-            //     var strTime = hours + ':' + minutes + ' ' + ampm;
-            //     return strTime;
-            // }
-        
-</script>
-  -->                                               
+                                              
 <script>
                 
 Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
-/*var Games = Parse.Object.extend("Games");
- var laurensGame = new Games();
- laurensGame.save({sport: "swimming"}).then(function(object) {
- alert("yay! it worked");
- });
- */
+
 var query = new Parse.Query("Games");
 query.find({
        success: function(results) {
@@ -106,6 +81,8 @@ query.find({
              
        
        $("#page").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+
+      $("#favoritepage").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
        
        
        
@@ -119,82 +96,29 @@ query.find({
        });
               
 </script>
+
+<script>
+ function setTab(m,n){  
+  
+ var tli=document.getElementById("menu"+m).getElementsByTagName("li");  
+  
+ var mli=document.getElementById("main"+m).getElementsByTagName("ul");  
+  
+ for(i=0;i<tli.length;i++){  
+  
+  tli[i].className=i==n?"hover":"unhover";  
+  
+  mli[i].style.display=i==n?"block":"none";  
+  
+ }  
+  
+} 
+
+</script>
 </head>
 
 
 
-    <!--<div class="menu-wrapper">
-     <em><i class="fa fa-question-circle"></i>Swipe the icons, tap to select!</em>
-     <div class="menu">
-     <a href="#" class="item" id="selected">
-     <img src="images/highlights/1.jpg" alt="img">
-     Homepage
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/2.jpg" alt="img">
-     Features
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/3.jpg" alt="img">
-     Gallery
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/4.jpg" alt="img">
-     Portfolio
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/5.jpg" alt="img">
-     App Styled
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/6.jpg" alt="img">
-     Pages
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/7.jpg" alt="img">
-     Blog
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/8.jpg" alt="img">
-     Contact
-     </a>
-     </div>
-     </div>-->
-<!--     
-  <script>          
-//             var sport = results[i].get("sport");
-//             var imagePath;
-            
-//             if (sport == "Basketball")
-//                 imagePath = "images/Custom/Basketball/basketball.png";
-//             else if (sport == "Soccer")
-//                 imagePath = "images/Custom/Soccer/Soccer_Ball.png";
-//             else
-//                 imagePath = "images/Custom/Football/Football.png";
-            
-            
-//             var location = results[i].get("location");
-//             var startTime = results[i].get("Start_Time");
-//             startTime = new Date(startTime);
-//             startTime = formatAMPM(startTime);
-//             var currentPlayerCount = results[i].get("Current_Num_Of_Players");
-//             var maxPlayerCount = results[i].get("Max_Num_Of_Players");
-
-//             $("#page").append("<a href=\"#\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
-            
-            
-            
-//         }
-//     },
-    
-//     error: function(error) {
-//         // error is an instance of Parse.Error.
-//         alert(error);
-//     }
-// });
-</script>
- -->
-<!-- </head> -->
 
 <body>
 
@@ -248,9 +172,40 @@ query.find({
 
         <div class="header-clear"></div>
         <div class="content">
-            <div class="decoration"></div>
-            <div id="page" class="one-third-responsive">
-            </div>
+        <div class="decoration"></div>
+
+        <div id="tabs0">
+          <ul class="menu0" id="menu0">
+          
+          <li onclick="setTab(0,0)" class="hover">All games</li>  
+            
+          <li onclick="setTab(0,1)" class='unhover'>Favorite</li>
+          
+          </ul>
+
+          <div class="main" id="main0">
+            
+            <ul class="block">
+
+              <div id="page" class="one-third-responsive">
+    
+
+              </div>
+
+            </ul>
+            
+            <ul>
+              <div id="favoritepage" class="one-third-responsive">
+    
+
+              </div>
+
+            </ul>
+
+
+          </div>
+            
+
         </div>
     </div>
     
