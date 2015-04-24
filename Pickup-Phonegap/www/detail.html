@@ -29,6 +29,7 @@
 <script type="text/javascript" src="scripts/jqueryui.js"></script>
 <script type="text/javascript" src="scripts/framework.plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
+<script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
 <script>
 function getUrlParameter(sParam)
 {
@@ -44,10 +45,22 @@ function getUrlParameter(sParam)
     }
 }   
 var id = getUrlParameter('id');
-alert(id);
+
+Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+
+Parse.Cloud.run('get_more', { GameID: id }, {
+                success: function(results) {
+                for (var i = 0; i < results[1].length; i++){
+                alert(results[1][i].get('PlayerID'));
+                }
+                },
+                error: function(error) {
+                console.log(error);
+                }
+            });
 </script>
 </head>
-<body> 
+<body>
 
 <div id="preloader">
 	<div id="status">
@@ -278,16 +291,35 @@ alert(id);
     
     <!-- Page Content-->
     <div id="content" class="snap-content">
-    	
-    	Test	
-    </div>
-        
-     
-        
+       <br>
+       <br>
+       <br>
+       <div class="container switch-box">
+           <h4 class="center-text">Join Game</h4><br>
+           <a href="#" class="switch switch-1 switch-1-off">
+               <em>I</em>
+               <span></span>
+               <em>0</em>
+           </a>
+           <em class="switch-box-subtitle">
+               Optional subtitle can be added here, this message automatically hides when the content is shown!
+           </em>
+           <div class="switch-box-content">
+               <p class="no-bottom">
+               Switches can be used as content toggles, where you can add almost every feature from the page inside of them.
+               We also provided the styles, so if you want you can even convert these to checkboxes. By default, they function
+               as content toggles! An extra style for your device!
+               </p>
+           </div>
+       </div>
     </div>
     
-   
     
+    
+    </div>
+
+
+
 </div>
 
 </body>
