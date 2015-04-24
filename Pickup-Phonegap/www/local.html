@@ -20,7 +20,7 @@
 <link rel="apple-touch-startup-image" sizes="1536x2008" href="images/splash/splash-screen-ipad-portrait-retina.png"   media="(device-width: 768px)  and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)"/>
 <link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png"   media="(device-width: 768px) and (orientation: landscape)    and (-webkit-device-pixel-ratio: 2)"/>
 
-<title>Pickup</title>
+<title>Pickup..</title>
 
 <script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
 <link href="styles/style.css"            rel="stylesheet" type="text/css">
@@ -61,9 +61,9 @@ query.find({
        // results is an array of Parse.Object.
        for (var i = 0; i < results.length; i++){
        
-       var sport = results[i].get("sport");
+       var sport = results[i].get("Sport");
        var imagePath;
-       var id = results[i].id;
+       var id = results[i].get("GameID");
        if (sport == "Basketball")
        imagePath = "images/Custom/Basketball/basketball.png";
        else if (sport == "Soccer")
@@ -72,11 +72,11 @@ query.find({
        imagePath = "images/Custom/Football/Football.png";
        
        
-       var location = results[i].get("location");
+       var location = results[i].get("Location_Name");
        var startTime = results[i].get("Start_Time");
        startTime = new Date(startTime);
        startTime = formatAMPM(startTime);
-       var currentPlayerCount = results[i].get("Current_Num_Of_Players");
+       var currentPlayerCount = results[i].get("Num_Of_Players");
        var maxPlayerCount = results[i].get("Max_Num_Of_Players");
              
        
@@ -94,8 +94,17 @@ query.find({
        alert(error);
        }
        });
-              
-</script>
+       
+       Parse.Cloud.run('get_more', { GameID: 'rs3IX' }, {
+                       success: function(results) {
+                       for (var i = 0; i < results[1].length; i++){
+                       alert(results[1][i].get('PlayerID'));
+                       }
+                       },
+                       error: function(error) {
+                       console.log(error);
+                       }
+                       });</script>
 
 <script>
  function setTab(m,n){  
