@@ -35,8 +35,11 @@
 			<string>DB80595A7B6CCDBD1405D182501E0D03AD471433</string>
 			<key>IDESourceControlWCCName</key>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 			<string>PickUp</string>
 =======
+>>>>>>> master
 			<string>Pickup</string>
 >>>>>>> LaurenRahul
 		</dict>
