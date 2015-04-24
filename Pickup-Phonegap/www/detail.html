@@ -29,6 +29,7 @@
 <script type="text/javascript" src="scripts/jqueryui.js"></script>
 <script type="text/javascript" src="scripts/framework.plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
+<script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
 <script>
 function getUrlParameter(sParam)
 {
@@ -44,10 +45,22 @@ function getUrlParameter(sParam)
     }
 }   
 var id = getUrlParameter('id'); //getting the ID from the local page
-alert(id);
+//alert(id);
+
+Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+Parse.Cloud.run('get_more', { GameID: id }, {
+                success: function(results) {
+                for (var i = 0; i < results[1].length; i++){
+                //alert(results[1][i].get('PlayerID'));
+                }
+                },
+                error: function(error) {
+                console.log(error);
+                }
+                });
 </script>
 </head>
-<body> 
+<body>
 
 <div id="preloader">
 	<div id="status">
@@ -103,6 +116,7 @@ alert(id);
         <a href="#" class="open-slide"><i class="fa fa-star"></i></a>-->
         <a href="local.html" class="backButton"><i class="fa fa-chevron-left"></i></a>
     </div>
+
 </div>
        
 <div class="all-elements">
@@ -278,8 +292,15 @@ alert(id);
     
     <!-- Page Content-->
     <div id="content" class="snap-content">
-    	
-    	Test	
+        
+        <!--<div class="header-clear"></div>-->
+        <div class="content">
+        <div class="decoration"></div>
+        
+        <div id="tabs0">
+            <ul class="menu1" id="menu1">
+            <li> All games</li>
+            </ul>
     </div>
         
      

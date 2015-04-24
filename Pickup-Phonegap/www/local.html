@@ -94,17 +94,7 @@ query.find({
        alert(error);
        }
        });
-       
-       Parse.Cloud.run('get_more', { GameID: 'rs3IX' }, {
-                       success: function(results) {
-                       for (var i = 0; i < results[1].length; i++){
-                       alert(results[1][i].get('PlayerID'));
-                       }
-                       },
-                       error: function(error) {
-                       console.log(error);
-                       }
-                       });</script>
+       </script>
 
 <script>
  function setTab(m,n){  
@@ -179,7 +169,7 @@ query.find({
 <!-- Page Content-->
     <div id="content" class="snap-content">
 
-        <div class="header-clear"></div>
+        <!--<div class="header-clear"></div>-->
         <div class="content">
         <div class="decoration"></div>
 
