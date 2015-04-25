@@ -38,7 +38,7 @@ Parse.Cloud.define("get_more", function(request, response)
     //gets game info
     var game = new Parse.Query("Current_Games");
     game.equalTo("GameID", request.params.GameID);
-    game.select("Notes");
+    //game.select("Notes");
 
     game.find({
     	success: function(results)
