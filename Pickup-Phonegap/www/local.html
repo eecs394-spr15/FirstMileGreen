@@ -31,6 +31,11 @@
 <link href="styles/animate.css"          rel="stylesheet" type="text/css">
 <link href="styles/local.css"            rel="stylesheet" type="text/css">
 
+
+   <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+   <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jqueryui.js"></script>
@@ -82,7 +87,7 @@ query.find({
        
        $("#page").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
 
-      $("#favoritepage").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+      $("#favoritepage").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>" + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
        
        
        
@@ -139,11 +144,6 @@ query.find({
     </div>
 </div>
 
-<div>
-    <input type='text' id='link_id'>
-    <input type='button' id='link_str' value='Search' onClick='link()'>
-</div>
-
 <div class="all-elements">
     <div class="snap-drawers">
         <!-- Left Sidebar -->
@@ -170,43 +170,45 @@ query.find({
 <!-- Page Content-->
     <div id="content" class="snap-content">
 
-        <!--<div class="header-clear"></div>-->
+        <div class="header-clear">deuwifhiwefewufhiw</div>
+        <input type="text" placeholder="Seach" class="inputfield" id = "searchgame" ></input>
+
+
         <div class="content">
         <div class="localDecoration"></div>
 
         <div id="tabs0">
-          <ul class="menu0" id="menu0">
-          
-          <li onclick="setTab(0,0)" class="hover">All games</li>  
-            
-          <li onclick="setTab(0,1)" class='unhover'>Favorite</li>
-          
-          </ul>
+              <ul class="menu0" id="menu0">          
+                    <li onclick="setTab(0,0)" class="hover">All games</li>  
+                      
+                    <li onclick="setTab(0,1)" class='unhover'>Favorite</li>
 
-          <div class="main" id="main0">
-            
-            <ul class="block">
+                    <!-- <li class='dropdown-menu' role='menu'> test</li>          -->
+              </ul>
+              <br>
+              <br>
 
-              <div id="page" class="one-third-responsive">
-    
+              <div class="main" id="main0">           
+                    <ul class="block">
+                            <div id="page" class="one-third-responsive"></div>
+                    </ul>
+                    
+                    <ul>
+                          <div>
+                            How to choose the favorite?
+                          </div>
+                          <br>
+                          <div id="favoritepage" class="one-third-responsive"></div>
+                    </ul>
 
+<!--                     <ul>
+                      <div id="page" class="one-third-responsive"></div>
+                    </ul> -->
               </div>
-
-            </ul>
-            
-            <ul>
-              <div id="favoritepage" class="one-third-responsive">
-    
-
-              </div>
-
-            </ul>
-
-
-          </div>
             
 
         </div>
+
     </div>
     
 </div>
