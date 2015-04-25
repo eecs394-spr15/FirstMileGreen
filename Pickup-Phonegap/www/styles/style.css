@@ -1265,6 +1265,24 @@ body{
     color: black;
 }
 
+/*toggle before pressed:*/
+.switch-box-subtitle{
+    color: grey;
+    text-align: right;
+    font-style: normal;
+    font-size: 10px;
+    padding-top: 5.5px;
+}
+
+/*toggle after pressed:*/
+.no-bottom{
+    color: grey;
+    text-align: right;
+    font-style: normal;
+    font-size: 10px;
+    padding-left: 10px;
+}
+
 
 
 
