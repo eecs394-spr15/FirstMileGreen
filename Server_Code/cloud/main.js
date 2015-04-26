@@ -35,21 +35,24 @@ Parse.Cloud.define("get_more", function(request, response)
 
     });
 
-    //gets game info
     var game = new Parse.Query("Current_Games");
     game.equalTo("GameID", request.params.GameID);
-    //game.select("Notes");
+    var game_info; //used to store game data
+    var location_info; //used to store location data
 
-    game.find({
-    	success: function(results)
-    	{
-    		response.success([results, players]);
-    	},
-    	error: function()
-    	{
-    		response.error("lookup failed");
-    	}
-    })  
+    game.find().then(function(results)
+    {
+        game_info = results;
+        //console.log(results);
+        var location = new Parse.Query("Location");
+        location.equalTo("Location_Name", game_info[0].get('Location_Name'));
+        return location.find();
+    }).then(function(results){
+        location_info = results;
+        response.success([game_info, players, location_info]);
+    }, function(error){
+        response.error("lookup failed");
+    })
 });
 
 Parse.Cloud.define("get_games", function(request, response)
