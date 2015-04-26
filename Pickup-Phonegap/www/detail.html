@@ -43,21 +43,57 @@ function getUrlParameter(sParam)
             return sParameterName[1];
         }
     }
-}   
+}
 var id = getUrlParameter('id');
-
+var players = [];
+var loc;
+var maxPlayerCount;
+var creator;
+var startTime;
+var endTime;
+var updatedAt;
+var currentPlayerCount;
+var sport;
+function generateResults(callback){
 Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
-
 Parse.Cloud.run('get_more', { GameID: id }, {
                 success: function(results) {
-                for (var i = 0; i < results[1].length; i++){
-                alert(results[1][i].get('PlayerID'));
+                
+                if(callback != null && callback != undefined){
+                callback(results);
                 }
                 },
                 error: function(error) {
                 console.log(error);
                 }
             });
+}
+generateResults(function(results){
+                for (var i = 0; i < results[1].length; i++){
+                players.push(results[1][i].get("PlayerID"));
+
+                }
+                
+                loc = results[0][0].get("Location_Name")
+                alert(loc);
+
+                maxPlayerCount = results[0][0].get("Max_Num_Of_Players");
+                alert("max: " + maxPlayerCount);
+                creator = results[0][0].get("Creator");
+                alert("creator: " + creator);
+                startTime = results[0][0].get("Start_Time");
+                alert("starttime: " + startTime);
+                endTime = results[0][0].get("End_Time");
+                alert("endtime: " + endTime);
+                updatedAt = results[0][0].updatedAt;
+                alert("updated: " + updatedAt);
+                currentPlayerCount = results[0][0].get("Num_Of_Players");
+                alert("current: " + currentPlayerCount);
+                sport = results[0][0].get("Sport");
+                alert("sport: " + sport);
+                alert(players.toString());
+                    });
+                
 </script>
 </head>
 <body>
