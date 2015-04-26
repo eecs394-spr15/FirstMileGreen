@@ -906,19 +906,20 @@ body{
 /*Page Header*/
 
 #content{
-    /*padding-top:70px;*/
+    /*padding-top:70px; 50*/
     padding-top:50px;
 }
 
 .header-clear{
     /*height:30px;*/
-    heigh:5px;
+    height:5px;
 }
 
 .header{
     pointer-events:all;
     position:fixed;
     height:70px;
+    /*height:60px;*/
     z-index:999999;
     background-color:#FFFFFF;
     width:100%;
@@ -971,7 +972,7 @@ body{
 
 .header-controls{
     /*margin-top:15px;*/
-    margin-top:15px;
+    margin-top: 25px;
     margin-right:3px;
     
     /*border-bottom-style:solid;
@@ -1213,6 +1214,73 @@ body{
     font-size:14px;
     text-align:center;
     /*padding-bottom: 50px;*/
+}
+
+
+
+
+.menu1{
+    width: 400px;
+    height: 20px;
+}
+
+.menu1 li{
+    display:block;
+    
+    float: left;
+    
+    padding: 4px 0;
+    
+    width:100px;
+    
+    text-align: center;
+    
+    cursor:pointer;
+    font-size: 14px;
+    
+    
+    color: black;
+    /*box-shadow: 1px 1px 2px 1px black;*/
+}
+
+.menu1{
+    width: 400px;
+    height: 20px;
+}
+
+.menu1 li{
+    display:block;
+    
+    float: left;
+    
+    padding: 4px 0;
+    
+    width:100px;
+    
+    text-align: center;
+    
+    cursor:pointer;
+    font-size: 14px;
+    
+    color: black;
+}
+
+/*toggle before pressed:*/
+.switch-box-subtitle{
+    color: grey;
+    text-align: right;
+    font-style: normal;
+    font-size: 10px;
+    padding-top: 5.5px;
+}
+
+/*toggle after pressed:*/
+.no-bottom{
+    color: grey;
+    text-align: right;
+    font-style: normal;
+    font-size: 10px;
+    padding-left: 10px;
 }
 
 
