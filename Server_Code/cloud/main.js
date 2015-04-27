@@ -401,3 +401,69 @@ Parse.Cloud.define("remove_friend", function(request, response)
         }
     });
 });
+
+Parse.Cloud.define("send_invites", function(request, response)
+{
+    var Mailgun = require('mailgun');
+    Mailgun.initialize('sandbox5f586396551240e5b00361e2661a613d.mailgun.org', 'key-303a7c2b78e701dc87bca3e4685f5b4c');
+
+    var query = new Parse.Query("Current_Games");
+    query.equalTo("GameID", request.params.GameID);
+    bcc_string = "";
+    var players = request.params.InviteList;
+    for (i = 0; i < players.length; i++)
+    {
+        bcc_string += players[i]+ "@u.northwestern.edu";
+        if(i != (players.length - 1))
+        {
+            bcc_string += ", ";
+        }
+    }
+    console.log(bcc_string);
+
+    query.find({
+        success: function(results)
+        {
+            //calculates new date
+            var d = results[0].get('Start_Time');
+            utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+            new_date = new Date(utc + (3600000*-5));//make sure to change this for daylights savings time
+            var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            //response.success("You've been invited by " + request.params.PlayerID + " to a " + results[0].get('Sport') + " game at " + results[0].get('Location_Name') + " on " + monthNames[new_date.getMonth()] + " " + new_date.getDate() + " at " + new_date.getHours() + ":" + new_date.getMinutes() + "!");
+            Mailgun.sendEmail({
+              to: bcc_string,//bcc_string;
+              from: "Mailgun@CloudCode.com",
+              subject: "You've been invited to a game!",
+              text: "You've been invited by " + request.params.PlayerID + " to a " + results[0].get('Sport') + " game at " + results[0].get('Location_Name') + " on " + monthNames[new_date.getMonth()] + " " + new_date.getDate() + " at " + new_date.getHours() + ":" + new_date.getMinutes() + "!"
+          }, {
+              success: function(httpResponse) {
+                console.log(httpResponse);
+                response.success("Email sent!");
+            },
+            error: function(httpResponse) {
+                console.error(httpResponse);
+                response.error("Uh oh, something went wrong");
+            }
+        });
+
+        }
+
+    });
+    /*
+    Mailgun.sendEmail({
+  bcc = bcc_string;
+  from: "Mailgun@CloudCode.com",
+  subject: "You've been invited to a game!",
+  text: "";
+}, {
+  success: function(httpResponse) {
+    console.log(httpResponse);
+    response.success("Email sent!");
+  },
+  error: function(httpResponse) {
+    console.error(httpResponse);
+    response.error("Uh oh, something went wrong");
+  }
+});
+*/
+});
