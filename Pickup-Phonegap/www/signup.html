@@ -29,6 +29,7 @@
                                                 <script type="text/javascript" src="scripts/jqueryui.js"></script>
                                                 <script type="text/javascript" src="scripts/framework.plugins.js"></script>
                                                 <script type="text/javascript" src="scripts/custom.js"></script>
+                                                <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
                                                 
 </head>
 
@@ -114,17 +115,35 @@
     
     <script>
         function signUp() {
+        Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
         var user = new Parse.User();
-        user.set("username", getElementById("email"));
-        user.set("password", getElementById("password"));
-        user.set("email", getElementById("email"));
+        //getting the values
+        var email = $("#email").val();
+        var password = $("#password").val();
         
-        // other fields can be set just like with Parse.Object
-        user.set("phone", "415-392-0202");
+        //basic validation
+        var errors= "";
+        if(password === "") errors += "Password required.<br/>";
+        if(email === "") errors += "Email required.<br/>";
+        
+        if(errors !== "") {
+            alert("errors");
+            return;
+        }
+        
+      //Register with Parse
+        user.set("username", email);
+        user.set("password", password);
+      // user.set("email", getElementById("email"));
+        
+      // other fields can be set just like with Parse.Object
+      //  user.set("phone", "415-392-0202");
         
         user.signUp(null, {
                     success: function(user) {
                     // Hooray! Let them use the app now.
+                    var currentUser = user;
+                    alert("This has fired successfully");
                     },
                     error: function(user, error) {
                     // Show the error message somewhere and let the user try again.
@@ -134,6 +153,11 @@
         }
         </script>
     
+    <script>
+        function myFunction () {
+            alert("handler for sign-up button was clicked");
+        };
+    </script>
     
     <!-- Page Content-->
     <div id="content" class="snap-content">
@@ -146,7 +170,6 @@
                 </p>
                 <input type="text" id="email" class="signup-email" value="Email">
                     <input type="text" id="password" class="signup-password" value="Password">
-                        <input type="text" id="username" class="signup-username" value="Username">
                         <div class="one-half">
                                 </div>                
                         <div class="one-half last-column">
