@@ -1283,6 +1283,24 @@ body{
     padding-left: 10px;
 }
 
+#page-sport{
+    color: black;
+    font-size: 15px;
+}
+
+.title{
+    color: black;
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+
+#title{
+    color: black;
+    font-size: 15px;
+    text-decoration: underline;
+}
+
 
 
 
