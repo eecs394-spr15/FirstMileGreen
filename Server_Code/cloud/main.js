@@ -328,3 +328,20 @@ Parse.Cloud.define("cancel_game", function(request, response)
     	}
     });
 });
+
+
+//Friends list
+{
+    var query = new Parse.Query("Friends_List");
+    query.equalTo("PlayerID", request.params.PlayerID);
+    query.find({
+        success: function(results) {
+            response.success(results);
+        },
+        error: function() {
+            response.error("Friend lookup failed");
+        }
+    });
+});
+
+
