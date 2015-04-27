@@ -369,3 +369,35 @@ Parse.Cloud.define("add_friend", function(request, response)
         }
     });
 });
+
+Parse.Cloud.define("remove_friend", function(request, response)
+{
+    var friend = Parse.Object.extend("Friends_List");
+    var add_to_list = new Parse.Query(friend);
+    //gets data from phone request
+    add_to_list.equalTo("PlayerID", request.params.PlayerID);
+    add_to_list.equalTo("FriendID", request.params.FriendID);
+    //Save data to Players table
+    add_to_list.find(
+    {
+        success: function(results)
+        {
+            var person = results[0];
+            person.destroy(
+            {
+                success: function(person)
+                {
+                    response.success("Friend dropped");
+                },
+                error: function(person, error)
+                {
+                    response.error("Friend drop failed");
+                }
+            })
+        },
+        error: function()
+        {
+            response.error("Friend not found");
+        }
+    });
+});
