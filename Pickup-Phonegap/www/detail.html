@@ -104,11 +104,11 @@ generateResults(function(results){
                 //alert("current: " + currentPlayerCount);
                 
                 sport = results[0][0].get("Sport");
-                alert("sport: " + sport);
+                //alert("sport: " + sport);
                 
                 //alert(players.toString());
                 
-                $("#page").append(sport);
+                $("#page-sport").append(sport);
                 //$("#page").append("<a href=\"detail.html?id="+sport +"\" class=\"user-list-item\">");
                 //"<a href=\"detail.html?id="+id +"\" class=\"user-list-item\">
                 
@@ -388,10 +388,15 @@ generateResults(function(results){
            </div>
            
            <ul class="block">
+               <!--
+               <div class="title">
+                   Game:
+                   </div>
+                -->
+               <div id="page-sport" class="one-third-responsive">
+                   Game:
+                   
                
-               <div id="page" class="one-third-responsive">
-                   
-                   
                </div>
                
            </ul>
