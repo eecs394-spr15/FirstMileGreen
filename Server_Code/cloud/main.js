@@ -331,6 +331,7 @@ Parse.Cloud.define("cancel_game", function(request, response)
 
 
 //Friends list
+Parse.Cloud.define("get_friends", function(request, response)
 {
     var query = new Parse.Query("Friends_List");
     query.equalTo("PlayerID", request.params.PlayerID);
@@ -345,3 +346,26 @@ Parse.Cloud.define("cancel_game", function(request, response)
 });
 
 
+
+Parse.Cloud.define("add_friend", function(request, response)
+{
+    //add name to list of Friends
+
+    var friend = Parse.Object.extend("Friends_List");
+    var add_to_list = new friend();
+    //gets data from phone request
+    add_to_list.set("PlayerID", request.params.PlayerID);
+    add_to_list.set("FriendID", request.params.FriendID);
+    //Save data to Friends list table table
+    add_to_list.save(null,
+    {
+        success: function(add_to_list)
+        {
+            response.success("Friend added");
+        },
+        error: function(add_to_list, error)
+        {
+            response.error("Friend add failed");
+        }
+    });
+});
