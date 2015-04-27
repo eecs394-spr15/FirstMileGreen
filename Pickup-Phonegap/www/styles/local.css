@@ -8,6 +8,13 @@
     
 }
 
+#searchgame{
+    margin-left:40px;
+    height: 20px;
+    font-size: 16px;
+    overflow: hidden;
+} 
+
 .menu0 li{
     
     display:block;

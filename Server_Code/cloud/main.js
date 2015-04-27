@@ -35,21 +35,24 @@ Parse.Cloud.define("get_more", function(request, response)
 
     });
 
-    //gets game info
     var game = new Parse.Query("Current_Games");
     game.equalTo("GameID", request.params.GameID);
-    //game.select("Notes");
+    var game_info; //used to store game data
+    var location_info; //used to store location data
 
-    game.find({
-    	success: function(results)
-    	{
-    		response.success([results, players]);
-    	},
-    	error: function()
-    	{
-    		response.error("lookup failed");
-    	}
-    })  
+    game.find().then(function(results)
+    {
+        game_info = results;
+        //console.log(results);
+        var location = new Parse.Query("Location");
+        location.equalTo("Location_Name", game_info[0].get('Location_Name'));
+        return location.find();
+    }).then(function(results){
+        location_info = results;
+        response.success([game_info, players, location_info]);
+    }, function(error){
+        response.error("lookup failed");
+    })
 });
 
 Parse.Cloud.define("get_games", function(request, response)
@@ -324,4 +327,143 @@ Parse.Cloud.define("cancel_game", function(request, response)
     		response.error("Player drop failed");
     	}
     });
+});
+
+
+//Friends list
+Parse.Cloud.define("get_friends", function(request, response)
+{
+    var query = new Parse.Query("Friends_List");
+    query.equalTo("PlayerID", request.params.PlayerID);
+    query.find({
+        success: function(results) {
+            response.success(results);
+        },
+        error: function() {
+            response.error("Friend lookup failed");
+        }
+    });
+});
+
+
+
+Parse.Cloud.define("add_friend", function(request, response)
+{
+    //add name to list of Friends
+
+    var friend = Parse.Object.extend("Friends_List");
+    var add_to_list = new friend();
+    //gets data from phone request
+    add_to_list.set("PlayerID", request.params.PlayerID);
+    add_to_list.set("FriendID", request.params.FriendID);
+    //Save data to Friends list table table
+    add_to_list.save(null,
+    {
+        success: function(add_to_list)
+        {
+            response.success("Friend added");
+        },
+        error: function(add_to_list, error)
+        {
+            response.error("Friend add failed");
+        }
+    });
+});
+
+Parse.Cloud.define("remove_friend", function(request, response)
+{
+    var friend = Parse.Object.extend("Friends_List");
+    var add_to_list = new Parse.Query(friend);
+    //gets data from phone request
+    add_to_list.equalTo("PlayerID", request.params.PlayerID);
+    add_to_list.equalTo("FriendID", request.params.FriendID);
+    //Save data to Players table
+    add_to_list.find(
+    {
+        success: function(results)
+        {
+            var person = results[0];
+            person.destroy(
+            {
+                success: function(person)
+                {
+                    response.success("Friend dropped");
+                },
+                error: function(person, error)
+                {
+                    response.error("Friend drop failed");
+                }
+            })
+        },
+        error: function()
+        {
+            response.error("Friend not found");
+        }
+    });
+});
+
+Parse.Cloud.define("send_invites", function(request, response)
+{
+    var Mailgun = require('mailgun');
+    Mailgun.initialize('sandbox5f586396551240e5b00361e2661a613d.mailgun.org', 'key-303a7c2b78e701dc87bca3e4685f5b4c');
+
+    var query = new Parse.Query("Current_Games");
+    query.equalTo("GameID", request.params.GameID);
+    bcc_string = "";
+    var players = request.params.InviteList;
+    for (i = 0; i < players.length; i++)
+    {
+        bcc_string += players[i]+ "@u.northwestern.edu";
+        if(i != (players.length - 1))
+        {
+            bcc_string += ", ";
+        }
+    }
+    console.log(bcc_string);
+
+    query.find({
+        success: function(results)
+        {
+            //calculates new date
+            var d = results[0].get('Start_Time');
+            utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+            new_date = new Date(utc + (3600000*-5));//make sure to change this for daylights savings time
+            var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            //response.success("You've been invited by " + request.params.PlayerID + " to a " + results[0].get('Sport') + " game at " + results[0].get('Location_Name') + " on " + monthNames[new_date.getMonth()] + " " + new_date.getDate() + " at " + new_date.getHours() + ":" + new_date.getMinutes() + "!");
+            Mailgun.sendEmail({
+              to: bcc_string,//bcc_string;
+              from: "Mailgun@CloudCode.com",
+              subject: "You've been invited to a game!",
+              text: "You've been invited by " + request.params.PlayerID + " to a " + results[0].get('Sport') + " game at " + results[0].get('Location_Name') + " on " + monthNames[new_date.getMonth()] + " " + new_date.getDate() + " at " + new_date.getHours() + ":" + new_date.getMinutes() + "!"
+          }, {
+              success: function(httpResponse) {
+                console.log(httpResponse);
+                response.success("Email sent!");
+            },
+            error: function(httpResponse) {
+                console.error(httpResponse);
+                response.error("Uh oh, something went wrong");
+            }
+        });
+
+        }
+
+    });
+    /*
+    Mailgun.sendEmail({
+  bcc = bcc_string;
+  from: "Mailgun@CloudCode.com",
+  subject: "You've been invited to a game!",
+  text: "";
+}, {
+  success: function(httpResponse) {
+    console.log(httpResponse);
+    response.success("Email sent!");
+  },
+  error: function(httpResponse) {
+    console.error(httpResponse);
+    response.error("Uh oh, something went wrong");
+  }
+});
+*/
 });
