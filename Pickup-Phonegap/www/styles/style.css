@@ -1288,6 +1288,16 @@ body{
     font-size: 15px;
 }
 
+#page-date{
+    color: black;
+    font-size: 15px;
+}
+
+#page-time{
+    color: black;
+    font-size: 15px;
+}
+
 .title{
     color: black;
     font-size: 15px;

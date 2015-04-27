@@ -32,6 +32,27 @@
 <script type="text/javascript" src="scripts/custom.js"></script>
 <script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
 <script>
+    function formatAMPM(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+
+function formatAMPMDate(date) {
+    var month = date.getMonth();
+    var day = date.getDate();
+    //var ampm = hours >= 12 ? 'pm' : 'am';
+    //hours = hours % 12;
+    //hours = hours ? hours : 12; // the hour '0' should be '12'
+    //minutes = minutes < 10 ? '0'+minutes : minutes;
+    var tttt = month + '/' + day;
+    return tttt;
+}
 function getUrlParameter(sParam)
 {
     var sPageURL = window.location.search.substring(1);
@@ -56,6 +77,8 @@ var endTime;
 var updatedAt;
 var currentPlayerCount;
 var sport;
+var time;
+var date;
 
 //Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
 
@@ -93,6 +116,10 @@ generateResults(function(results){
                 
                 startTime = results[0][0].get("Start_Time");
                 //alert("starttime: " + startTime);
+                time = formatAMPM(startTime);
+                //alert(time);
+                
+                date = formatAMPMDate(startTime);
                 
                 endTime = results[0][0].get("End_Time");
                 //alert("endtime: " + endTime);
@@ -109,6 +136,9 @@ generateResults(function(results){
                 //alert(players.toString());
                 
                 $("#page-sport").append(sport);
+                $("#page-date").append(date);
+                $("#page-time").append(time);
+
                 //$("#page").append("<a href=\"detail.html?id="+sport +"\" class=\"user-list-item\">");
                 //"<a href=\"detail.html?id="+id +"\" class=\"user-list-item\">
                 
@@ -397,6 +427,18 @@ generateResults(function(results){
                    Game:
                    
                
+               </div>
+               
+               <div id="page-date" class="one-third-responsive">
+                   When:
+                   
+                   
+               </div>
+               
+               <div id="page-time" class="one-third-responsive">
+                   Time:
+                   
+                   
                </div>
                
            </ul>
