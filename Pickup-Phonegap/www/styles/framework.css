@@ -433,6 +433,15 @@ a{
     clear:both;
 }
 
+.detailDecoration{
+    height:1px;
+    background-color:rgba(0,0,0,0.1);
+    margin-top: 10px;
+    margin-bottom:10px;
+    display:block;
+    clear:both;
+}
+
 @media (max-width:767px){
 	.center-if-mobile{
 		text-align:center;
