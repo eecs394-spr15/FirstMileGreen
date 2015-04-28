@@ -162,14 +162,8 @@ function searchgames(){
 <script>
 function favoritegame(){
     var favoritetype=document.getElementById("favoritechoice").value;
-<<<<<<< HEAD
-   
-=======
-    // alert("favorite is working!");
-    // alert("you love " + favoritetype + ", right?" );
 
->>>>>>> origin/master
-    $("#favoritepage").html("Serching Reasult of " + favoritetype + ": ");
+    $("#favoritepage").html("Serching Result of " + favoritetype + ": ");
 
     var queryiii = new Parse.Query("Current_Games");
     queryiii.containedIn("Sport" , [favoritetype]);
