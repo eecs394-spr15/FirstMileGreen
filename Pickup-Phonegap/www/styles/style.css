@@ -1298,6 +1298,16 @@ body{
     font-size: 15px;
 }
 
+#page-loc{
+    color: black;
+    font-size: 15px;
+}
+
+#page-address{
+    color: black;
+    font-size: 15px;
+}
+
 .title{
     color: black;
     font-size: 15px;

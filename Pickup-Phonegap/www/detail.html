@@ -105,7 +105,7 @@ generateResults(function(results){
                 
                 }
                 
-                loc = results[0][0].get("Location_Name")
+                loc = results[0][0].get("Location_Name");
                 //alert(loc);
                 
                 maxPlayerCount = results[0][0].get("Max_Num_Of_Players");
@@ -135,9 +135,13 @@ generateResults(function(results){
                 
                 //alert(players.toString());
                 
+                address = results[2][0].get("Address");
+                
                 $("#page-sport").append(sport);
                 $("#page-date").append(date);
                 $("#page-time").append(time);
+                $("#page-loc").append(loc);
+                $("#page-address").append(address);
 
                 //$("#page").append("<a href=\"detail.html?id="+sport +"\" class=\"user-list-item\">");
                 //"<a href=\"detail.html?id="+id +"\" class=\"user-list-item\">
@@ -437,6 +441,18 @@ generateResults(function(results){
                
                <div id="page-time" class="one-third-responsive">
                    Time:
+                   
+                   
+               </div>
+               
+               <div id="page-loc" class="one-third-responsive">
+                   Location:
+                   
+                   
+               </div>
+               
+               <div id="page-address" class="one-third-responsive">
+                   Address:
                    
                    
                </div>
