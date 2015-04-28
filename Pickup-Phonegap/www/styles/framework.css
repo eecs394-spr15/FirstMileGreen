@@ -338,6 +338,7 @@ a{
 
 .container{
 	margin-bottom:30px;
+    
 }
 
 .no-bottom{
@@ -3796,6 +3797,9 @@ table tr:hover td{
     display:block;
     clear:both;
     opacity:0.8;
+    /*padding-bottom: 10px;
+    display: inline-block;
+    padding-left: 120px;*/
 }
 
 .switch-1{

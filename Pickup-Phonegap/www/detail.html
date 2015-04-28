@@ -112,6 +112,7 @@ generateResults(function(results){
                 
                 }
                 
+                
                 loc = results[0][0].get("Location_Name");
                 //alert(loc);
                 
@@ -152,13 +153,18 @@ generateResults(function(results){
                 address = results[2][0].get("Address");
                 
                 //$("#page-sport").append("<img src=\""imagePath+"\">"+sport);
-                //$("#page-sport").append("<img src=\""imagePath+"\" alt=\"img\">"+sport);
+                $("#page-image").append("<img src=\""+imagePath+"\" alt=\"img\">");
                 $("#page-sport").append(sport);
+                //$("#page-sport").append(sport);
                 $("#page-date").append(date);
                 $("#page-time").append(time);
                 $("#page-loc").append(loc);
                 $("#page-address").append(address);
                 $("#page-creator").append(creator);
+                for (var p = 0; p < players.length; p++){
+                $("#page-players").append(players[p]+"<br>");
+
+                }
 
                 //$("#page").append("<a href=\"detail.html?id="+sport +"\" class=\"user-list-item\">");
                 //"<a href=\"detail.html?id="+id +"\" class=\"user-list-item\">
@@ -172,7 +178,46 @@ generateResults(function(results){
                 
                 
                 });
-        
+                function joinGame(){
+                    var currentUser = Parse.User.current();
+
+                    Parse.Cloud.run('join_game', { GameID: id , PlayerID: currentUser.get("username") }, {
+                                    success: function(results) {
+                                    //for (var i = 0; i < results[1].length; i++){
+                                    //alert(results[1][i].get('PlayerID'));
+                                    //}
+                                    
+                                    },
+                                    error: function(error) {
+                                    console.log(error);
+                                    }
+                                    });
+
+
+                }
+
+function leaveGame(){
+    var currentUser = Parse.User.current();
+    
+    Parse.Cloud.run('leave_game', { GameID: id , PlayerID: currentUser.get("username") }, {
+                    success: function(results) {
+                    //for (var i = 0; i < results[1].length; i++){
+                    //alert(results[1][i].get('PlayerID'));
+                    //}
+                    
+                    },
+                    error: function(error) {
+                    console.log(error);
+                    }
+                    });
+                    
+
+
+
+
+
+}
+
 </script>
 </head>
 <body>
@@ -413,43 +458,50 @@ generateResults(function(results){
         <div class="content">
         <div class="decoration"></div>
         
- 
 
- 
-       <div class="container switch-box">
-           <!--<h4 class="center-text">Join Game</h4><br>-->
-           <a href="#" class="switch switch-1 switch-1-off">
-               <em>I</em>
-               <span></span>
-               <em>0</em>
-           </a>
-           <em class="switch-box-subtitle">
-               Join Game
-            <!--
-               Optional subtitle can be added here, this message automatically hides when the content is shown!
-             -->
-           </em>
-           <div class="switch-box-content">
-               <p class="no-bottom">
-               Unjoin Game
-                <!--
-               Switches can be used as content toggles, where you can add almost every feature from the page inside of them.
-               We also provided the styles, so if you want you can even convert these to checkboxes. By default, they function
-               as content toggles! An extra style for your device!
-                -->
-               </p>
-           </div>
-           
+
+
            <ul class="block">
                <!--
                <div class="title">
                    Game:
                    </div>
                 -->
-                <div class="detailDecoration"></div>
-                
-               <div id="page-sport" class="one-third-responsive">
-               </div>
+               <!--<div id="page-image" class="one-third-responsive">
+               </div> -->
+                   
+                   <div class="container switch-box">
+                       <!--<h4 class="center-text">Join Game</h4><br>-->
+                      
+                      <div id="page-image" class="one-third-responsive">
+                       </div>
+                       
+                       <a href="#" class="switch switch-1 switch-1-off">
+                           <em>I</em>
+                           <span></span>
+                           <em>0</em>
+                       </a>
+                       <em class="switch-box-subtitle">
+                           Join Game
+                           <!--
+                            Optional subtitle can be added here, this message automatically hides when the content is shown!
+                            -->
+                       </em>
+                       <div class="switch-box-content">
+                           <p class="no-bottom">
+                           Unjoin Game
+                           <!--
+                            Switches can be used as content toggles, where you can add almost every feature from the page inside of them.
+                            We also provided the styles, so if you want you can even convert these to checkboxes. By default, they function
+                            as content toggles! An extra style for your device!
+                            -->
+                           </p>
+                       </div>
+                  </div>
+                       
+                <div id="page-sport" class="one-third-responsive">
+                </div>
+        
                
                <div class="detailDecoration"></div>
                
@@ -477,10 +529,20 @@ generateResults(function(results){
                
                <div id="page-creator" class="one-third-responsive">
                <i class="icon ion-person"> </i>
+               Created by:
                </div>
+               
+               <div class="detailDecoration"></div>
+               
+               <div id="page-players" class="one-third-responsive">
+                   <div class="playersAttending">
+                       Players attending:
+                       </div>
+                </div>
                
            </ul>
        </div>
+
     
   
     

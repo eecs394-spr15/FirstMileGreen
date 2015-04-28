@@ -53,10 +53,18 @@
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+<!--New boostrap hype -->
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen"
+href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+
+
+<!-- JS Functions -->
 <script>
 function generateResults(callback){
 	Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
-	Parse.Cloud.run('get_more', { GameID: "1", "Location_Name": $("#location option:selected").text(), "Sport": $("#sport option:selected").text(), Notes: document.getElementById('comments').value, Creator: "Spencer", Max_Num_Of_Players:document.getElementById('max_players').value}, {
+	Parse.Cloud.run('create_game', { GameID: "1", "Location_Name": $("#location option:selected").text(), "Sport": $("#sport option:selected").text(), Notes: document.getElementById('comments').value, PlayerID: "Spencer", Max_Num_Of_Players:document.getElementById('max_players').value, Start_Time:document.getElementById('date_info').value}, {
 		success: function(results) {
 
 			if(callback != null && callback != undefined){
@@ -140,33 +148,38 @@ function generateResults(callback){
 					</fieldset>
 				</form>
 				<br>
-					<form action="action_page.php">
-						Maximum number of players (between 1 and 50):
-						<input type="number" name="quantity" min="1" max="50" id="max_players">
-					</form>	
-				<h3 class="center-text">Select Time</h3>
-				<div class="container">
-					<div class="submenu-navigation">
-						<a href="#" class="submenu-nav-deploy">Times</a>
-						<div class="submenu-nav-items">
-							<div class="demo">
-								<p align="center">Start Time<input id="stepExample1" type="text" class="time" /></p>
-								<p align="center">End Time<input id="stepExample2" type="text" class="time" /></p>
-								<br>
-							</div>
-							<script>
-							$(function() {
-								$('#stepExample1').timepicker({ 'step': 30 });
-								$('#stepExample2').timepicker({
-									'step': 30
-								});
-							});
-							</script>
-						</div>
-					</div>
+				<form action="action_page.php">
+					Maximum number of players (between 1 and 50):
+					<input type="number" name="quantity" min="1" max="50" id="max_players">
+				</form>	
+				<div id="datetimepicker" class="input-append date">
+					<input id="date_info" type="text"></input>
+					<span class="add-on">
+						<i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+					</span>
 				</div>
+				<script type="text/javascript"
+				src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+				</script> 
+				<script type="text/javascript"
+				src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+				</script>
+				<script type="text/javascript"
+				src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+				</script>
+				<script type="text/javascript"
+				src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+				</script>
+				<script type="text/javascript">
+				$('#datetimepicker').datetimepicker({
+					format: 'dd/MM/yyyy hh:mm:ss',
+					language: 'en',
+					pick12HourFormat: true
+				});
+				</script>
+
 				<h3 class="center-text">Comments?</h3>
-				<input class="blog-search" type="text" id="comments" value="e.g bring cleats, meet at bleachers, etc.">
+				<input class="blog-search" type="text" id="comments" placeholder="e.g bring cleats, meet at bleachers, etc.">
 				<div class="clear"></div>
 				<br>
 				<p class="center-text"><a href="your.html" class="button-3d button-green green-3d" onclick="generateResults()">Post!</a></p>

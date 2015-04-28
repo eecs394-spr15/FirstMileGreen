@@ -272,9 +272,19 @@ $(document).ready(function() {
 	});
 	
     //Switches
+                  /*function joinGame(){
+                  var currentUser = Parse.User.current();
+                  }*/
+                  
     
     $('.switch-1').click(function(){
-       $(this).toggleClass('switch-1-on'); 
+                         if ($(this).hasClass("switch-1-on")){
+                         leaveGame();
+                             }
+                         else {
+                         joinGame();
+                         }
+        $(this).toggleClass('switch-1-on');
         return false;
     });
     
