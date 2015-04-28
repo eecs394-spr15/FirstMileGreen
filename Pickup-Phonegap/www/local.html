@@ -1,393 +1,361 @@
-<!DOCTYPE HTML><head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/splash/splash-icon.png">
-            <link rel="apple-touch-icon-precomposed" sizes="180x180" href="images/splash/splash-icon-big.png">
-                <link rel="apple-touch-startup-image" href="images/splash/splash-screen.png" 	media="screen and (max-device-width: 320px)" />
-                <link rel="apple-touch-startup-image" href="images/splash/splash-screen@2x.png" media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" />
-                <link rel="apple-touch-startup-image" href="images/splash/splash-screen-six.png" media="(device-width: 375px)">
-                    <link rel="apple-touch-startup-image" href="images/splash/splash-screen-six-plus.png" media="(device-width: 414px)">
-                        <link rel="apple-touch-startup-image" sizes="640x1096" href="images/splash/splash-screen@3x.png" />
-                        <link rel="apple-touch-startup-image" sizes="1024x748" href="images/splash/splash-screen-ipad-landscape" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : landscape)" />
-                        <link rel="apple-touch-startup-image" sizes="768x1004" href="images/splash/splash-screen-ipad-portrait.png" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : portrait)" />
-                        <link rel="apple-touch-startup-image" sizes="1536x2008" href="images/splash/splash-screen-ipad-portrait-retina.png"   media="(device-width: 768px)	and (orientation: portrait)	and (-webkit-device-pixel-ratio: 2)"/>
-                        <link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png"   media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)"/>
-                        
-                        <title>Pickup</title>
-                        
-                        <script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
-                        <link href="styles/style.css"     		 rel="stylesheet" type="text/css">
-                            <link href="styles/framework.css" 		 rel="stylesheet" type="text/css">
-                                <link href="styles/owl.theme.css" 		 rel="stylesheet" type="text/css">
-                                    <link href="styles/swipebox.css"		 rel="stylesheet" type="text/css">
-                                        <link href="styles/font-awesome.css"	 rel="stylesheet" type="text/css">
-                                            <link href="styles/animate.css"			 rel="stylesheet" type="text/css">
-                                                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-                                                <script type="text/javascript" src="scripts/jquery.js"></script>
-                                                <script type="text/javascript" src="scripts/jqueryui.js"></script>
-                                                <script type="text/javascript" src="scripts/framework.plugins.js"></script>
-                                                <script type="text/javascript" src="scripts/custom.js"></script>
-                                                <script type="text/javascript">
-                                                    function formatAMPM(date) {
-                                                        var hours = date.getHours();
-                                                        var minutes = date.getMinutes();
-                                                        var ampm = hours >= 12 ? 'pm' : 'am';
-                                                        hours = hours % 12;
-                                                        hours = hours ? hours : 12; // the hour '0' should be '12'
-                                                        minutes = minutes < 10 ? '0'+minutes : minutes;
-                                                        var strTime = hours + ':' + minutes + ' ' + ampm;
-                                                        return strTime;
-                                                    }
-                                                
-                                                    </script>
-                                                
-                                                <script>
-                                                    
-                                                    Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
-                                                    /*var Games = Parse.Object.extend("Games");
-                                                     var laurensGame = new Games();
-                                                     laurensGame.save({sport: "swimming"}).then(function(object) {
-                                                     alert("yay! it worked");
-                                                     });
-                                                     */
-                                                var query = new Parse.Query("Games");
-                                                query.find({
-                                                           success: function(results) {
-                                                           // results is an array of Parse.Object.
-                                                           for (var i = 0; i < results.length; i++){
-                                                           
-                                                           var sport = results[i].get("sport");
-                                                           var imagePath;
-                                                           
-                                                           if (sport == "Basketball")
-                                                           imagePath = "images/Custom/Basketball/basketball.png";
-                                                           else if (sport == "Soccer")
-                                                           imagePath = "images/Custom/Soccer/Soccer_Ball.png";
-                                                           else
-                                                           imagePath = "images/Custom/Football/Football.png";
-                                                           
-                                                           
-                                                           var location = results[i].get("location");
-                                                           var startTime = results[i].get("Start_Time");
-                                                           startTime = new Date(startTime);
-                                                           startTime = formatAMPM(startTime);
-                                                           var currentPlayerCount = results[i].get("Current_Num_Of_Players");
-                                                           var maxPlayerCount = results[i].get("Max_Num_Of_Players");
-                                                           
-                                                           
-                                                           
-                                                           
-                                                           
-                                                           
-                                                           $("#page").append("<a href=\"#\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
-                                                           
-                                                           
-                                                           
-                                                           }
-                                                           },
-                                                           
-                                                           error: function(error) {
-                                                           // error is an instance of Parse.Error.
-                                                           alert(error);
-                                                           }
-                                                           });
-                                                           
-                                                           
-                                                    </script>
+
+<!DOCTYPE HTML>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/splash/splash-icon.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="images/splash/splash-icon-big.png">
+<link rel="apple-touch-startup-image" href="images/splash/splash-screen.png"    media="screen and (max-device-width: 320px)" />
+<link rel="apple-touch-startup-image" href="images/splash/splash-screen@2x.png" media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" />
+<link rel="apple-touch-startup-image" href="images/splash/splash-screen-six.png" media="(device-width: 375px)">
+<link rel="apple-touch-startup-image" href="images/splash/splash-screen-six-plus.png" media="(device-width: 414px)">
+<link rel="apple-touch-startup-image" sizes="640x1096" href="images/splash/splash-screen@3x.png" />
+<link rel="apple-touch-startup-image" sizes="1024x748" href="images/splash/splash-screen-ipad-landscape" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : landscape)" />
+<link rel="apple-touch-startup-image" sizes="768x1004" href="images/splash/splash-screen-ipad-portrait.png" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : portrait)" />
+<link rel="apple-touch-startup-image" sizes="1536x2008" href="images/splash/splash-screen-ipad-portrait-retina.png"   media="(device-width: 768px)  and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)"/>
+<link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png"   media="(device-width: 768px) and (orientation: landscape)    and (-webkit-device-pixel-ratio: 2)"/>
+
+<title>Pickup..</title>
+
+<script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
+<link href="styles/style.css"            rel="stylesheet" type="text/css">
+<link href="styles/framework.css"        rel="stylesheet" type="text/css">
+<link href="styles/owl.theme.css"        rel="stylesheet" type="text/css">
+<link href="styles/swipebox.css"         rel="stylesheet" type="text/css">
+<link href="styles/font-awesome.css"     rel="stylesheet" type="text/css">
+<link href="styles/animate.css"          rel="stylesheet" type="text/css">
+<link href="styles/local.css"            rel="stylesheet" type="text/css">
+
+
+   <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+   <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/jqueryui.js"></script>
+<script type="text/javascript" src="scripts/framework.plugins.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+
+<script type="text/javascript">
+function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+}
+
+</script>
+                                              
+<script>
+                
+Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+
+var query = new Parse.Query("Current_Games");
+query.find({
+       success: function(results) {
+       // results is an array of Parse.Object.
+       for (var i = 0; i < results.length; i++){
+       
+       var sport = results[i].get("Sport");
+       var imagePath;
+       var id = results[i].get("GameID");
+       if (sport == "Basketball")
+       imagePath = "images/Custom/Basketball/basketball.png";
+       else if (sport == "Soccer")
+       imagePath = "images/Custom/Soccer/Soccer_Ball.png";
+       else
+       imagePath = "images/Custom/Football/Football.png";
+       
+       
+       var location = results[i].get("Location_Name");
+       var startTime = results[i].get("Start_Time");
+       startTime = new Date(startTime);
+       startTime = formatAMPM(startTime);
+       var currentPlayerCount = results[i].get("Num_Of_Players");
+       var maxPlayerCount = results[i].get("Max_Num_Of_Players");
+             
+       
+       $("#page").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+
+      $("#favoritepage").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>" + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+       
+       
+       
+           }
+           },
+       
+       error: function(error) {
+       // error is an instance of Parse.Error.
+       alert(error);
+       }
+       });
+       
+      </script>
+
+<script>
+
+
+function searchgames(){
+
+  var searchtext=document.getElementById("s").value;
+
+  $("#page").html("");
+  $("#favoritepage").html("");
+
+  var queryii = new Parse.Query("Current_Games");
+  queryii.containedIn("Sport", [searchtext]);
+  queryii.find({
+       success: function(results) {
+       // results is an array of Parse.Object.
+       for (var i = 0; i < results.length; i++){
+       
+       var sport = results[i].get("Sport");
+       var imagePath;
+       var id = results[i].get("GameID");
+       if (sport == "Basketball")
+       imagePath = "images/Custom/Basketball/basketball.png";
+       else if (sport == "Soccer")
+       imagePath = "images/Custom/Soccer/Soccer_Ball.png";
+       else
+       imagePath = "images/Custom/Football/Football.png";
+       
+       
+       var location = results[i].get("Location_Name");
+       var startTime = results[i].get("Start_Time");
+       startTime = new Date(startTime);
+       startTime = formatAMPM(startTime);
+       var currentPlayerCount = results[i].get("Num_Of_Players");
+       var maxPlayerCount = results[i].get("Max_Num_Of_Players");
+             
+       
+       $("#page").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+
+      $("#favoritepage").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>" + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+       
+       
+       
+           }
+           },
+       
+       error: function(error) {
+       // error is an instance of Parse.Error.
+       alert(error);
+       }
+       });
+
+
+}
+
+
+</script>
+
+<script>
+function favoritegame(){
+    var favoritetype=document.getElementById("favoritechoice").value;
+
+    $("#favoritepage").html( "");
+
+    var queryiii = new Parse.Query("Current_Games");
+    queryiii.containedIn("Sport" , [favoritetype]);
+    queryiii.find({
+       success: function(results) {
+       for (var i = 0; i < results.length; i++){
+       
+       var sport = results[i].get("Sport");
+       var imagePath;
+       var id = results[i].get("GameID");
+       if (sport == "Basketball")
+       imagePath = "images/Custom/Basketball/basketball.png";
+       else if (sport == "Soccer")
+       imagePath = "images/Custom/Soccer/Soccer_Ball.png";
+       else
+       imagePath = "images/Custom/Football/Football.png";
+       
+       
+       var location = results[i].get("Location_Name");
+       var startTime = results[i].get("Start_Time");
+       startTime = new Date(startTime);
+       startTime = formatAMPM(startTime);
+       var currentPlayerCount = results[i].get("Num_Of_Players");
+       var maxPlayerCount = results[i].get("Max_Num_Of_Players");
+             
+
+      $("#favoritepage").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>" + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+       
+       
+       
+           }
+           },
+       
+       error: function(error) {
+       // error is an instance of Parse.Error.
+       alert(error);
+       }
+       });
+
+
+}
+
+
+
+
+
+</script>
+
+<script>
+ function setTab(m,n){  
+  
+ var tli=document.getElementById("menu"+m).getElementsByTagName("li");  
+  
+ var mli=document.getElementById("main"+m).getElementsByTagName("ul");  
+  
+ for(i=0;i<tli.length;i++){  
+  
+  tli[i].className=i==n?"hover":"unhover";  
+  
+  mli[i].style.display=i==n?"block":"none";  
+  
+ }  
+  
+} 
+
+</script>
 </head>
+
+
+
+
 <body>
-    
-    <div id="preloader">
-        <div id="status">
-            <p class="center-text">
+
+<div id="preloader">
+    <div id="status">
+        <p class="center-text">
             Loading the content...
             <em>Loading depends on your connection speed!</em>
-            </p>
-        </div>
+        </p>
     </div>
-    
-    <!--<div class="menu-wrapper">
-     <em><i class="fa fa-question-circle"></i>Swipe the icons, tap to select!</em>
-     <div class="menu">
-     <a href="#" class="item" id="selected">
-     <img src="images/highlights/1.jpg" alt="img">
-     Homepage
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/2.jpg" alt="img">
-     Features
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/3.jpg" alt="img">
-     Gallery
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/4.jpg" alt="img">
-     Portfolio
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/5.jpg" alt="img">
-     App Styled
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/6.jpg" alt="img">
-     Pages
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/7.jpg" alt="img">
-     Blog
-     </a>
-     <a href="#" class="item">
-     <img src="images/highlights/8.jpg" alt="img">
-     Contact
-     </a>
-     </div>
-     </div>-->
-    
-    <div class="header">
-        <!--
-         <a href="#" class="main-logo"></a>
-         -->
-        <div class="header-controls">
-            <!--<a href="#" class="open-more"><i class="fa fa-envelope"></i></a>
-             <a href="#" class="open-slide"><i class="fa fa-star"></i></a>-->
-            
-            <a href="#" class="open-menu"><i class="fa fa-navicon"></i></a>
+</div>
+
+<div class="header">
+    <div class="header-controls">
+        <a href="#" class="open-menu"><i class="fa fa-navicon"></i></a>
             <span class="local-games-title">Local Games</span>
-            <a href="create.html" class="plus-button"><i class="fa fa-plus"></i></a>
-            
-            <!--
-             <div class="local-games-title">
-             Local Games
-             </div>
-             
-             <div class="local-games-title">
-             Local Games
-             </div>
-             -->
-            
-            
-            
-            
-            <!--
-             <p class="local-games-title">
-             Local Games
-             </p>
-             
-             
-             <div class="plus-button">
-             <img src="images/ui/plus.png"/>
-             </div>
-             
-             -->
-            
+        <a href="create.html" class="plus-button"><i class="fa fa-plus"></i></a>
+    </div>
+</div>
+
+<div class="all-elements">
+    <div class="snap-drawers">
+        <!-- Left Sidebar -->
+        <div class="snap-drawer snap-drawer-left">
+
+            <div class="sidebar-header">
+            <a href="#"><i class="fa fa-times"></i></a>
+            </div>
+
+            <ul class="sidebar-navigation">
+                <li>
+                    <a href="create.html">Create Game<i class="fa fa-angle-right"></i></a>
+                </li>
+                <li>
+                    <a href="local.html">Local Games<i class="fa fa-angle-right"></i></a>
+                </li>
+                <li>
+                    <a href="your.html">Your Games<i class="fa fa-angle-right"></i></a>
+                </li>
+                <li>
+                    <a href="login.html">Log In<i class="fa fa-angle-right"></i></a>
+                </li>
+            </ul>
         </div>
     </div>
-    
-    
-    <div class="all-elements">
-        <div class="snap-drawers">
-            <!-- Left Sidebar -->
-            <div class="snap-drawer snap-drawer-left">
-                
-                <div class="sidebar-header">
-                    <!--<a href="#"><i class="fa fa-phone"></i></a>
-                     <a href="#"><i class="fa fa-comment"></i></a>
-                     <a href="#"><i class="fa fa-facebook"></i></a>
-                     <a href="#"><i class="fa fa-twitter"></i></a>-->
-                    <a href="#"><i class="fa fa-times"></i></a>
-                </div>
-                
-                <!-- <div class="sidebar-logo"></div>
-                 
-                 <div class="sidebar-divider">
-                 Navigation
-                 </div>-->
-                
-                <ul class="sidebar-navigation">
-                    <li>
-                        <a href="create.html">Create Game<i class="fa fa-angle-right"></i></a>
-                        <!-- <ul class="submenu active-submenu-items">
-                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
-                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
-                         </ul>-->
-                    </li>
-                    <li>
-                        <a href="local.html">Local Games<i class="fa fa-angle-right"></i></a>
-                        <!-- <ul class="submenu active-submenu-items">
-                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
-                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
-                         </ul>-->
-                    </li>
-                    <li>
-                        <a href="your.html">Your Games<i class="fa fa-angle-right"></i></a>
-                        <!-- <ul class="submenu active-submenu-items">
-                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
-                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
-                         </ul>-->
-                    </li>
-                    <li>
-                        <a href="login.html">Log In<i class="fa fa-angle-right"></i></a>
-                        <!-- <ul class="submenu active-submenu-items">
-                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
-                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
-                         </ul>-->
-                    </li>
-                    <!--   <li class="has-submenu">
-                     <a class="deploy-submenu" href="#"><i class="fa fa-cog"></i>Features<i class="fa fa-plus"></i></a>
-                     <ul class="submenu">
-                     <li><a href="features-type.html"><i class="fa fa-angle-right"></i>Type<i class="fa fa-circle"></i></a></li>
-                     <li><a href="features-jquery.html"><i class="fa fa-angle-right"></i>jQuery<i class="fa fa-circle"></i></a></li>
-                     <li><a href="features-others.html"><i class="fa fa-angle-right"></i>Others<i class="fa fa-circle"></i></a></li>
-                     </ul>
-                     </li>
-                     <li class="has-submenu">
-                     <a class="deploy-submenu" href="#"><i class="fa fa-picture-o"></i>Portfolios<i class="fa fa-plus"></i></a>
-                     <ul class="submenu">
-                     <li><a href="portfolio-adaptive.html"><i class="fa fa-angle-right"></i>Adaptive<i class="fa fa-circle"></i></a></li>
-                     <li><a href="portfolio-one.html"><i class="fa fa-angle-right"></i>One Column<i class="fa fa-circle"></i></a></li>
-                     <li><a href="portfolio-two.html"><i class="fa fa-angle-right"></i>Two Columns<i class="fa fa-circle"></i></a></li>
-                     </ul>
-                     </li>
-                     <li class="has-submenu">
-                     <a class="deploy-submenu" href="#"><i class="fa fa-camera"></i>Gallery<i class="fa fa-plus"></i></a>
-                     <ul class="submenu">
-                     <li><a href="gallery-adaptive.html"><i class="fa fa-angle-right"></i>Adaptive<i class="fa fa-circle"></i></a></li>
-                     <li><a href="gallery-square.html"><i class="fa fa-angle-right"></i>Square Thumbs<i class="fa fa-circle"></i></a></li>
-                     <li><a href="gallery-round.html"><i class="fa fa-angle-right"></i>Round Thumbs<i class="fa fa-circle"></i></a></li>
-                     <li><a href="gallery-wide.html"><i class="fa fa-angle-right"></i>Wide Thumbs<i class="fa fa-circle"></i></a></li>
-                     </ul>
-                     </li>
-                     <li class="has-submenu">
-                     <a class="deploy-submenu" href="#"><i class="fa fa-file"></i>Pages<i class="fa fa-plus"></i></a>
-                     <ul class="submenu">
-                     <li><a href="page-error.html"><i class="fa fa-angle-right"></i>404 Page<i class="fa fa-circle"></i></a></li>
-                     <li><a href="page-soon.html"><i class="fa fa-angle-right"></i>Soon Page<i class="fa fa-circle"></i></a></li>
-                     <li><a href="page-updates.html"><i class="fa fa-angle-right"></i>Updates Page<i class="fa fa-circle"></i></a></li>
-                     <li><a href="page-timeline.html"><i class="fa fa-angle-right"></i>Timeline Page<i class="fa fa-circle"></i></a></li>
-                     <li><a href="page-charts.html"><i class="fa fa-angle-right"></i>Charts & Pies <i class="fa fa-circle"></i></a></li>
-                     </ul>
-                     </li>
-                     <li class="has-submenu">
-                     <a class="deploy-submenu" href="#"><i class="fa fa-mobile"></i>App Specific<i class="fa fa-plus"></i></a>
-                     <ul class="submenu">
-                     <li><a href="pageapp-login.html"><i class="fa fa-angle-right"></i>Login<i class="fa fa-circle"></i></a></li>
-                     <li><a href="pageapp-sigin.html"><i class="fa fa-angle-right"></i>Signup<i class="fa fa-circle"></i></a></li>
-                     <li><a href="pageapp-coverpage.html"><i class="fa fa-angle-right"></i>Coverpage<i class="fa fa-circle"></i></a></li>
-                     <li><a href="pageapp-userlist.html"><i class="fa fa-angle-right"></i>User List<i class="fa fa-circle"></i></a></li>
-                     <li><a href="pageapp-calendar.html"><i class="fa fa-angle-right"></i>Calendar<i class="fa fa-circle"></i></a></li>
-                     <li><a href="pageapp-activity.html"><i class="fa fa-angle-right"></i>Activity Feed<i class="fa fa-circle"></i></a></li>
-                     <li><a href="pageapp-bubbles.html"><i class="fa fa-angle-right"></i>Chat Bubbles<i class="fa fa-circle"></i></a></li>
-                     <li><a href="pageapp-shareboxes.html"><i class="fa fa-angle-right"></i>Share Boxes<i class="fa fa-circle"></i></a></li>
-                     </ul>
-                     </li>
-                     <li><a href="page-video.html"><i class="fa fa-youtube-play"></i>Videos<i class="fa fa-circle"></i></a></li>
-                     <li><a href="page-blog.html"><i class="fa fa-pencil"></i>Blog<i class="fa fa-circle"></i></a></li>
-                     <li><a href="contact.html"><i class="fa fa-envelope"></i>Contact<i class="fa fa-circle"></i></a></li>-->
-                </ul>
-                <!-- <div class="sidebar-divider">
-                 Copyright 2015. All rights reserved.
-                 </div>-->
-            </div>
-            <!-- <div class="snap-drawer snap-drawer-right">
-             <div class="sidebar-header">
-             <a href="#"><i class="fa fa-phone"></i></a>
-             <a href="#"><i class="fa fa-comment"></i></a>
-             <a href="#"><i class="fa fa-facebook"></i></a>
-             <a href="#"><i class="fa fa-twitter"></i></a>
-             <a href="#"><i class="fa fa-times"></i></a>
-             </div>
-             
-             <div class="sidebar-logo"></div>
-             
-             <div class="sidebar-divider">
-             Get in touch
-             </div>
-             
-             <ul class="sidebar-navigation">
-             <li><a href="#"><i class="fa fa-envelope-o"></i>Mail Us<i class="fa fa-caret-right"></i></a></li>
-             <li><a href="#"><i class="fa fa-phone"></i>Call Us<i class="fa fa-caret-right"></i></a></li>
-             <li><a href="#"><i class="fa fa-comment-o"></i>Text Us<i class="fa fa-caret-right"></i></a></li>
-             </ul>
-             
-             <div class="sidebar-divider">
-             get social
-             </div>
-             
-             <ul class="sidebar-navigation">
-             <li><a href="#"><i class="fa fa-facebook"></i>Facebook<i class="fa fa-caret-right"></i></a></li>
-             <li><a href="#"><i class="fa fa-twitter"></i>Twitter<i class="fa fa-caret-right"></i></a></li>
-             <li><a href="#"><i class="fa fa-google-plus"></i>Google Plus<i class="fa fa-caret-right"></i></a></li>
-             <li><a href="#"><i class="fa fa-youtube-play"></i>YouTube<i class="fa fa-caret-right"></i></a></li>
-             <li><a href="#"><i class="fa fa-linkedin"></i>LinkedIn<i class="fa fa-caret-right"></i></a></li>
-             <li><a href="#"><i class="fa fa-dribbble"></i>Dribbble<i class="fa fa-caret-right"></i></a></li>
-             <li><a href="#"><i class="fa fa-pinterest"></i>Pinterest<i class="fa fa-caret-right"></i></a></li>
-             </ul>
-             
-             <div class="sidebar-divider">
-             updates and news
-             </div>
-             
-             <a href="#" class="sidebar-update red-update">
-             <i class="fa fa-times"></i>
-             <strong>Warning</strong>
-             <em>Released a right sidebar item</em>
-             </a>
-             
-             <a href="#" class="sidebar-update green-update">
-             <i class="fa fa-check"></i>
-             <strong>All great!</strong>
-             <em>Released a right sidebar item</em>
-             </a>
-             
-             <a href="#" class="sidebar-update blue-update">
-             <i class="fa fa-info"></i>
-             <strong>Information</strong>
-             <em>Released a right sidebar item</em>
-             </a>
-             
-             <a href="#" class="sidebar-update yellow-update full-bottom">
-             <i class="fa fa-warning"></i>
-             <strong>Atention</strong>
-             <em>Released a right sidebar item</em>
-             </a>
-             <div class="sidebar-divider">
-             Copyright 2015. All rights reserved.
-             </div>
-             </div>-->
+
+<!-- Page Content-->
+    <div id="content" class="snap-content">
+
+        <!-- <div class="header-clear">deuwifhiwefewufhiw</div> -->
+        <br>
+        <br>
+<!--         <input type="text" placeholder="Search" class="inputfield" id = "searchgame" ></input> -->
+
+        <div id="searchform">
+           <fieldset class="search">
+                <input type="text" class="box" name="s" id="s" class="inputText" placeholder="Search Games" x-webkit-speech>
+                <button class="btn" title="SEARCH" onclick="searchgames()"> </button>
+
+           </fieldset>
         </div>
-        
-        <!-- Page Content-->
-        <div id="content" class="snap-content">
-            
-            <div class="header-clear"></div>
-            <div class="content">
-                <div class="decoration"></div>
-                <div id="page" class="one-third-responsive">
+
+
+        <div class="content">
+        <div class="localDecoration"></div>
+
+        <div id="tabs0">
+              <ul class="menu0" id="menu0">          
+                    <li onclick="setTab(0,0)" class="hover">All games</li>  
+                      
+                    <li onclick="setTab(0,1)" class='unhover'>
+                      
+                      <div>
+                        <form>
+  <!--                       <select 
+
+                        onChange="if(this.selectedIndex!=0) self.location=this.options[this.selectedIndex].value" 
+
+                        id="favoritechoice">
+ -->
+                         <select id="favoritechoice" onChange="favoritegame()">
+
+                        <option value="" selected>Favorite
+                        <option value="Basketball" >Basketball
+                        <option value="Football">Football
+                        <option value="Soccer">Soccer
+ 
+
+                        </select>
+                        </form> 
+
+                      </div>
+
+
+                      
+                    </li>
+
+                    <!-- <li class='dropdown-menu' role='menu'> test</li>          -->
+              </ul>
+              <br>
+              
+
+              <div class="main" id="main0">           
+                    <ul class="block">
+                                                
+                            <div id="page" class="one-third-responsive"></div>
+                    </ul>
                     
-                </div>
-                
-                
-                
-            </div>
+                    <ul>
+
+
+                          <div id="favoritepage" class="one-third-responsive"></div>
+                    </ul>
+
+
+              </div>
             
-            
-            
+
         </div>
-        
-        
-        
+
     </div>
     
+</div>
+
 </body>
