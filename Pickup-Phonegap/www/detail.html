@@ -24,6 +24,7 @@
 <link href="styles/swipebox.css"		 rel="stylesheet" type="text/css">
 <link href="styles/font-awesome.css"	 rel="stylesheet" type="text/css">
 <link href="styles/animate.css"			 rel="stylesheet" type="text/css">
+<link href="styles/ionicons.css"         rel="stylesheet" type="text/css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 <script type="text/javascript" src="scripts/jquery.js"></script>
@@ -31,6 +32,12 @@
 <script type="text/javascript" src="scripts/framework.plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
 <script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
+
+
+
+
+
+
 <script>
     function formatAMPM(date) {
         var hours = date.getHours();
@@ -105,7 +112,7 @@ generateResults(function(results){
                 
                 }
                 
-                loc = results[0][0].get("Location_Name")
+                loc = results[0][0].get("Location_Name");
                 //alert(loc);
                 
                 maxPlayerCount = results[0][0].get("Max_Num_Of_Players");
@@ -133,11 +140,25 @@ generateResults(function(results){
                 sport = results[0][0].get("Sport");
                 //alert("sport: " + sport);
                 
+                if (sport == "Basketball")
+                imagePath = "images/Custom/Basketball/basketball.png";
+                else if (sport == "Soccer")
+                imagePath = "images/Custom/Soccer/Soccer_Ball.png";
+                else
+                imagePath = "images/Custom/Football/Football.png";
+                
                 //alert(players.toString());
                 
+                address = results[2][0].get("Address");
+                
+                //$("#page-sport").append("<img src=\""imagePath+"\">"+sport);
+                //$("#page-sport").append("<img src=\""imagePath+"\" alt=\"img\">"+sport);
                 $("#page-sport").append(sport);
                 $("#page-date").append(date);
                 $("#page-time").append(time);
+                $("#page-loc").append(loc);
+                $("#page-address").append(address);
+                $("#page-creator").append(creator);
 
                 //$("#page").append("<a href=\"detail.html?id="+sport +"\" class=\"user-list-item\">");
                 //"<a href=\"detail.html?id="+id +"\" class=\"user-list-item\">
@@ -208,8 +229,10 @@ generateResults(function(results){
     <div class="header-controls">
         <!--<a href="#" class="open-more"><i class="fa fa-envelope"></i></a>
         <a href="#" class="open-slide"><i class="fa fa-star"></i></a>-->
+        <span class="detail-title">Game Info</span>
         <a href="local.html" class="backButton"><i class="fa fa-chevron-left"></i></a>
     </div>
+    
 
 </div>
        
@@ -423,22 +446,37 @@ generateResults(function(results){
                    Game:
                    </div>
                 -->
+                <div class="detailDecoration"></div>
+                
                <div id="page-sport" class="one-third-responsive">
-                   Game:
-                   
-               
                </div>
+               
+               <div class="detailDecoration"></div>
                
                <div id="page-date" class="one-third-responsive">
-                   When:
-                   
-                   
+                   <i class="icon ion-calendar"> </i>
                </div>
                
+               <div class="detailDecoration"></div>
+               
                <div id="page-time" class="one-third-responsive">
-                   Time:
-                   
-                   
+                   <i class="icon ion-clock"> </i>
+               </div>
+               
+               <div class="detailDecoration"></div>
+               <div id="page-loc" class="one-third-responsive">
+                   <i class="icon ion-location"> </i>
+               </div>
+               <div class="detailDecoration"></div>
+               
+               <div id="page-address" class="one-third-responsive">
+                   <i class="icon ion-navigate"> </i>
+               </div>
+               
+               <div class="detailDecoration"></div>
+               
+               <div id="page-creator" class="one-third-responsive">
+               <i class="icon ion-person"> </i>
                </div>
                
            </ul>
