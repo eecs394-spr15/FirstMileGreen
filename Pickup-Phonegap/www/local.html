@@ -103,6 +103,69 @@ query.find({
       </script>
 
 <script>
+
+//   i = 0;
+// $(document).ready(function(){
+//     $("s").keypress(function(){
+//         $("page").text(i += 1);
+//     });
+// });
+
+function searchgames(){
+
+  var searchtext=document.getElementById("s").value;
+
+  $("#page").html("Serching Reasult of " + searchtext + ": ");
+  $("#favoritepage").html("Serching Reasult of " + searchtext + ": ");
+
+  var queryii = new Parse.Query("Current_Games");
+  queryii.containedIn("Sport", [searchtext]);
+  queryii.find({
+       success: function(results) {
+       // results is an array of Parse.Object.
+       for (var i = 0; i < results.length; i++){
+       
+       var sport = results[i].get("Sport");
+       var imagePath;
+       var id = results[i].get("GameID");
+       if (sport == "Basketball")
+       imagePath = "images/Custom/Basketball/basketball.png";
+       else if (sport == "Soccer")
+       imagePath = "images/Custom/Soccer/Soccer_Ball.png";
+       else
+       imagePath = "images/Custom/Football/Football.png";
+       
+       
+       var location = results[i].get("Location_Name");
+       var startTime = results[i].get("Start_Time");
+       startTime = new Date(startTime);
+       startTime = formatAMPM(startTime);
+       var currentPlayerCount = results[i].get("Num_Of_Players");
+       var maxPlayerCount = results[i].get("Max_Num_Of_Players");
+             
+       
+       $("#page").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+
+      $("#favoritepage").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>" + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+       
+       
+       
+           }
+           },
+       
+       error: function(error) {
+       // error is an instance of Parse.Error.
+       alert(error);
+       }
+       });
+
+
+}
+
+
+</script>
+
+<script>
  function setTab(m,n){  
   
  var tli=document.getElementById("menu"+m).getElementsByTagName("li");  
@@ -173,7 +236,15 @@ query.find({
         <!-- <div class="header-clear">deuwifhiwefewufhiw</div> -->
         <br>
         <br>
-        <input type="text" placeholder="Search" class="inputfield" id = "searchgame" ></input>
+<!--         <input type="text" placeholder="Search" class="inputfield" id = "searchgame" ></input> -->
+
+        <div id="searchform">
+           <fieldset class="search">
+                <input type="text" class="box" name="s" id="s" class="inputText" placeholder="Search Games" x-webkit-speech>
+                <button class="btn" title="SEARCH" onclick="searchgames()"> </button>
+
+           </fieldset>
+        </div>
 
 
         <div class="content">
