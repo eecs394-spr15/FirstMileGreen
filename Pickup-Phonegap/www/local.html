@@ -113,8 +113,8 @@ function searchgames(){
   $("#favoritepage").html("");
 
   var queryii = new Parse.Query("Current_Games");
-  //queryii.containedIn("Sport", [searchtext]);
-  queryii.whereMatches("Sport", "("+searchtext+")", "i"); 
+  queryii.containedIn("Sport", [searchtext]);
+  //queryii.whereMatches("Sport", "("+searchtext+")", "i"); 
   queryii.find({
        success: function(results) {
        // results is an array of Parse.Object.
@@ -164,7 +164,7 @@ function searchgames(){
 function favoritegame(){
     var favoritetype=document.getElementById("favoritechoice").value;
 
-    $("#favoritepage").html( "");
+    $("#favoritepage").html("");
 
     var queryiii = new Parse.Query("Current_Games");
     queryiii.containedIn("Sport" , [favoritetype]);
