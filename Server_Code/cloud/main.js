@@ -228,7 +228,20 @@ Parse.Cloud.define("create_game", function(request, response)
     add_to_list.set("Location_Name", request.params.Location_Name);
     add_to_list.set("Sport", request.params.Sport);
     add_to_list.set("Max_Num_Of_Players", request.params.Max_Num_Of_Players);
-    add_to_list.set("Start_Time", request.params.Start_Time);
+    console.log(request.params.Start_Time);
+    var s = request.params.Start_Time;
+    var date_string = request.params.Start_Time.slice(0, 10);
+    var time_string = request.params.Start_Time.slice(10,19);
+    var split_date = date_string.split("/");
+    var split_time = time_string.split(":");
+
+    console.log("date string" + split_date);
+    console.log("time string" + split_time);
+    console.log("Fuck JS" + date_string[1]);
+    //var new_date = new Date(date_string[2], String((Number(date_string[1]) - 1)), date_string[0], time_string[0], time_string[1], time_string[2]);
+    var new_date = new Date(s.slice(4,6),s.slice(2,4), s.slice(0, 2), "0", "0", "0", "0");
+    console.log("new_date" + new_date);
+    //add_to_list.set("Start_Time", new Date(request.params.Start_Time));
     add_to_list.set("End_Time", request.params.End_Time);
     add_to_list.set("Notes", request.params.Notes);
     add_to_list.set("Creator", request.params.PlayerID);
@@ -245,6 +258,7 @@ Parse.Cloud.define("create_game", function(request, response)
     		response.error("Game add failed");
     	}
     });
+    console.log("after games_added");
     //Add to players list
     Parse.Cloud.run('join_game', {"PlayerID":request.params.PlayerID, "GameID":newid})
 });
