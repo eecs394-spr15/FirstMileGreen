@@ -83,7 +83,7 @@
                          </ul>-->
                     </li>
                     <li>
-                        <a href="#">Local Games<i class="fa fa-angle-right"></i></a>
+                        <a href="local.html">Local Games<i class="fa fa-angle-right"></i></a>
                         <!-- <ul class="submenu active-submenu-items">
                          <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
                          <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
@@ -92,7 +92,7 @@
                          </ul>-->
                     </li>
                     <li>
-                        <a href="#">Your Games<i class="fa fa-angle-right"></i></a>
+                        <a href="login.html">Log In<i class="fa fa-angle-right"></i></a>
                         <!-- <ul class="submenu active-submenu-items">
                          <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
                          <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
@@ -112,33 +112,27 @@
     
     </div>
     
-    
     <script>
         function signUp() {
         Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
         var user = new Parse.User();
         //getting the values
-        var email = $("#email").val();
-        var password = $("#password").val();
+       var email = document.getElementById("email").value;
+       var password = document.getElementById("password").value;
+        //alert("Inside signUP function");
         
         //basic validation
         var errors= "";
         if(password === "") errors += "Password required.<br/>";
         if(email === "") errors += "Email required.<br/>";
-        
         if(errors !== "") {
-            alert("errors");
+            alert(errors);
             return;
         }
         
       //Register with Parse
         user.set("username", email);
         user.set("password", password);
-      // user.set("email", getElementById("email"));
-        
-      // other fields can be set just like with Parse.Object
-      //  user.set("phone", "415-392-0202");
-        
         user.signUp(null, {
                     success: function(user) {
                     // Hooray! Let them use the app now.
@@ -153,11 +147,6 @@
         }
         </script>
     
-    <script>
-        function myFunction () {
-            alert("handler for sign-up button was clicked");
-        };
-    </script>
     
     <!-- Page Content-->
     <div id="content" class="snap-content">
