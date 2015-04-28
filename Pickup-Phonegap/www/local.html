@@ -110,7 +110,7 @@ function searchgames(){
   var searchtext=document.getElementById("s").value;
 
   $("#page").html("Serching Reasult of " + searchtext + ": ");
-  // $("#favoritepage").html("Serching Reasult of " + searchtext + ": ");
+  $("#favoritepage").html("Serching Reasult of " + searchtext + ": ");
 
   var queryii = new Parse.Query("Current_Games");
   queryii.containedIn("Sport", [searchtext]);
@@ -163,7 +163,7 @@ function searchgames(){
 function favoritegame(){
     var favoritetype=document.getElementById("favoritechoice").value;
 
-    // $("#favoritepage").html("Serching Result of " + favoritetype + ": ");
+    $("#favoritepage").html("Serching Result of " + favoritetype + ": ");
 
     var queryiii = new Parse.Query("Current_Games");
     queryiii.containedIn("Sport" , [favoritetype]);
