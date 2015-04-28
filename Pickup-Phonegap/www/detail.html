@@ -24,12 +24,42 @@
 <link href="styles/swipebox.css"		 rel="stylesheet" type="text/css">
 <link href="styles/font-awesome.css"	 rel="stylesheet" type="text/css">
 <link href="styles/animate.css"			 rel="stylesheet" type="text/css">
+<link href="styles/ionicons.css"         rel="stylesheet" type="text/css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jqueryui.js"></script>
 <script type="text/javascript" src="scripts/framework.plugins.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
+<script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
+
+
+
+
+
+
 <script>
+    function formatAMPM(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+
+function formatAMPMDate(date) {
+    var month = date.getMonth();
+    var day = date.getDate();
+    //var ampm = hours >= 12 ? 'pm' : 'am';
+    //hours = hours % 12;
+    //hours = hours ? hours : 12; // the hour '0' should be '12'
+    //minutes = minutes < 10 ? '0'+minutes : minutes;
+    var tttt = month + '/' + day;
+    return tttt;
+}
 function getUrlParameter(sParam)
 {
     var sPageURL = window.location.search.substring(1);
@@ -43,11 +73,99 @@ function getUrlParameter(sParam)
         }
     }
 }   
-var id = getUrlParameter('id');
-alert(id);
+var id = getUrlParameter('id'); //getting the ID from the local page
+//alert(id);
+var players = [];
+var loc;
+var maxPlayerCount;
+var creator;
+var startTime;
+var endTime;
+var updatedAt;
+var currentPlayerCount;
+var sport;
+var time;
+var date;
+
+//Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+
+function generateResults(callback){
+    Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+Parse.Cloud.run('get_more', { GameID: id }, {
+                success: function(results) {
+                //for (var i = 0; i < results[1].length; i++){
+                //alert(results[1][i].get('PlayerID'));
+                //}
+                if(callback != null && callback != undefined){
+                callback(results);
+                }
+                },
+                error: function(error) {
+                console.log(error);
+                }
+            });
+}
+generateResults(function(results){
+                
+                for (var i = 0; i < results[1].length; i++){
+                players.push(results[1][i].get("PlayerID"));
+                
+                }
+                
+                loc = results[0][0].get("Location_Name");
+                //alert(loc);
+                
+                maxPlayerCount = results[0][0].get("Max_Num_Of_Players");
+                //alert("max: " + maxPlayerCount);
+                
+                creator = results[0][0].get("Creator");
+                //alert("creator: " + creator);
+                
+                startTime = results[0][0].get("Start_Time");
+                //alert("starttime: " + startTime);
+                time = formatAMPM(startTime);
+                //alert(time);
+                
+                date = formatAMPMDate(startTime);
+                
+                endTime = results[0][0].get("End_Time");
+                //alert("endtime: " + endTime);
+                
+                updatedAt = results[0][0].updatedAt;
+                //alert("updated: " + updatedAt);
+                
+                currentPlayerCount = results[0][0].get("Num_Of_Players");
+                //alert("current: " + currentPlayerCount);
+                
+                sport = results[0][0].get("Sport");
+                //alert("sport: " + sport);
+                
+                //alert(players.toString());
+                
+                address = results[2][0].get("Address");
+                
+                $("#page-sport").append(sport);
+                $("#page-date").append(date);
+                $("#page-time").append(time);
+                $("#page-loc").append(loc);
+                $("#page-address").append(address);
+
+                //$("#page").append("<a href=\"detail.html?id="+sport +"\" class=\"user-list-item\">");
+                //"<a href=\"detail.html?id="+id +"\" class=\"user-list-item\">
+                
+                
+                //$("#page").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+                
+                //$("#favoritepage").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>"+sport + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+                
+                
+                
+                
+                });
+        
 </script>
 </head>
-<body> 
+<body>
 
 <div id="preloader">
 	<div id="status">
@@ -103,6 +221,7 @@ alert(id);
         <a href="#" class="open-slide"><i class="fa fa-star"></i></a>-->
         <a href="local.html" class="backButton"><i class="fa fa-chevron-left"></i></a>
     </div>
+
 </div>
        
 <div class="all-elements">
@@ -278,16 +397,111 @@ alert(id);
     
     <!-- Page Content-->
     <div id="content" class="snap-content">
-    	
-    	Test	
-    </div>
+        <!--<div class="header-clear"></div>-->
+        <div class="content">
+        <div class="decoration"></div>
         
-     
-        
+ 
+
+ 
+       <div class="container switch-box">
+           <!--<h4 class="center-text">Join Game</h4><br>-->
+           <a href="#" class="switch switch-1 switch-1-off">
+               <em>I</em>
+               <span></span>
+               <em>0</em>
+           </a>
+           <em class="switch-box-subtitle">
+               Join Game
+            <!--
+               Optional subtitle can be added here, this message automatically hides when the content is shown!
+             -->
+           </em>
+           <div class="switch-box-content">
+               <p class="no-bottom">
+               Unjoin Game
+                <!--
+               Switches can be used as content toggles, where you can add almost every feature from the page inside of them.
+               We also provided the styles, so if you want you can even convert these to checkboxes. By default, they function
+               as content toggles! An extra style for your device!
+                -->
+               </p>
+           </div>
+           
+           <ul class="block">
+               <!--
+               <div class="title">
+                   Game:
+                   </div>
+                -->
+              <i class="icon ion-home"></i>
+                <div class="detailDecoration"></div>
+                
+               <div id="page-sport" class="one-third-responsive">
+                   Game:
+               </div>
+               
+               <div class="detailDecoration"></div>
+               
+               <div id="page-date" class="one-third-responsive">
+                   When:
+               </div>
+               
+               <div class="detailDecoration"></div>
+               
+               <div id="page-time" class="one-third-responsive">
+                   <i class="icon ion-clock"> </i>
+               </div>
+               
+               <div class="detailDecoration"></div>
+               <div id="page-loc" class="one-third-responsive">
+                   <i class="icon ion-location"> </i>
+               </div>
+               <div class="detailDecoration"></div>
+               
+               <div id="page-address" class="one-third-responsive">
+                   Address:
+               </div>
+               
+               <div class="detailDecoration"></div>
+               
+           </ul>
+       </div>
+    
+  
+    
+    
+       <!-- <div id="tabs0">
+            <ul class="menu1" id="menu1">
+                
+                <li>Game Info:</li>
+                <li>maxPlayerCount</li>
+                
+                <div class="main" id="main0">
+                    
+                    <ul class="block">
+                        
+                       
+                        
+                    </ul>
+                    
+                    <ul>
+                        <div id="favoritepage" class="one-third-responsive">
+                            
+                            
+                        </div>
+                        
+                    </ul>
+                    
+                    
+                </div>
+                
+                </div>
+    
     </div>
-    
-   
-    
+       
+-->
+
 </div>
 
 </body>

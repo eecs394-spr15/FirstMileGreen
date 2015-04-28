@@ -1,0 +1,133 @@
+
+.menu0{  
+  
+ width: 400px;
+ height: 20px;
+
+
+
+  
+} 
+
+a {
+    text-decoration:none;
+    color:#1c00ff;
+}
+ 
+a:hover {
+    color:#5f00e4;
+}
+fieldset.search {
+    margin-left: 40px;
+    padding: 0px;
+    border: none;
+    width: 260px;
+    background:white;
+}
+ 
+fieldset.search:hover {
+    background: white;
+}
+.search input, .search button {
+    border: none;
+    float: left;
+}
+.search input.box {
+    height: 28px;
+    width: 210px;
+    margin-right: 0px;
+    padding-right: 0px;
+    background: white;
+    margin: 1px;
+    border:#006699 1px solid;
+}
+.search input.box:focus {
+    background: white ;
+    outline: none;
+}
+.search button.btn {
+    border: none;
+    width: 28px;
+    height: 28px;
+    margin: 0px auto;
+    margin: 1px;
+    background: url(http://sandbox.runjs.cn/uploads/rs/339/livk7pl5/search_blue.png) no-repeat top right;
+}
+.search button.btn:hover {
+    background: url(http://sandbox.runjs.cn/uploads/rs/339/livk7pl5/search_black.png) no-repeat bottom right;
+}
+
+#searchgame{
+    margin-left:75px;
+    height: 20px;
+    font-size: 16px;
+    overflow: hidden;
+    float: left;
+} 
+#getsearchbutton{
+    float:left;
+    background-color: lightyellow;
+    border-radius: 5px;
+    font-size: 20px;
+
+}
+  
+.menu0 li{  
+  
+ display:block;  
+  
+ float: left;  
+  
+ padding: 2px 0;  
+  
+ width:150px;  
+  
+ /*text-align: center;  */
+  
+ cursor:pointer; 
+ font-size: 14px;
+
+margin-top: 5px;
+margin-left: 5px;
+  
+
+ color: grey;
+/*background-color: #33CCFF;*/
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+
+  
+}  
+  
+.menu0 li.hover{  
+  
+ 
+ /*box-shadow:-5px -5px 3px 0.5px black; */
+ color:black;/*dark*/
+ font-weight: bolder;
+ font-size: 15px;
+ /*background-color: #33CC11;*/
+ /*box-shadow: 0px -5px 0.1px 0px black;*/
+
+
+  
+}   
+  
+#main0 ul{  
+  
+ display: none;  
+  
+}  
+  
+#main0 ul.block{  
+  
+ display: block;  
+  
+}
+#page {
+    /*box-shadow: -20px 0px 20px 0.5px black;*/
+    /*background-color: #ccCCFF*/
+} 
+#favoritepage {
+
+}
