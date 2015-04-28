@@ -3239,6 +3239,21 @@ table tr:hover td{
      border-radius:0px;
 }
 
+.signup-username{
+    display:block;
+    width:100%;
+    height:45px;
+    padding-left:20px;
+    padding-right:20px;
+    line-height:45px;
+    line-height:100%;
+    border:solid 1px #cacaca;
+    color:#666666;
+    margin-top:-1px;
+    margin-bottom:30px;
+    border-radius:0px;
+}
+
 
 .or-button{
     margin-top:10px;

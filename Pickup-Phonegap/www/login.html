@@ -1,0 +1,256 @@
+<!DOCTYPE HTML><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/splash/splash-icon.png">
+            <link rel="apple-touch-icon-precomposed" sizes="180x180" href="images/splash/splash-icon-big.png">
+                <link rel="apple-touch-startup-image" href="images/splash/splash-screen.png" 	media="screen and (max-device-width: 320px)" />
+                <link rel="apple-touch-startup-image" href="images/splash/splash-screen@2x.png" media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" />
+                <link rel="apple-touch-startup-image" href="images/splash/splash-screen-six.png" media="(device-width: 375px)">
+                    <link rel="apple-touch-startup-image" href="images/splash/splash-screen-six-plus.png" media="(device-width: 414px)">
+                        <link rel="apple-touch-startup-image" sizes="640x1096" href="images/splash/splash-screen@3x.png" />
+                        <link rel="apple-touch-startup-image" sizes="1024x748" href="images/splash/splash-screen-ipad-landscape" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : landscape)" />
+                        <link rel="apple-touch-startup-image" sizes="768x1004" href="images/splash/splash-screen-ipad-portrait.png" media="screen and (min-device-width : 481px) and (max-device-width : 1024px) and (orientation : portrait)" />
+                        <link rel="apple-touch-startup-image" sizes="1536x2008" href="images/splash/splash-screen-ipad-portrait-retina.png"   media="(device-width: 768px)	and (orientation: portrait)	and (-webkit-device-pixel-ratio: 2)"/>
+                        <link rel="apple-touch-startup-image" sizes="1496x2048" href="images/splash/splash-screen-ipad-landscape-retina.png"   media="(device-width: 768px)	and (orientation: landscape)	and (-webkit-device-pixel-ratio: 2)"/>
+                        
+                        <title>Pickup</title>
+                        
+                        <script src="http://www.parsecdn.com/js/parse-1.4.0.min.js"></script>
+                        <link href="styles/style.css"     		 rel="stylesheet" type="text/css">
+                            <link href="styles/framework.css" 		 rel="stylesheet" type="text/css">
+                                <link href="styles/owl.theme.css" 		 rel="stylesheet" type="text/css">
+                                    <link href="styles/swipebox.css"		 rel="stylesheet" type="text/css">
+                                        <link href="styles/font-awesome.css"	 rel="stylesheet" type="text/css">
+                                            <link href="styles/animate.css"			 rel="stylesheet" type="text/css">
+                                                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+                                                <script type="text/javascript" src="scripts/jquery.js"></script>
+                                                <script type="text/javascript" src="scripts/jqueryui.js"></script>
+                                                <script type="text/javascript" src="scripts/framework.plugins.js"></script>
+                                                <script type="text/javascript" src="scripts/custom.js"></script>
+                                                <script type="text/javascript">
+                                                    function loadPage(href)
+                                                    {
+                                                        var xmlhttp = new XMLHttpRequest();
+                                                        xmlhttp.open("GET", href, false);
+                                                        xmlhttp.send();
+                                                        return xmlhttp.responseText;
+                                                    }
+                                                </script>
+                                              
+                                                
+                                                
+
+                                                
+                                              
+</head>
+<body>
+    
+    <div id="preloader">
+        <div id="status">
+            <p class="center-text">
+            Loading the content...
+            <em>Loading depends on your connection speed!</em>
+            </p>
+        </div>
+    </div>
+    
+    
+    <div class="header">
+        
+        <div class="header-controls">
+            
+            <a href="#" class="open-menu"><i class="fa fa-navicon"></i></a>
+            <span class="local-games-title">Local Games</span>
+            <a href="create.html" class="plus-button"><i class="fa fa-plus"></i></a>
+        </div>
+    </div>
+    
+    
+    <div class="all-elements">
+        <div class="snap-drawers">
+            <!-- Left Sidebar -->
+            <div class="snap-drawer snap-drawer-left">
+                
+                <div class="sidebar-header">
+                    <!--<a href="#"><i class="fa fa-phone"></i></a>
+                     <a href="#"><i class="fa fa-comment"></i></a>
+                     <a href="#"><i class="fa fa-facebook"></i></a>
+                     <a href="#"><i class="fa fa-twitter"></i></a>-->
+                    <a href="#"><i class="fa fa-times"></i></a>
+                </div>
+                
+                <!-- <div class="sidebar-logo"></div>
+                 
+                 <div class="sidebar-divider">
+                 Navigation
+                 </div>-->
+                
+                <ul class="sidebar-navigation">
+                    <li>
+                        <a href="create.html">Create Game<i class="fa fa-angle-right"></i></a>
+                        <!-- <ul class="submenu active-submenu-items">
+                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
+                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
+                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
+                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
+                         </ul>-->
+                    </li>
+                    <li>
+                        <a href="local.html">Local Games<i class="fa fa-angle-right"></i></a>
+                        <!-- <ul class="submenu active-submenu-items">
+                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
+                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
+                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
+                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
+                         </ul>-->
+                    </li>
+                    <li>
+                        <a href="your.html">Your Games<i class="fa fa-angle-right"></i></a>
+                        <!-- <ul class="submenu active-submenu-items">
+                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
+                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
+                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
+                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
+                         </ul>-->
+                    </li>
+                    <li>
+                        <a href="login.html">Log In<i class="fa fa-angle-right"></i></a>
+                        <!-- <ul class="submenu active-submenu-items">
+                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
+                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
+                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
+                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
+                         </ul>-->
+                    </li>
+                </ul>
+                <!-- <div class="sidebar-divider">
+                 Copyright 2015. All rights reserved.
+                 </div>-->
+            </div>
+        </div>
+        
+<script>
+    function logIn() {
+        alert("we're getting this far function");
+
+        Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+        alert("we're getting this far function");
+        var user = new Parse.User();
+        //getting the values
+        var myName = document.querySelector('.login-username').value;
+        var myPass = document.querySelector('.login-password').value;
+        alert("Getting the variables");
+        
+        
+        //basic validation
+        var errors= "";
+        if(password === "") errors += "Password required.<br/>";
+        if(username === "") errors += "Email required.<br/>";
+        if(errors !== "") {
+            alert(errors);
+            return;
+        }
+        
+        //Login with Parse
+        user.logIn(myName, myPass, {
+                   alert("inside the logIn function");
+                    success: function(user) {
+                    // Hooray! Let them use the app now.
+                    //var currentUser = user;
+                    alert("This has fired successfully -- LogIn");
+                    },
+                    error: function(user, error) {
+                    // Show the error message somewhere and let the user try again.
+                    alert("Error: " + error.code + " " + error.message);
+                    }
+                    });
+    }
+</script>
+<script>
+    function myFunction() {
+        alert("we're getting this far function");
+        Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+        //getting the values
+        var myName = document.querySelector('.login-username').value;
+        var myPass = document.querySelector('.login-password').value;
+        alert("Getting the variables");
+        alert(myName);
+   //     var user = new Parse.User();
+        alert(myPass);
+    
+        
+        //basic validation
+        var errors= "";
+        if(myPass === "") errors += "Password required.<br/>";
+        if(myName === "") errors += "Email required.<br/>";
+        if(errors !== "") {
+            alert(errors);
+            return;
+        }
+        alert("Right before login");
+        //Login with Parse
+        Parse.User.logIn("newUser", "Pass2", {
+                   success: function(user) {
+                   // Hooray! Let them use the app now.
+                   //var currentUser = user;
+                   alert("This has fired successfully -- LogIn");
+                         alert(user.get("username"));
+                   },
+                   error: function(user, error) {
+                   // Show the error message somewhere and let the user try again.
+                   alert("Error: " + error.code + " " + error.message);
+                   }
+                   });
+        
+    }
+</script>
+
+
+        <!-- Page Content-->
+        <div id="content" class="snap-content">
+            <div class="login-page bg1">
+                <div class="login-page-overlay"></div>
+                <div class="login-page-wrapper">
+                    <a href="#" class="login-logo"></a>
+                    <p>
+                    Please enter your login credentials bellow.
+                    </p>
+                    <input type="text"     class="login-username" value="username">
+                        <input type="password" class="login-password" value="password">
+                            <div class="one-half">
+                                <a=href="#" onclick="myFunction();" class="button button-green">Login</a>
+                            </div>
+                            <div class="one-half last-column">
+                                <a href="signup.html" class="button button-blue">Signup</a>
+                            </div>
+                            <div class="clear"></div>
+                            <a class="forgot" href="#">Forgot Password?</a>
+                            </div>
+            </div>
+            
+            <div class="header-clear"></div>
+            <div class="content">
+                <div class="decoration"></div>
+                <div id="page" class="one-third-responsive">
+                    
+                </div>
+                
+                
+            </div>
+            
+            
+            
+        </div>
+        
+        
+        
+    </div>
+</body>
+
+
+
+
+

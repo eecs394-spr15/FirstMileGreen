@@ -59,7 +59,8 @@ function formatAMPM(date) {
 <script>
                 
 Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
-
+var currentUser = Parse.User.current();
+alert(currentUser.get("username"));
 var query = new Parse.Query("Current_Games");
 query.find({
        success: function(results) {
@@ -109,8 +110,8 @@ function searchgames(){
 
   var searchtext=document.getElementById("s").value;
 
-  $("#page").html("" + searchtext + ": ");
-  $("#favoritepage").html("" + searchtext + ": ");
+  $("#page").html("");
+  $("#favoritepage").html("");
 
   var queryii = new Parse.Query("Current_Games");
   queryii.containedIn("Sport", [searchtext]);
@@ -273,6 +274,9 @@ function favoritegame(){
                 <li>
                     <a href="your.html">Your Games<i class="fa fa-angle-right"></i></a>
                 </li>
+                <li>
+                    <a href="login.html">Log In<i class="fa fa-angle-right"></i></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -286,7 +290,10 @@ function favoritegame(){
 <!--         <input type="text" placeholder="Search" class="inputfield" id = "searchgame" ></input> -->
 
         <div id="searchform">
+
            <fieldset class="search">
+               <div class="localDecoration"></div>
+
                 <input type="text" class="box" name="s" id="s" class="inputText" placeholder="Search Games" x-webkit-speech>
                 <button class="btn" title="SEARCH" onclick="searchgames()"> </button>
 
@@ -295,7 +302,6 @@ function favoritegame(){
 
 
         <div class="content">
-        <div class="localDecoration"></div>
 
         <div id="tabs0">
               <ul class="menu0" id="menu0">          
