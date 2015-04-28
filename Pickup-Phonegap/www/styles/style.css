@@ -1004,6 +1004,18 @@ body{
     font-weight: bold;
 }
 
+.detail-title{
+    float:center;
+    width:250px;
+    height:40px;
+    font-size:15px;
+    line-height:40px;
+    color:#1f1f1f;
+    text-align:center;
+    padding-left:64px;
+    font-weight: bold;
+}
+
 .plus-button{
     float:right;
     width:60px;
@@ -1304,6 +1316,11 @@ body{
 }
 
 #page-address{
+    color: black;
+    font-size: 15px;
+}
+
+#page-creator{
     color: black;
     font-size: 15px;
 }
