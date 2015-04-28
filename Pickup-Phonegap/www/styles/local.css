@@ -1,12 +1,13 @@
-.menu0{
-    
-    width: 400px;
-    height: 20px;
-    
-    
-    
-    
-}
+
+.menu0{  
+  
+ width: 400px;
+ height: 20px;
+
+
+
+  
+} 
 
 a {
     text-decoration:none;
@@ -21,11 +22,11 @@ fieldset.search {
     padding: 0px;
     border: none;
     width: 260px;
-    background:#e0e0e0;
+    background:white;
 }
  
 fieldset.search:hover {
-    background: #a8a8a8;
+    background: white;
 }
 .search input, .search button {
     border: none;
@@ -36,11 +37,12 @@ fieldset.search:hover {
     width: 210px;
     margin-right: 0px;
     padding-right: 0px;
-    background: #e0e0e0;
+    background: white;
     margin: 1px;
+    border:#006699 1px solid;
 }
 .search input.box:focus {
-    background: #e8e8e8 ;
+    background: white ;
     outline: none;
 }
 .search button.btn {
@@ -54,52 +56,78 @@ fieldset.search:hover {
 .search button.btn:hover {
     background: url(http://sandbox.runjs.cn/uploads/rs/339/livk7pl5/search_black.png) no-repeat bottom right;
 }
+
 #searchgame{
-    margin-left:40px;
+    margin-left:75px;
     height: 20px;
     font-size: 16px;
     overflow: hidden;
-} 
-
-.menu0 li{
-    
-    display:block;
-    
     float: left;
-    
-    padding: 4px 0;
-    
-    width:100px;
-    
-    text-align: center;
-    
-    cursor:pointer;
-    font-size: 14px;
-    
-    
-    color: lightgrey;
-    /*box-shadow: 1px 1px 2px 1px black;
-    padding: 4px 0;*/
-    
-}
+} 
+#getsearchbutton{
+    float:left;
+    background-color: lightyellow;
+    border-radius: 5px;
+    font-size: 20px;
 
-.menu0 li.hover{
-    /*box-shadow:-5px -5px 3px 0.5px black; */
-    color:black;/*dark*/
-    font-weight: bolder;
-    font-size: 15px;
-    
-    
 }
+  
+.menu0 li{  
+  
+ display:block;  
+  
+ float: left;  
+  
+ padding: 2px 0;  
+  
+ width:150px;  
+  
+ text-align: center;  
+  
+ cursor:pointer; 
+ font-size: 14px;
 
-#main0 ul{
-    
-    display: none;  
-    
+margin-top: 5px;
+margin-left: 5px;
+  
+
+ color: grey;
+/*background-color: #33CCFF;*/
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+
+  
 }  
+  
+.menu0 li.hover{  
+  
+ 
+ /*box-shadow:-5px -5px 3px 0.5px black; */
+ color:black;/*dark*/
+ font-weight: bolder;
+ font-size: 15px;
+ /*background-color: #33CC11;*/
+ /*box-shadow: 0px -5px 0.1px 0px black;*/
 
+
+  
+}   
+  
+#main0 ul{  
+  
+ display: none;  
+  
+}  
+  
 #main0 ul.block{  
-    
-    display: block;  
-    
+  
+ display: block;  
+  
+}
+#page {
+    /*box-shadow: -20px 0px 20px 0.5px black;*/
+    /*background-color: #ccCCFF*/
+} 
+#favoritepage {
+
 }
