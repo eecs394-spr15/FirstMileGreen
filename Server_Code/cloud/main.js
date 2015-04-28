@@ -234,12 +234,11 @@ Parse.Cloud.define("create_game", function(request, response)
     var time_string = request.params.Start_Time.slice(10,19);
     var split_date = date_string.split("/");
     var split_time = time_string.split(":");
-
+    var legitstring = 
     console.log("date string" + split_date);
     console.log("time string" + split_time);
     console.log("Fuck JS" + date_string[1]);
     //var new_date = new Date(date_string[2], String((Number(date_string[1]) - 1)), date_string[0], time_string[0], time_string[1], time_string[2]);
-    var new_date = new Date(s.slice(4,6),s.slice(2,4), s.slice(0, 2), "0", "0", "0", "0");
     console.log("new_date" + new_date);
     //add_to_list.set("Start_Time", new Date(request.params.Start_Time));
     add_to_list.set("End_Time", request.params.End_Time);
@@ -480,4 +479,22 @@ Parse.Cloud.define("send_invites", function(request, response)
   }
 });
 */
+});
+
+
+Parse.Cloud.define("view_games", function(request, response)
+{
+    var query = new Parse.Query("Current_Games");
+    query.equalTo("PlayerID", request.params.PlayerID);
+    query.select("GameID", "Location_Name", "Sport", "Num_Of_Players", "Max_Num_Of_Players", "Start_Time", "End_Time");
+    query.ascending("Start_Time");
+    query.limit(15);//increase to usable size
+    query.find({
+        success: function(results) {
+            response.success(results);
+        },
+        error: function() {
+            response.error("Game lookup failed");
+        }
+    });
 });

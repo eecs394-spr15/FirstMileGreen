@@ -123,11 +123,11 @@ function generateResults(callback){
 	<div id="content" class="snap-content">
 		<div data-role="page">
 			<div data-role="header">
-				<h3 class="center-text">Location</h3>
+				<h3 class="center-text">Pick a place</h3>
 			</div>
 			<div data-role="main" class="ui-content">
 				<br>
-				<h3 class="center-text">Select Location</h3>
+				<h3 class="center-text">Pick a place</h3>
 				<form method="post" action="demoform.asp">
 					<fieldset class="ui-field-contain">
 						<select name="day" id="location">
@@ -137,7 +137,7 @@ function generateResults(callback){
 					</fieldset>
 				</form>
 				<br>
-				<h3 class="center-text">Select Sport</h3>
+				<h3 class="center-text">Pick a sport</h3>
 				<form method="post" action="demoform.asp">
 					<fieldset class="ui-field-contain">
 						<select name="day" id="sport">
@@ -149,9 +149,11 @@ function generateResults(callback){
 				</form>
 				<br>
 				<form action="action_page.php">
-					Maximum number of players (between 1 and 50):
+					<h3 class="center-text">Max # of people? (between 1 and 50)</h3>
 					<input type="number" name="quantity" min="1" max="50" id="max_players">
 				</form>	
+				<br>
+				<h3 class="center-text">When? </h3>
 				<div id="datetimepicker" class="input-append date">
 					<input id="date_info" type="text"></input>
 					<span class="add-on">
@@ -177,8 +179,18 @@ function generateResults(callback){
 					pick12HourFormat: true
 				});
 				</script>
-
-				<h3 class="center-text">Comments?</h3>
+				<h3 class="center-text">How long?</h3>
+				<form method="post" action="demoform.asp">
+					<fieldset class="ui-field-contain">
+						<select name="day" id="duration">
+							<option value="time1">30 minutes</option>
+							<option value="time2">60 minutes</option>
+							<option value="time3">90 minutes</option>
+							<option value="time4">120 minutes</option>
+						</select>
+					</fieldset>
+				</form>
+				<h3 class="center-text">Anything Else?</h3>
 				<input class="blog-search" type="text" id="comments" placeholder="e.g bring cleats, meet at bleachers, etc.">
 				<div class="clear"></div>
 				<br>
