@@ -56,7 +56,7 @@
 <script>
 function generateResults(callback){
 	Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
-	Parse.Cloud.run('get_more', { GameID: "1", "Location_Name": $("#location option:selected").text(), "Sport": $("#sport option:selected").text()}, {
+	Parse.Cloud.run('get_more', { GameID: "1", "Location_Name": $("#location option:selected").text(), "Sport": $("#sport option:selected").text(), Notes: document.getElementById('comments').value, Creator: "Spencer", Max_Num_Of_Players:document.getElementById('max_players').value}, {
 		success: function(results) {
 
 			if(callback != null && callback != undefined){
@@ -139,7 +139,11 @@ function generateResults(callback){
 						</select>
 					</fieldset>
 				</form>
-				<br>	
+				<br>
+					<form action="action_page.php">
+						Maximum number of players (between 1 and 50):
+						<input type="number" name="quantity" min="1" max="50" id="max_players">
+					</form>	
 				<h3 class="center-text">Select Time</h3>
 				<div class="container">
 					<div class="submenu-navigation">
@@ -162,7 +166,7 @@ function generateResults(callback){
 					</div>
 				</div>
 				<h3 class="center-text">Comments?</h3>
-				<input class="blog-search" type="text" value="e.g bring cleats, meet at bleachers, etc.">
+				<input class="blog-search" type="text" id="comments" value="e.g bring cleats, meet at bleachers, etc.">
 				<div class="clear"></div>
 				<br>
 				<p class="center-text"><a href="your.html" class="button-3d button-green green-3d" onclick="generateResults()">Post!</a></p>
