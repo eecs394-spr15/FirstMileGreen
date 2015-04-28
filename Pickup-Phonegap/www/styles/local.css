@@ -82,7 +82,7 @@ fieldset.search:hover {
   
  width:150px;  
   
- text-align: center;  
+ /*text-align: center;  */
   
  cursor:pointer; 
  font-size: 14px;

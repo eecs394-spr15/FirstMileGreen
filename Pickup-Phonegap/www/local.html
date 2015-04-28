@@ -109,8 +109,8 @@ function searchgames(){
 
   var searchtext=document.getElementById("s").value;
 
-  $("#page").html("Serching Reasult of " + searchtext + ": ");
-  $("#favoritepage").html("Serching Reasult of " + searchtext + ": ");
+  $("#page").html("" + searchtext + ": ");
+  $("#favoritepage").html("" + searchtext + ": ");
 
   var queryii = new Parse.Query("Current_Games");
   queryii.containedIn("Sport", [searchtext]);
@@ -163,7 +163,7 @@ function searchgames(){
 function favoritegame(){
     var favoritetype=document.getElementById("favoritechoice").value;
 
-    $("#favoritepage").html("Serching Result of " + favoritetype + ": ");
+    $("#favoritepage").html( "");
 
     var queryiii = new Parse.Query("Current_Games");
     queryiii.containedIn("Sport" , [favoritetype]);
@@ -331,18 +331,16 @@ function favoritegame(){
                     <!-- <li class='dropdown-menu' role='menu'> test</li>          -->
               </ul>
               <br>
-              <br>
+              
 
               <div class="main" id="main0">           
                     <ul class="block">
+                                                
                             <div id="page" class="one-third-responsive"></div>
                     </ul>
                     
                     <ul>
-<!--                           <div>
-                            How to choose the favorite?
-                          </div> -->
-                          <br>
+
 
                           <div id="favoritepage" class="one-third-responsive"></div>
                     </ul>
