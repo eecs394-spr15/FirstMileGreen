@@ -166,6 +166,62 @@ function searchgames(){
 </script>
 
 <script>
+function favoritegame(){
+    var favoritetype=document.getElementById("favoritechoice").value;
+    alert("favorite is working!");
+    alert("you love " + favoritetype + ", right?" );
+
+    $("#favoritepage").html("Serching Reasult of " + favoritetype + ": ");
+
+    var queryiii = new Parse.Query("Current_Games");
+    queryiii.containedIn("Sport" , [favoritetype]);
+    queryiii.find({
+       success: function(results) {
+       // results is an array of Parse.Object.
+       for (var i = 0; i < results.length; i++){
+       
+       var sport = results[i].get("Sport");
+       var imagePath;
+       var id = results[i].get("GameID");
+       if (sport == "Basketball")
+       imagePath = "images/Custom/Basketball/basketball.png";
+       else if (sport == "Soccer")
+       imagePath = "images/Custom/Soccer/Soccer_Ball.png";
+       else
+       imagePath = "images/Custom/Football/Football.png";
+       
+       
+       var location = results[i].get("Location_Name");
+       var startTime = results[i].get("Start_Time");
+       startTime = new Date(startTime);
+       startTime = formatAMPM(startTime);
+       var currentPlayerCount = results[i].get("Num_Of_Players");
+       var maxPlayerCount = results[i].get("Max_Num_Of_Players");
+             
+
+      $("#favoritepage").append("<a href=\"detail.html?id="+id +"\" class=\"user-list-item\"><img src=\""+imagePath+"\" alt=\"img\"><strong>" + " @ " + startTime +"<br></strong><em>"+location+" | " + currentPlayerCount + "/" + maxPlayerCount + " players</em><i class=\"fa fa-chevron-right\"></i></a><div class=\"decoration\"></div>");
+       
+       
+       
+           }
+           },
+       
+       error: function(error) {
+       // error is an instance of Parse.Error.
+       alert(error);
+       }
+       });
+
+
+}
+
+
+
+
+
+</script>
+
+<script>
  function setTab(m,n){  
   
  var tli=document.getElementById("menu"+m).getElementsByTagName("li");  
@@ -254,7 +310,32 @@ function searchgames(){
               <ul class="menu0" id="menu0">          
                     <li onclick="setTab(0,0)" class="hover">All games</li>  
                       
-                    <li onclick="setTab(0,1)" class='unhover'>Favorite</li>
+                    <li onclick="setTab(0,1)" class='unhover'>
+                      
+                      <div>
+                        <form>
+  <!--                       <select 
+
+                        onChange="if(this.selectedIndex!=0) self.location=this.options[this.selectedIndex].value" 
+
+                        id="favoritechoice">
+ -->
+                         <select id="favoritechoice" onChange="favoritegame()">
+
+                        <option value="" selected>Favorite
+                        <option value="Basketball" >Basketball
+                        <option value="Football">Football
+                        <option value="Soccer">Soccer
+ 
+
+                        </select>
+                        </form> 
+
+                      </div>
+
+
+                      
+                    </li>
 
                     <!-- <li class='dropdown-menu' role='menu'> test</li>          -->
               </ul>
