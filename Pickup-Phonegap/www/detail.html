@@ -172,7 +172,46 @@ generateResults(function(results){
                 
                 
                 });
-        
+                function joinGame(){
+                    var currentUser = Parse.User.current();
+
+                    Parse.Cloud.run('join_game', { GameID: id , PlayerID: currentUser.get("username") }, {
+                                    success: function(results) {
+                                    //for (var i = 0; i < results[1].length; i++){
+                                    //alert(results[1][i].get('PlayerID'));
+                                    //}
+                                    
+                                    },
+                                    error: function(error) {
+                                    console.log(error);
+                                    }
+                                    });
+
+
+                }
+
+function leaveGame(){
+    var currentUser = Parse.User.current();
+    
+    Parse.Cloud.run('leave_game', { GameID: id , PlayerID: currentUser.get("username") }, {
+                    success: function(results) {
+                    //for (var i = 0; i < results[1].length; i++){
+                    //alert(results[1][i].get('PlayerID'));
+                    //}
+                    
+                    },
+                    error: function(error) {
+                    console.log(error);
+                    }
+                    });
+                    
+
+
+
+
+
+}
+
 </script>
 </head>
 <body>
