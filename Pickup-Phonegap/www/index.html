@@ -150,7 +150,7 @@
                     var ul = document.querySelector('.sidebar-navigation');
                     alert("changeLogIn() go to the 2nd milestone");
                     var li = document.createElement('li');
-                    li.innerHTML = '<a href="signup.html" id="signup-press"> Sign Up <i class ="fa-angle-right"></i></a>';
+                    li.innerHTML = '<a href="index.html" id="signup-press"> Log In <i class ="fa-angle-right"></i></a>';
                     ul.appendChild(li);
                     remove("logout-press");
                 }
@@ -192,7 +192,7 @@
                                  // Hooray! Let them use the app now.
                                  alert("Logged In");
                                  var currentUser = user;
-                                 document.querySelector('#content').innerHTML = loadPage('local.html');
+                                 document.querySelector('.all-elements').innerHTML = loadPage('local.html');
                                  changeLogIn();
                                  },
                                  error: function(user, error) {
