@@ -77,9 +77,43 @@ function generateResults(callback){
 	});
 }
 </script>
+
+<script>
+    function remove(id)
+    {
+        return (elem=document.getElementById(id)).parentNode.removeChild(elem);
+    }
+</script>
+
+<script>
+    function changeLogIn()
+    {
+        Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+        var currentUser = Parse.User.current();
+        alert("changeLogIn(): Has hit the 1st milestone");
+        if(currentUser){
+            var ul = document.querySelector('.sidebar-navigation');
+            alert("changeLogIn() go to the 2nd milestone");
+            var li = document.createElement('li');
+            li.innerHTML = '<a href="#" id="logout-press" onclick="logOut();"> Log Out <i class ="fa-angle-right"></i></a>';
+            ul.appendChild(li);
+            remove("signup-press");
+            
+        } else {
+            var ul = document.querySelector('.sidebar-navigation');
+            alert("changeLogIn() go to the 2nd milestone");
+            var li = document.createElement('li');
+            li.innerHTML = '<a href="signup.html" id="signup-press"> Sign Up <i class ="fa-angle-right"></i></a>';
+            ul.appendChild(li);
+            remove("logout-press");
+        }
+        
+    }
+</script>
+
 </head>
 
-<body>
+<body onload="changeLogIn():">
 	<div id="preloader">
 		<div id="status">
 			<p class="center-text">
@@ -119,6 +153,7 @@ function generateResults(callback){
 			</div>
 		</div>
 	</div>
+    
 	<!-- Page Content-->
 	<div id="content" class="snap-content">
 		<div data-role="page">

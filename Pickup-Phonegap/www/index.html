@@ -111,29 +111,60 @@
                          <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
                          </ul>-->
                     </li>
-                    <li>
-                        <a href="#" onclick="logOut();">Log Out<i class="fa fa-angle-right"></i></a>
+                    
+                      <!--  <a href="#" onclick="logOut();">Log Out<i class="fa fa-angle-right"></i></a>
                         <!-- <ul class="submenu active-submenu-items">
                          <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
                          <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
                          <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
                          <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
                          </ul>-->
-                    </li>
+                    
                 </ul>
                 <!-- <div class="sidebar-divider">
                  Copyright 2015. All rights reserved.
                  </div>-->
             </div>
         </div>
-        
+        <script>
+            function remove(id)
+            {
+                return (elem=document.getElementById(id)).parentNode.removeChild(elem);
+            }
+        </script>
+        <script>
+            function changeLogIn()
+            {
+                 Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+                 alert("changeLogIn() got to 1st milestone");
+                var currentUser = Parse.User.current();
+                if(currentUser){
+                    var ul = document.querySelector('.sidebar-navigation');
+                    alert("changeLogIn() go to the 2nd milestone");
+                    var li = document.createElement('li');
+                    li.innerHTML = '<a href="#" id="logout-press" onclick="logOut();"> Log Out <i class ="fa-angle-right"></i></a>';
+                    ul.appendChild(li);
+                    remove("signup-press");
+                    
+                } else {
+                    var ul = document.querySelector('.sidebar-navigation');
+                    alert("changeLogIn() go to the 2nd milestone");
+                    var li = document.createElement('li');
+                    li.innerHTML = '<a href="signup.html" id="signup-press"> Sign Up <i class ="fa-angle-right"></i></a>';
+                    ul.appendChild(li);
+                    remove("logout-press");
+                }
+                
+            }
+        </script>
         <script>
             function logOut() {
                 Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
                 Parse.User.logOut();
                 var currentUser = Parse.User.current();
                 alert("Logging out");
-             //   $("#content").load(./www/index.html);
+                document.querySelector('#content').innerHTML = loadPage('index.html');
+                changeLogIn();
             }
         </script>
         
@@ -141,6 +172,7 @@
             function myFunction() {
                  alert("getting values");
                 Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+                Parse.User.enableRevocableSession();
                 //getting the values
                 var myName = document.querySelector('.login-username').value;
                 var myPass = document.querySelector('.login-password').value;
@@ -160,8 +192,8 @@
                                  // Hooray! Let them use the app now.
                                  alert("Logged In");
                                  var currentUser = user;
-                                 //$(".all-elements").load('local.html');
                                  document.querySelector('#content').innerHTML = loadPage('local.html');
+                                 changeLogIn();
                                  },
                                  error: function(user, error) {
                                  // Show the error message somewhere and let the user try again.
@@ -169,6 +201,43 @@
                                  }
                                  });
                                  
+            }
+        </script>
+        
+        <script>
+            function signUp() {
+                Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+                Parse.User.enableRevocableSession();
+                var user = new Parse.User();
+                alert("signUp: Has hit the 1st milestone");
+                //getting the values
+                var email = document.querySelector('.login-username').value;
+                var password = document.querySelector('.login-password').value;
+                alert("Inside signUP function");
+                
+                //basic validation
+                var errors2= "";
+                if(password === "") errors2 += "Password required.<br/>";
+                if(email === "") errors2 += "Email required.<br/>";
+                if(errors2 !== "") {
+                    alert(errors2);
+                    return;
+                }
+                alert("signUp: Finished Validation");
+                //Register with Parse
+                user.set("username", email);
+                user.set("password", password);
+                user.signUp(null, {
+                            success: function(user) {
+                            // Hooray! Let them use the app now.
+                            var currentUser = user;
+                            alert("signUp:This has fired successfully");
+                            },
+                            error: function(user, error) {
+                            // Show the error message somewhere and let the user try again.
+                            alert("Error: " + error.code + " " + error.message);
+                            }
+                            });
             }
         </script>
         
@@ -188,7 +257,7 @@
                                 <a=href="#" onclick="myFunction();" class="button button-green">Login</a>
                             </div>
                             <div class="one-half last-column">
-                                <a href="signup.html" class="button button-blue">Signup</a>
+                                <a href="#" onclick="signUp();" class="button button-blue">Signup</a>
                             </div>
                             <div class="clear"></div>
                             <a class="forgot" href="#">Forgot Password?</a>

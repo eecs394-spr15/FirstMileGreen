@@ -30,11 +30,42 @@
                                                 <script type="text/javascript" src="scripts/framework.plugins.js"></script>
                                                 <script type="text/javascript" src="scripts/custom.js"></script>
                                                 <script src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+                                                <script>
+                                                    function remove(id)
+                                                    {
+                                                        return (elem=document.getElementById(id)).parentNode.removeChild(elem);
+                                                    }
+                                                </script>
+                                                <script>
+                                                    function changeLogIn()
+                                                    {
+                                                        Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+                                                        var currentUser = Parse.User.current();
+                                                        alert("changeLogIn(): Has hit the 1st milestone");
+                                                        if(currentUser){
+                                                            var ul = document.querySelector('.sidebar-navigation');
+                                                            alert("changeLogIn() go to the 2nd milestone");
+                                                            var li = document.createElement('li');
+                                                            li.innerHTML = '<a href="#" id="logout-press" onclick="logOut();"> Log Out <i class ="fa-angle-right"></i></a>';
+                                                            ul.appendChild(li);
+                                                            remove("signup-press");
+                                                            
+                                                        } else {
+                                                            var ul = document.querySelector('.sidebar-navigation');
+                                                            alert("changeLogIn() go to the 2nd milestone");
+                                                            var li = document.createElement('li');
+                                                            li.innerHTML = '<a href="signup.html" id="signup-press"> Sign Up <i class ="fa-angle-right"></i></a>';
+                                                            ul.appendChild(li);
+                                                            remove("logout-press");
+                                                        }
+                                                        
+                                                    }
+                                                </script>
                                                 
 </head>
 
 
-<body>
+<body onload="changeLogIn():">
     
     <div id="preloader">
         <div id="status">
@@ -75,30 +106,14 @@
                 <ul class="sidebar-navigation">
                     <li>
                         <a href="create.html">Create Game<i class="fa fa-angle-right"></i></a>
-                        <!-- <ul class="submenu active-submenu-items">
-                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
-                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
-                         </ul>-->
+                       
                     </li>
                     <li>
                         <a href="local.html">Local Games<i class="fa fa-angle-right"></i></a>
-                        <!-- <ul class="submenu active-submenu-items">
-                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
-                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
-                         </ul>-->
+                       
                     </li>
                     <li>
-                        <a href="login.html">Log In<i class="fa fa-angle-right"></i></a>
-                        <!-- <ul class="submenu active-submenu-items">
-                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
-                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
-                         </ul>-->
+                        <a href="your.html">Your Games<i class="fa fa-angle-right"></i></a>
                     </li>
                     
                 </ul>

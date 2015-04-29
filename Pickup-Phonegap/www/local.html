@@ -60,7 +60,7 @@ function formatAMPM(date) {
                 
 Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
 var currentUser = Parse.User.current();
-alert(currentUser.get("username"));
+
 var query = new Parse.Query("Current_Games");
 query.find({
        success: function(results) {
@@ -231,12 +231,45 @@ function favoritegame(){
 } 
 
 </script>
+
+<script>
+    function remove(id)
+    {
+        return (elem=document.getElementById(id)).parentNode.removeChild(elem);
+    }
+</script>
+
+<script>
+    function changeLogIn()
+    {
+        Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+        alert("ChangeLogIn(): Has made it to the 1st Milestone");
+        var currentUser = Parse.User.current();
+        if(currentUser){
+            var ul = document.querySelector('.sidebar-navigation');
+            alert("ChangeLogIn(): Has made it to the 1st Milestone");
+            var li = document.createElement('li');
+            li.innerHTML = '<a href="#"> Log Out <i class ="fa-angle-right"></i></a>';
+            ul.appendChild(li);
+            remove("signup-press");
+            
+        } else {
+            var ul = document.querySelector('.sidebar-navigation');
+            alert("changeLogIn() go to the 2nd milestone");
+            var li = document.createElement('li');
+            li.innerHTML = '<a href="signup.html" id="signup-press"> Sign Up <i class ="fa-angle-right"></i></a>';
+            ul.appendChild(li);
+            remove("logout-press");
+        }
+        
+    }
+</script>
 </head>
 
 
 
 
-<body>
+<body onload="changeLogIn():">
 
 <div id="preloader">
     <div id="status">
@@ -273,9 +306,6 @@ function favoritegame(){
                 </li>
                 <li>
                     <a href="your.html">Your Games<i class="fa fa-angle-right"></i></a>
-                </li>
-                <li>
-                    <a href="login.html">Log In<i class="fa fa-angle-right"></i></a>
                 </li>
             </ul>
         </div>
