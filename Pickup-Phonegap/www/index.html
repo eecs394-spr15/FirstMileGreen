@@ -163,7 +163,8 @@
                 Parse.User.logOut();
                 var currentUser = Parse.User.current();
                 alert("Logging out");
-                document.querySelector('#content').innerHTML = loadPage('index.html');
+                //document.querySelector('#content').innerHTML = loadPage('index.html');
+                $("#content").load("index.html");
                 changeLogIn();
             }
         </script>
