@@ -91,7 +91,6 @@
                 Parse.User.logOut();
                 var currentUser = Parse.User.current();
                 window.location.assign('index.html');
-                changeLogIn();
             }
         </script>
         
@@ -133,7 +132,6 @@
                 Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
                 Parse.User.enableRevocableSession();
                 var user = new Parse.User();
-                alert("signUp: Has hit the 1st milestone");
                 //getting the values
                 var email = document.querySelector('.login-username').value;
                 var password = document.querySelector('.login-password').value;
@@ -146,7 +144,6 @@
                     alert(errors2);
                     return;
                 }
-                alert("signUp: Finished Validation");
                 //Register with Parse
                 user.set("username", email);
                 user.set("password", password);
