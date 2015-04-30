@@ -193,7 +193,8 @@
                                  // Hooray! Let them use the app now.
                                  alert("Logged In");
                                  var currentUser = user;
-                                 document.querySelector('.all-elements').innerHTML = loadPage('local.html');
+                                 //document.querySelector('#content').innerHTML = loadPage('local.html');
+                                 $("#content").load("local.html");
                                  changeLogIn();
                                  },
                                  error: function(user, error) {
