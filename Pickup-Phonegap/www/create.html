@@ -61,10 +61,11 @@ href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-da
 
 
 <!-- JS Functions -->
+<!-- Parse.User.current()-->
 <script>
 function generateResults(callback){
 	Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
-	Parse.Cloud.run('create_game', { GameID: "1", "Location_Name": $("#location option:selected").text(), "Sport": $("#sport option:selected").text(), Notes: document.getElementById('comments').value, PlayerID: "Spencer", Max_Num_Of_Players:document.getElementById('max_players').value, Start_Time:document.getElementById('date_info').value}, {
+	Parse.Cloud.run('create_game', { GameID: "1", "Location_Name": $("#location option:selected").text(), "Sport": $("#sport option:selected").text(), Notes: document.getElementById('comments').value, PlayerID: "Spencer", Max_Num_Of_Players:document.getElementById('max_players').value, Start_Time:document.getElementById('date_info').value, InviteList:document.getElementById('invites').value.split(","), Duration:$("#duration option:selected").text()}, {
 		success: function(results) {
 
 			if(callback != null && callback != undefined){
@@ -208,6 +209,8 @@ function generateResults(callback){
 				</form>
 				<h3 class="center-text">Anything Else?</h3>
 				<input class="blog-search" type="text" id="comments" placeholder="e.g bring cleats, meet at bleachers, etc.">
+				<h3 class="center-text">Want to invite people?</h3>
+				<input class="blog-search" type="text" id="invites" placeholder="enter usernames separated by commas">
 				<div class="clear"></div>
 				<br>
 				<p class="center-text"><a href="your.html" class="button-3d button-green green-3d" onclick="generateResults()">Post!</a></p>
