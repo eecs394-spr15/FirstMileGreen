@@ -143,7 +143,7 @@
                 //basic validation
                 var errors2= "";
                 if(password === "") errors2 += "Password required.<br/>";
-                if(email === "" myName.indexOf('@') === -1) errors2 += "Email required.<br/>";
+                if(email === "" | myName.indexOf('@') === -1) errors2 += "Email required.<br/>";
                 if(errors2 !== "") {
                     alert(errors2);
                     return;
