@@ -61,6 +61,12 @@ href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-da
 
 
 <!-- JS Functions -->
+<script>
+    function switchView () {
+        window.location.assign('local.html');
+    }
+</script>
+
 <!-- Parse.User.current()-->
 <script>
 function generateResults(callback){
@@ -69,9 +75,11 @@ function generateResults(callback){
 		success: function(results) {
 
 			if(callback != null && callback != undefined){
+                    
+                window.location.assign('local.html');
 				callback(results);
 			}
-                    window.location.assign('local.html');
+                    
 		},
 		error: function(error) {
 			console.log(error);
