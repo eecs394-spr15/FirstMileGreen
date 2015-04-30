@@ -61,6 +61,12 @@ href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-da
 
 
 <!-- JS Functions -->
+<script>
+    function switchView () {
+        window.location.assign('local.html');
+    }
+</script>
+
 <!-- Parse.User.current()-->
 <script>
 function generateResults(callback){
@@ -69,7 +75,9 @@ function generateResults(callback){
 		success: function(results) {
 
 			if(callback != null && callback != undefined){
-				callback('local.html');
+                    
+                window.location.assign('local.html');
+				callback(results);
 			}
                     
 		},
@@ -214,7 +222,7 @@ function generateResults(callback){
 				<input class="blog-search" type="text" id="invites" placeholder="enter usernames separated by commas">
 				<div class="clear"></div>
 				<br>
-				<p class="center-text"><a href="your.html" class="button-3d button-green green-3d" onclick="generateResults(window.location.assign())">Post!</a></p>
+				<p class="center-text"><a href="your.html" class="button-3d button-green green-3d" onclick="generateResults()">Post!</a></p>
 			</div>
 		</div>
 	</div>
