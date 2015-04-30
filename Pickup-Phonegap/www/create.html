@@ -75,7 +75,6 @@ function generateResults(callback){
 		success: function(results) {
             
 			if(callback != null && callback != undefined){
-                window.location.assign('local.html');    
 				callback(results);
 			}
                     
@@ -219,7 +218,7 @@ function generateResults(callback){
 				<input class="blog-search" type="text" id="invites" placeholder="enter usernames separated by commas">
 				<div class="clear"></div>
 				<br>
-				<p class="center-text"><a href="your.html" class="button-3d button-green green-3d" onclick="generateResults()">Post!</a></p>
+				<p class="center-text"><a href="your.html" class="button-3d button-green green-3d" onclick="generateResults(switchView())">Post!</a></p>
 			</div>
 		</div>
 	</div>
