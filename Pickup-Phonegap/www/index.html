@@ -117,9 +117,7 @@
                                  success: function(user) {
                                  // Hooray! Let them use the app now.
                                  var currentUser = user;
-                                 //document.querySelector('#content').innerHTML = loadPage('local.html');
-                                 $("#content").load("local.html");
-                                 changeLogIn();
+                                 window.location.assign('local.html');
                                  },
                                  error: function(user, error) {
                                  // Show the error message somewhere and let the user try again.
@@ -143,7 +141,7 @@
                 //basic validation
                 var errors2= "";
                 if(password === "") errors2 += "Password required.<br/>";
-                if(email === "" | myName.indexOf('@') === -1) errors2 += "Email required.<br/>";
+                if(email === "" | email.indexOf('@') === -1) errors2 += "Email required.<br/>";
                 if(errors2 !== "") {
                     alert(errors2);
                     return;
