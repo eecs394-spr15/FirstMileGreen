@@ -79,35 +79,13 @@ function generateResults(callback){
 </script>
 
 <script>
-    function remove(id)
-    {
-        return (elem=document.getElementById(id)).parentNode.removeChild(elem);
-    }
-</script>
-
-<script>
-    function changeLogIn()
-    {
+    function logOut() {
         Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+        Parse.User.logOut();
         var currentUser = Parse.User.current();
-        alert("changeLogIn(): Has hit the 1st milestone");
-        if(currentUser){
-            var ul = document.querySelector('.sidebar-navigation');
-            alert("changeLogIn() go to the 2nd milestone");
-            var li = document.createElement('li');
-            li.innerHTML = '<a href="#" id="logout-press" onclick="logOut();"> Log Out <i class ="fa-angle-right"></i></a>';
-            ul.appendChild(li);
-            remove("signup-press");
-            
-        } else {
-            var ul = document.querySelector('.sidebar-navigation');
-            alert("changeLogIn() go to the 2nd milestone");
-            var li = document.createElement('li');
-            li.innerHTML = '<a href="signup.html" id="signup-press"> Sign Up <i class ="fa-angle-right"></i></a>';
-            ul.appendChild(li);
-            remove("logout-press");
-        }
-        
+        alert("Logging out");
+        window.location.assign('index.html');
+        changeLogIn();
     }
 </script>
 
@@ -146,6 +124,9 @@ function generateResults(callback){
 					<li>
 						<a href="your.html">Your Games<i class="fa fa-angle-right"></i></a>
 					</li>
+                    <li>
+                        <a href="#" id="logout-press" onclick="logOut();"> Log Out <i class ="fa-angle-right"></i></a>
+                    </li>
 				</ul>
 				<div class="sidebar-divider">
 					Copyright 2015. All rights reserved.
