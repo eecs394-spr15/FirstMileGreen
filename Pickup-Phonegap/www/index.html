@@ -30,15 +30,7 @@
                                                 <script type="text/javascript" src="scripts/jqueryui.js"></script>
                                                 <script type="text/javascript" src="scripts/framework.plugins.js"></script>
                                                 <script type="text/javascript" src="scripts/custom.js"></script>
-                                                <script type="text/javascript">
-                                                    function loadPage(href)
-                                                    {
-                                                        var xmlhttp = new XMLHttpRequest();
-                                                        xmlhttp.open("GET", href, false);
-                                                        xmlhttp.send();
-                                                        return xmlhttp.responseText;
-                                                    }
-                                                </script>
+                                        
                                                 
 </head>
 <body>
@@ -56,76 +48,12 @@
     <div class="header">
         
         <div class="header-controls">
-            
-            <a href="#" class="open-menu"><i class="fa fa-navicon"></i></a>
             <span class="local-games-title">Log In</span>
-            <a href="create.html" class="plus-button"><i class="fa fa-plus"></i></a>
         </div>
     </div>
     
     
     <div class="all-elements">
-        <div class="snap-drawers">
-            <!-- Left Sidebar -->
-            <div class="snap-drawer snap-drawer-left">
-                
-                <div class="sidebar-header">
-                    <!--<a href="#"><i class="fa fa-phone"></i></a>
-                     <a href="#"><i class="fa fa-comment"></i></a>
-                     <a href="#"><i class="fa fa-facebook"></i></a>
-                     <a href="#"><i class="fa fa-twitter"></i></a>-->
-                    <a href="#"><i class="fa fa-times"></i></a>
-                </div>
-                
-                <!-- <div class="sidebar-logo"></div>
-                 
-                 <div class="sidebar-divider">
-                 Navigation
-                 </div>-->
-                
-                <ul class="sidebar-navigation">
-                    <li>
-                        <a href="create.html">Create Game<i class="fa fa-angle-right"></i></a>
-                        <!-- <ul class="submenu active-submenu-items">
-                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
-                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
-                         </ul>-->
-                    </li>
-                    <li>
-                        <a href="local.html">Local Games<i class="fa fa-angle-right"></i></a>
-                        <!-- <ul class="submenu active-submenu-items">
-                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
-                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
-                         </ul>-->
-                    </li>
-                    <li>
-                        <a href="your.html">Your Games<i class="fa fa-angle-right"></i></a>
-                        <!-- <ul class="submenu active-submenu-items">
-                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
-                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
-                         </ul>-->
-                    </li>
-                    
-                      <!--  <a href="#" onclick="logOut();">Log Out<i class="fa fa-angle-right"></i></a>
-                        <!-- <ul class="submenu active-submenu-items">
-                         <li><a href="index.html"><i class="fa fa-angle-right"></i>Classic Home<i class="fa fa-circle"></i></a></li>
-                         <li class="active-menu"><a href="index2.html"><i class="fa fa-angle-right"></i>Fullscreen Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index3.html"><i class="fa fa-angle-right"></i>Landing Home<i class="fa fa-circle"></i></a></li>
-                         <li><a href="index4.html"><i class="fa fa-angle-right"></i>Cards Home<i class="fa fa-circle"></i></a></li>
-                         </ul>-->
-                    
-                </ul>
-                <!-- <div class="sidebar-divider">
-                 Copyright 2015. All rights reserved.
-                 </div>-->
-            </div>
-        </div>
         <script>
             function remove(id)
             {
@@ -162,22 +90,19 @@
                 Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
                 Parse.User.logOut();
                 var currentUser = Parse.User.current();
-                alert("Logging out");
-                //document.querySelector('#content').innerHTML = loadPage('index.html');
-                $("#content").load("index.html");
+                window.location.assign('index.html');
                 changeLogIn();
             }
         </script>
         
         <script>
             function myFunction() {
-                 alert("getting values");
+                //Initialize Parse
                 Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
-                Parse.User.enableRevocableSession();
+                //Parse.User.enableRevocableSession();
                 //getting the values
                 var myName = document.querySelector('.login-username').value;
                 var myPass = document.querySelector('.login-password').value;
-                alert("getting values");
         
                 //basic validation
                 var errors= "";
@@ -191,10 +116,8 @@
                 Parse.User.logIn(myName, myPass, {
                                  success: function(user) {
                                  // Hooray! Let them use the app now.
-                                 alert("Logged In");
                                  var currentUser = user;
-                                 document.querySelector('.all-elements').innerHTML = loadPage('local.html');
-                                 changeLogIn();
+                                 window.location.assign('local.html');
                                  },
                                  error: function(user, error) {
                                  // Show the error message somewhere and let the user try again.
@@ -214,12 +137,11 @@
                 //getting the values
                 var email = document.querySelector('.login-username').value;
                 var password = document.querySelector('.login-password').value;
-                alert("Inside signUP function");
                 
                 //basic validation
                 var errors2= "";
                 if(password === "") errors2 += "Password required.<br/>";
-                if(email === "") errors2 += "Email required.<br/>";
+                if(email === "" | email.indexOf('@') === -1) errors2 += "Email required.<br/>";
                 if(errors2 !== "") {
                     alert(errors2);
                     return;
@@ -232,7 +154,7 @@
                             success: function(user) {
                             // Hooray! Let them use the app now.
                             var currentUser = user;
-                            alert("signUp:This has fired successfully");
+                            alert("Signup was successful");
                             },
                             error: function(user, error) {
                             // Show the error message somewhere and let the user try again.
@@ -241,6 +163,7 @@
                             });
             }
         </script>
+      
         
         
         <!-- Page Content-->
@@ -252,8 +175,8 @@
                     <p>
                     Please enter your login credentials bellow.
                     </p>
-                    <input type="text"     class="login-username" value="username">
-                        <input type="password" class="login-password" value="password">
+                    <input type="text" class="login-username" placeholder="username">
+                        <input type="password" class="login-password" placeholder="password">
                             <div class="one-half">
                                 <a=href="#" onclick="myFunction();" class="button button-green">Login</a>
                             </div>

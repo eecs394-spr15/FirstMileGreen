@@ -39,6 +39,16 @@
 
 
 <script>
+    function containsObject(obj, list) {
+        var i;
+        for (i = 0; i < list.length; i++) {
+            if (list[i] === obj) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
     function formatAMPM(date) {
         var hours = date.getHours();
         var minutes = date.getMinutes();
@@ -86,8 +96,10 @@ var currentPlayerCount;
 var sport;
 var time;
 var date;
-
 //Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+
+
+
 
 function generateResults(callback){
     Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
@@ -104,6 +116,7 @@ Parse.Cloud.run('get_more', { GameID: id }, {
                 console.log(error);
                 }
             });
+        
 }
 generateResults(function(results){
                 
@@ -112,9 +125,16 @@ generateResults(function(results){
                 
                 }
                 
+                var currentUser = Parse.User.current();
+                currentEmail = currentUser.get("username");
+             //   alert("email: " + currentEmail);
+                currentUsername = currentEmail.substring(0,currentEmail.search("@"));
+             //   alert(currentUsername);
                 
                 loc = results[0][0].get("Location_Name");
                 //alert(loc);
+                
+                
                 
                 maxPlayerCount = results[0][0].get("Max_Num_Of_Players");
                 //alert("max: " + maxPlayerCount);
@@ -162,9 +182,23 @@ generateResults(function(results){
                 $("#page-address").append(address);
                 $("#page-creator").append(creator);
                 for (var p = 0; p < players.length; p++){
+                if (!containsObject(currentUsername, players[p]))
                 $("#page-players").append(players[p]+"<br>");
-
                 }
+                var inGame = false;
+                for (var k = 0; k < players.length; k++){
+                if (currentUsername == players[k]){
+                inGame = true;
+               // alert("matched");
+                }
+                }
+
+                
+                if (inGame){
+             //   alert("yep in game");
+                $("#switchButton").attr("class","switch switch-1 switch-1-on");
+                }
+                
 
                 //$("#page").append("<a href=\"detail.html?id="+sport +"\" class=\"user-list-item\">");
                 //"<a href=\"detail.html?id="+id +"\" class=\"user-list-item\">
@@ -187,6 +221,9 @@ generateResults(function(results){
                                     //alert(results[1][i].get('PlayerID'));
                                     //}
                                     
+                                    generateResults();
+
+                                    
                                     },
                                     error: function(error) {
                                     console.log(error);
@@ -197,6 +234,7 @@ generateResults(function(results){
                 }
 
 function leaveGame(){
+
     var currentUser = Parse.User.current();
     
     Parse.Cloud.run('leave_game', { GameID: id , PlayerID: currentUser.get("username") }, {
@@ -204,6 +242,8 @@ function leaveGame(){
                     //for (var i = 0; i < results[1].length; i++){
                     //alert(results[1][i].get('PlayerID'));
                     //}
+                    generateResults();
+
                     
                     },
                     error: function(error) {
@@ -476,7 +516,7 @@ function leaveGame(){
                       <div id="page-image" class="one-third-responsive">
                        </div>
                        
-                       <a href="#" class="switch switch-1 switch-1-off">
+                       <a id="switchButton" href="#" class="switch switch-1 switch-1-off">
                            <em>I</em>
                            <span></span>
                            <em>0</em>

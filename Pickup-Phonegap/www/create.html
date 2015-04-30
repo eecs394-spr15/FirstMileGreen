@@ -61,10 +61,11 @@ href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-da
 
 
 <!-- JS Functions -->
+<!-- Parse.User.current()-->
 <script>
 function generateResults(callback){
 	Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
-	Parse.Cloud.run('create_game', { GameID: "1", "Location_Name": $("#location option:selected").text(), "Sport": $("#sport option:selected").text(), Notes: document.getElementById('comments').value, PlayerID: "Spencer", Max_Num_Of_Players:document.getElementById('max_players').value, Start_Time:document.getElementById('date_info').value}, {
+	Parse.Cloud.run('create_game', { GameID: "1", "Location_Name": $("#location option:selected").text(), "Sport": $("#sport option:selected").text(), Notes: document.getElementById('comments').value, PlayerID: "Spencer", Max_Num_Of_Players:document.getElementById('max_players').value, Start_Time:document.getElementById('date_info').value, InviteList:document.getElementById('invites').value.split(","), Duration:$("#duration option:selected").text()}, {
 		success: function(results) {
 
 			if(callback != null && callback != undefined){
@@ -79,35 +80,13 @@ function generateResults(callback){
 </script>
 
 <script>
-    function remove(id)
-    {
-        return (elem=document.getElementById(id)).parentNode.removeChild(elem);
-    }
-</script>
-
-<script>
-    function changeLogIn()
-    {
+    function logOut() {
         Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
+        Parse.User.logOut();
         var currentUser = Parse.User.current();
-        alert("changeLogIn(): Has hit the 1st milestone");
-        if(currentUser){
-            var ul = document.querySelector('.sidebar-navigation');
-            alert("changeLogIn() go to the 2nd milestone");
-            var li = document.createElement('li');
-            li.innerHTML = '<a href="#" id="logout-press" onclick="logOut();"> Log Out <i class ="fa-angle-right"></i></a>';
-            ul.appendChild(li);
-            remove("signup-press");
-            
-        } else {
-            var ul = document.querySelector('.sidebar-navigation');
-            alert("changeLogIn() go to the 2nd milestone");
-            var li = document.createElement('li');
-            li.innerHTML = '<a href="signup.html" id="signup-press"> Sign Up <i class ="fa-angle-right"></i></a>';
-            ul.appendChild(li);
-            remove("logout-press");
-        }
-        
+        alert("Logging out");
+        window.location.assign('index.html');
+        changeLogIn();
     }
 </script>
 
@@ -146,6 +125,9 @@ function generateResults(callback){
 					<li>
 						<a href="your.html">Your Games<i class="fa fa-angle-right"></i></a>
 					</li>
+                    <li>
+                        <a href="#" id="logout-press" onclick="logOut();"> Log Out <i class ="fa-angle-right"></i></a>
+                    </li>
 				</ul>
 				<div class="sidebar-divider">
 					Copyright 2015. All rights reserved.
@@ -227,6 +209,8 @@ function generateResults(callback){
 				</form>
 				<h3 class="center-text">Anything Else?</h3>
 				<input class="blog-search" type="text" id="comments" placeholder="e.g bring cleats, meet at bleachers, etc.">
+				<h3 class="center-text">Want to invite people?</h3>
+				<input class="blog-search" type="text" id="invites" placeholder="enter usernames separated by commas">
 				<div class="clear"></div>
 				<br>
 				<p class="center-text"><a href="your.html" class="button-3d button-green green-3d" onclick="generateResults()">Post!</a></p>
