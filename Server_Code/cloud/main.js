@@ -89,7 +89,8 @@ Parse.Cloud.define("join_game", function(request, response)
     var Players = Parse.Object.extend("Players");
     var add_to_list = new Players();
     //gets data from phone request
-    add_to_list.set("PlayerID", request.params.PlayerID);
+    var pid = request.params.PlayerID;
+    add_to_list.set("PlayerID", pid.substring(0, pid.search("@")));
     add_to_list.set("GameID", request.params.GameID);
     //Save data to Players table
     add_to_list.save(null,
@@ -206,6 +207,9 @@ Parse.Cloud.define("create_game", function(request, response)
     var newid;
     var oldid;
 
+    Parse.Cloud.run('send_invites', {"PlayerID":request.params.PlayerID, "GameID":request.params.GameID, "InviteList":request.params.InviteList})
+
+
     //generates a new GameID and checks it against any ID in the table
     do
     {
@@ -228,20 +232,23 @@ Parse.Cloud.define("create_game", function(request, response)
     add_to_list.set("Location_Name", request.params.Location_Name);
     add_to_list.set("Sport", request.params.Sport);
     add_to_list.set("Max_Num_Of_Players", request.params.Max_Num_Of_Players);
-    console.log(request.params.Start_Time);
+    //gets new date string
+    //format of incoming data = 30/04/2015 21:51:11
     var s = request.params.Start_Time;
-    var date_string = request.params.Start_Time.slice(0, 10);
-    var time_string = request.params.Start_Time.slice(10,19);
-    var split_date = date_string.split("/");
-    var split_time = time_string.split(":");
-    var legitstring = 
-    console.log("date string" + split_date);
-    console.log("time string" + split_time);
-    console.log("Fuck JS" + date_string[1]);
-    //var new_date = new Date(date_string[2], String((Number(date_string[1]) - 1)), date_string[0], time_string[0], time_string[1], time_string[2]);
-    console.log("new_date" + new_date);
-    //add_to_list.set("Start_Time", new Date(request.params.Start_Time));
-    add_to_list.set("End_Time", request.params.End_Time);
+    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var month = monthNames[Number(s.slice(3,5)) - 1] + " ";
+    var date = s.slice(0, 2) + ", ";
+    var year = s.slice(6, 10) + " ";
+    var time = s.slice(11, 19);
+    var date_string = month + date + year + time;
+    var new_date = new Date(date_string);
+    var d = new_date;//for convenience in creating end_time
+    var end_time = request.params.Duration.split(" ");
+    var Duration = Number(end_time[0]);
+    var end_date = new Date(d.getTime() + 1000 * 60 * Duration);
+
+    add_to_list.set("Start_Time", new_date);
+    add_to_list.set("End_Time", end_date);
     add_to_list.set("Notes", request.params.Notes);
     add_to_list.set("Creator", request.params.PlayerID);
     add_to_list.set("Num_Of_Players", 0);
@@ -481,20 +488,71 @@ Parse.Cloud.define("send_invites", function(request, response)
 */
 });
 
-
 Parse.Cloud.define("view_games", function(request, response)
 {
-    var query = new Parse.Query("Current_Games");
-    query.equalTo("PlayerID", request.params.PlayerID);
-    query.select("GameID", "Location_Name", "Sport", "Num_Of_Players", "Max_Num_Of_Players", "Start_Time", "End_Time");
-    query.ascending("Start_Time");
-    query.limit(15);//increase to usable size
-    query.find({
-        success: function(results) {
-            response.success(results);
-        },
-        error: function() {
-            response.error("Game lookup failed");
+    //gets list of playerss
+    var player = new Parse.Query("Players");
+    player.equalTo("PlayerID", request.params.PlayerID);
+    var game_info = []; //used to store game data
+    var player_info; 
+    player.find().then(function(results)
+    {
+        //used to store player data
+        player_info = results;
+        //console.log(player_info);
+    }).then(function(results)
+    {
+        for(i=0; i<player_info.length; i++)
+        {
+            var game = new Parse.Query("Current_Games");
+            console.log(player_info[i].get('GameID'));
+            game.equalTo("GameID", player_info[i].get('GameID'));
+            game.find({
+                success: function(results)
+                {
+                    console.log("here are the ");
+                    game_info.push(results);
+                },
+                error: function()
+                {
+                    response.error("Game not found");
+                }
+            });
         }
-    });
+    }).then(function(results)
+    {
+        console.log("in here");
+        response.success(game_info);        
+    }, function(error)
+    {
+        response.error("lookup failed");
+    })
 });
+
+/*
+player.find({
+    success:function(results)
+    {
+        for(i=0; i<results.length; i++)
+        {
+            var game = new Parse.Query("Current_Games");
+            game.equalTo("GameID", results[i].get('GameID'));
+            game.find({
+                success: function(results)
+                {
+                    player_info.push(results);
+                },
+                error: function()
+                {
+                    response.error("Game not found");
+                }
+            });
+        }
+        response.success(player_info);
+    },
+    error:function()
+    {
+        response.error("Game lookup failed");
+    }
+});
+*/
