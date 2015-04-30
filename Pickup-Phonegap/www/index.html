@@ -117,7 +117,9 @@
                                  success: function(user) {
                                  // Hooray! Let them use the app now.
                                  var currentUser = user;
-                                 window.location.assign('local.html');
+                                 //document.querySelector('#content').innerHTML = loadPage('local.html');
+                                 $("#content").load("local.html");
+                                 changeLogIn();
                                  },
                                  error: function(user, error) {
                                  // Show the error message somewhere and let the user try again.
