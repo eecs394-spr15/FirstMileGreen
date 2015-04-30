@@ -127,9 +127,9 @@ generateResults(function(results){
                 
                 var currentUser = Parse.User.current();
                 currentEmail = currentUser.get("username");
-                alert("email: " + currentEmail);
+             //   alert("email: " + currentEmail);
                 currentUsername = currentEmail.substring(0,currentEmail.search("@"));
-                alert(currentUsername);
+             //   alert(currentUsername);
                 
                 loc = results[0][0].get("Location_Name");
                 //alert(loc);
@@ -189,13 +189,13 @@ generateResults(function(results){
                 for (var k = 0; k < players.length; k++){
                 if (currentUsername == players[k]){
                 inGame = true;
-                alert("matched");
+               // alert("matched");
                 }
                 }
 
                 
                 if (inGame){
-                alert("yep in game");
+             //   alert("yep in game");
                 $("#switchButton").attr("class","switch switch-1 switch-1-on");
                 }
                 
