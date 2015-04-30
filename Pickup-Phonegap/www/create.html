@@ -71,6 +71,7 @@ function generateResults(callback){
 			if(callback != null && callback != undefined){
 				callback(results);
 			}
+                    window.location.assign('local.html');
 		},
 		error: function(error) {
 			console.log(error);
