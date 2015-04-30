@@ -73,10 +73,9 @@ function generateResults(callback){
 	Parse.initialize("lvTYtzYRnqWYIREX3qGCVKdct5cnZ6eN0sh3LQe4", "mJ80PwA0TA3eYiincVPVKi1HNCuxTvL8ymGirVQX");
 	Parse.Cloud.run('create_game', { GameID: "1", "Location_Name": $("#location option:selected").text(), "Sport": $("#sport option:selected").text(), Notes: document.getElementById('comments').value, PlayerID: "Spencer", Max_Num_Of_Players:document.getElementById('max_players').value, Start_Time:document.getElementById('date_info').value, InviteList:document.getElementById('invites').value.split(","), Duration:$("#duration option:selected").text()}, {
 		success: function(results) {
-
+            
 			if(callback != null && callback != undefined){
-                    
-                window.location.assign('local.html');
+                window.location.assign('local.html');    
 				callback(results);
 			}
                     
@@ -95,7 +94,6 @@ function generateResults(callback){
         var currentUser = Parse.User.current();
         alert("Logging out");
         window.location.assign('index.html');
-        changeLogIn();
     }
 </script>
 
