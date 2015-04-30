@@ -48,10 +48,7 @@
     <div class="header">
         
         <div class="header-controls">
-            
-           
             <span class="local-games-title">Log In</span>
-            <a href="create.html" class="plus-button"><i class="fa fa-plus"></i></a>
         </div>
     </div>
     
@@ -157,6 +154,7 @@
                             success: function(user) {
                             // Hooray! Let them use the app now.
                             var currentUser = user;
+                            alert("Signup was successful");
                             },
                             error: function(user, error) {
                             // Show the error message somewhere and let the user try again.
